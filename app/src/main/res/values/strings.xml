@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Bimbingan Akademik</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+
+    <!-- LOGIN -->
+    <string name="welcome1">Aplikasi Bimbingan Akademik</string>
+    <string name="welcome2">Masuk untuk melanjutkan</string>
+    <string name="login_email">Email</string>
+    <string name="login_pwd">Password</string>
+    <string name="login_regis">Belum punya akun?</string>
+    <string name="login_regis2">Daftar disini</string>
+    <string name="login_btn">Masuk</string>
+
+    <!-- REGIS -->
+    <string name="pilih_dosen">Pilih ID Dosen Pembimbing:</string>
+    <string name="regis_nim">NIM</string>
+    <string name="regis_nama">Nama lengkap</string>
+    <string name="regis_pwd">Password</string>
+    <string name="regis_email">Email</string>
+    <string name="regis_btn">Daftar</string>
+
+    <!-- BUTTON -->
+    <string name="simpan">Simpan</string>
+    <string name="kembali">Kembali</string>
+
+</resources>
