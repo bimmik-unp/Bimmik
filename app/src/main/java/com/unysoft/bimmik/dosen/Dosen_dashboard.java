@@ -3,6 +3,7 @@ package com.unysoft.bimmik.dosen;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.unysoft.bimmik.R;
@@ -23,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Dosen_dashboard extends AppCompatActivity {
+
+    boolean doubleBackToExitPressedOnce = false;
 
     private ListView lv;
     List<ImageModel> list;
@@ -87,5 +91,23 @@ public class Dosen_dashboard extends AppCompatActivity {
                 startActivity(new Intent(Dosen_dashboard.this, Dosen_profile.class));
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Tekan lagi untuk keluar", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

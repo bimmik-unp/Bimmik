@@ -1,53 +1,53 @@
 package com.unysoft.bimmik.utils;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
 
-    private int id;
-    private String name;
+    private String nama;
+    private String nim;
+    private String noHp;
+    private String dosenPA;
     private String email;
     private String password;
-    private String nim;
 
-    public User(String name, String email, String password, String nim) {
-        this.name = name;
+    public User(String nama, String nim, String email, String password) {
+        this.nama = nama;
+        this.nim = nim;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String nama, String nim, String noHp, String dosenPA, String email, String password) {
+        this.nama = nama;
         this.nim = nim;
-    }
-
-    public User(int id, String name, String email, String gender){
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.nim = gender;
-    }
-
-    public User(int id, String name, String email, String password, String nim) {
-        this.id = id;
-        this.name = name;
+        this.noHp = noHp;
+        this.dosenPA = dosenPA;
         this.email = email;
         this.password = password;
-        this.nim = nim;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword(){
-        return password;
+    public String getNama() {
+        return nama;
     }
 
     public String getNim() {
         return nim;
     }
 
+    public String getNoHp() {
+        return noHp;
+    }
+
+    public String getDosenPA() {
+        return dosenPA;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

@@ -12,6 +12,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp" />
     <TextView
+        android:fontFamily="@font/googlesans_reguler"
         android:id="@+id/dosen_list_nm_mhs"
         android:text="Nama mhs"
         android:textStyle="bold"

@@ -7,4 +7,6 @@
     <color name="item">#000000</color>
     <color name="ijo">@android:color/holo_blue_dark</color>
     <color name="putih">#ffffff</color>
+
+    <color name="bgParent">#808080</color>
 </resources>

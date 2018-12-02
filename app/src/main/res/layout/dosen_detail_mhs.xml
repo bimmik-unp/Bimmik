@@ -58,6 +58,7 @@
                         android:src="@drawable/ic_person" />
 
                     <TextView
+                        android:fontFamily="@font/googlesans_reguler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -75,6 +76,7 @@
                         android:src="@drawable/ic_contacts" />
 
                     <TextView
+                        android:fontFamily="@font/googlesans_reguler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -92,6 +94,7 @@
                         android:src="@drawable/ic_email" />
 
                     <TextView
+                        android:fontFamily="@font/googlesans_reguler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -109,6 +112,7 @@
                         android:src="@drawable/ic_phone" />
 
                     <TextView
+                        android:fontFamily="@font/googlesans_reguler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -126,6 +130,7 @@
                         android:src="@drawable/ic_book" />
 
                     <TextView
+                        android:fontFamily="@font/googlesans_reguler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -159,6 +164,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:fontFamily="@font/googlesans_reguler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kegiatan"
@@ -180,6 +186,7 @@
                     <!--android:src="@drawable/ic_person" />-->
 
                     <TextView
+                        android:fontFamily="@font/googlesans_reguler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -197,6 +204,7 @@
                     <!--android:src="@drawable/ic_contacts" />-->
 
                     <TextView
+                        android:fontFamily="@font/googlesans_reguler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -214,6 +222,7 @@
                     <!--android:src="@drawable/ic_email" />-->
 
                     <TextView
+                        android:fontFamily="@font/googlesans_reguler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -228,6 +237,7 @@
     </android.support.v7.widget.CardView>
 
     <Button
+        android:fontFamily="@font/googlesans_reguler"
         android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

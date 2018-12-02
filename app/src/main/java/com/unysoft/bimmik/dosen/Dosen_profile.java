@@ -14,8 +14,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.mahasiswa.Profile;
+import com.unysoft.bimmik.utils.SharedPrefManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -26,6 +28,8 @@ import java.util.Calendar;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Dosen_profile extends AppCompatActivity {
+
+    SharedPrefManager sharedPrefManager;
 
     private int GALLERY = 1;
     private int CAMERA = 2;
@@ -43,6 +47,12 @@ public class Dosen_profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showPictureDialog();
+            }
+        });
+
+        findViewById(R.id.dosen_profile_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
 

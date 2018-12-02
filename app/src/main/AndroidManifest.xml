@@ -6,15 +6,19 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name="com.unysoft.bimmik.webservice.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
+            android:noHistory="true"
             android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -23,24 +27,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mahasiswa.Register" />
+        <activity android:name=".RegisterActivity" />
         <activity
             android:name=".mahasiswa.Dashboard"
             android:label="@string/title_activity_dashboard"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity android:name=".mahasiswa.InputNilaiSemester" />
         <activity android:name=".mahasiswa.Profile" />
-        <activity android:name=".mahasiswa.GetNilaiSemester" />
         <activity android:name=".mahasiswa.Kegiatan" />
         <activity android:name=".mahasiswa.Chat" />
         <activity android:name=".dosen.Dosen_dashboard" />
         <activity
-            android:parentActivityName=".dosen.Dosen_dashboard"
             android:name=".dosen.Dosen_detail_mhs"
-            android:theme="@style/adaToolbar"
-            android:label="Detail mahasiswa" />
+            android:label="Detail mahasiswa"
+            android:parentActivityName=".dosen.Dosen_dashboard"
+            android:theme="@style/adaToolbar" />
         <activity android:name=".dosen.Dosen_profile" />
-        <activity android:name=".dosen.Dosen_chat"></activity>
+        <activity android:name=".dosen.Dosen_chat" />
     </application>
 
 </manifest>

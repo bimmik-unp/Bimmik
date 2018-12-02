@@ -38,6 +38,7 @@
         app:layout_constraintLeft_toLeftOf="parent">
 
         <EditText
+            android:fontFamily="@font/googlesans_reguler"
             android:id="@+id/dosen_edittext_chatbox"
             android:hint="Enter message"
             android:background="@android:color/transparent"
@@ -50,6 +51,7 @@
             android:maxLines="6"/>
 
         <Button
+            android:fontFamily="@font/googlesans_reguler"
             android:id="@+id/dosen_button_chatbox_send"
             android:text="SEND"
             android:textSize="14dp"
@@ -108,6 +110,7 @@
 
 
                 <TextView
+                    android:fontFamily="@font/googlesans_reguler"
                     android:id="@+id/dosen_chat_nm"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"

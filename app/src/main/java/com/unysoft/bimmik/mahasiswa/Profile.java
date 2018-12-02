@@ -1,35 +1,73 @@
 package com.unysoft.bimmik.mahasiswa;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
+import com.unysoft.bimmik.model.ResponseUpdate;
+import com.unysoft.bimmik.utils.GLOBAL;
+import com.unysoft.bimmik.utils.SharedPrefManager;
+import com.unysoft.bimmik.utils.User;
+import com.unysoft.bimmik.webservice.BaseApiService;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class Profile extends AppCompatActivity {
 
+    private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+
+    String[] dosenPA = { "--Pilih dosen pembimbing akademik--", "Sodik Kirono, S.Komp, M.Kom", "Mukidin, M.Kom", "Amroni, M.Kom" };
+
+    Spinner spinner;
+    SharedPrefManager sharedPrefManager;
+
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
+    ProgressDialog progressDialog;
+
     private int GALLERY = 1;
     private int CAMERA = 2;
+
+    EditText nim, nama, email, noHp, prodi;
+    String na,em,hp,prod,dosn,pw;
 
     CircleImageView profile;
 
@@ -38,8 +76,27 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mhs_profile);
 
-        profile = findViewById(R.id.profile_img);
+        preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
+        editor = preferences.edit();
 
+        nim = findViewById(R.id.profile_et_nim);
+        nama = findViewById(R.id.profile_et_nama);
+        email = findViewById(R.id.profile_et_email);
+        noHp = findViewById(R.id.profile_et_noHp);
+        prodi = findViewById(R.id.profile_et_prodi);
+
+        spinner = findViewById(R.id.profile_spin_dosenPA);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dosenPA);
+        spinner.setAdapter(adapter);
+
+        findViewById(R.id.profile_btn_save).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateUser();
+            }
+        });
+
+        //GANTI FOTO
         findViewById(R.id.change_img_fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +104,122 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        //BACK
+        findViewById(R.id.profile_btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        ambilData();
+
+
+        //LOGOUT
+        findViewById(R.id.profile_btn_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(Profile.this)
+                        .setMessage("Logout dari aplikasi ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                GLOBAL.id_mhs = "";
+                                editor.putString("STATUS_LOGIN", "FALSE");
+                                editor.clear();
+                                editor.apply();
+                                Intent i = new Intent(Profile.this, MainActivity.class);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(i);
+                            }
+                        })
+                        .setNegativeButton("Tidak", null)
+                        .show();
+            }
+        });
+
+        //GANTI PASSWORD
+        findViewById(R.id.profile_btn_gantiPwd).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater layoutInflater = LayoutInflater.from(Profile.this);
+                View view = layoutInflater.inflate(R.layout.mhs_dialog_pwd, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
+                builder.setView(view);
+
+                final EditText oldPwd = view.findViewById(R.id.profile_et_oldPd);
+                    oldPwd.setText(pw);
+                final EditText newPwd = view.findViewById(R.id.profile_et_newPwd);
+                final EditText confNewPwd = view.findViewById(R.id.profile_et_confNewPwd);
+
+                builder.setCancelable(false)
+                        .setPositiveButton("Simpan", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String op = oldPwd.getText().toString();
+                                String np = newPwd.getText().toString();
+                                String cnp = confNewPwd.getText().toString();
+
+                            }
+                        })
+                        .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+    }
+
+    private void ambilData() {
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Mengambil data...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        nama.setText(preferences.getString("NAMA_MHS", ""));
+        nim.setText(preferences.getString("ID_MHS", ""));
+        email.setText(preferences.getString("EMAIL_MHS",""));
+        noHp.setText(preferences.getString("NO_HP",""));
+        prodi.setText(preferences.getString("PRODI",""));
+
+        progressDialog.dismiss();
+
+    }
+
+    private void updateUser() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Update data...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        BaseApiService baseApiService = retrofit.create(BaseApiService.class);
+        Call<ResponseUpdate> call = baseApiService.mhsUpdate(na, em, hp, prod, dosn, GLOBAL.id_mhs);
+        call.enqueue(new Callback<ResponseUpdate>() {
+            @Override
+            public void onResponse(Call<ResponseUpdate> call, Response<ResponseUpdate> response) {
+                if (response.body().getValue().equals("1")){
+                    progressDialog.dismiss();
+                    FancyToast.makeText(Profile.this, "Berhasil perbarui data", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                    ambilData();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseUpdate> call, Throwable t) {
+                FancyToast.makeText(Profile.this, t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+            }
+        });
     }
 
     private void showPictureDialog(){
@@ -110,7 +283,6 @@ public class Profile extends AppCompatActivity {
             Toast.makeText(Profile.this, "Image Saved!", Toast.LENGTH_SHORT).show();
         }
     }
-
     public String saveImage(Bitmap myBitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
@@ -139,5 +311,6 @@ public class Profile extends AppCompatActivity {
         }
         return "";
     }
+
 
 }
