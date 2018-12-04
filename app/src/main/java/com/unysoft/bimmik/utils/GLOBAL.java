@@ -10,6 +10,10 @@ public class GLOBAL {
     public static String prodi = "";
     public static String dosen_pa = "";
 
+    public static String id_smt = "";
+
+    public static String nama_keg = "";
+
     public static String id_dosen = "";
     public static String nama_dosen = "";
     public static String email_dosen = "";

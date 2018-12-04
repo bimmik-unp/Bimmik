@@ -1,7 +1,9 @@
 package com.unysoft.bimmik.dosen;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.unysoft.bimmik.MainActivity;
@@ -29,19 +32,33 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Dosen_profile extends AppCompatActivity {
 
-    SharedPrefManager sharedPrefManager;
-
     private int GALLERY = 1;
     private int CAMERA = 2;
 
     CircleImageView profile;
+
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
+    EditText ETnim, ETnama, ETemail, ETnohp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dosen_profile);
 
+        preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
+        editor = preferences.edit();
+
         profile = findViewById(R.id.dosen_profile_img);
+        ETnim = findViewById(R.id.dosen_profile_et_id);
+        ETnama = findViewById(R.id.dosen_profile_et_nama);
+        ETemail = findViewById(R.id.dosen_profile_et_email);
+        ETnohp = findViewById(R.id.dosen_profile_et_noHp);
+
+        ETnim.setText(preferences.getString("ID_DOSEN",""));
+        ETnama.setText(preferences.getString("NAMA_DOSEN",""));
+        ETemail.setText(preferences.getString("EMAIL_DOSEN",""));
 
         findViewById(R.id.dosen_profile_fab).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,9 +67,30 @@ public class Dosen_profile extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.dosen_profile_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         findViewById(R.id.dosen_profile_logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Dosen_profile.this);
+                builder.setMessage("Anda yakin ingin logout?");
+                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        editor.putString("STATUS_LOGIN_DOSEN", "FALSE");
+                        editor.clear();
+                        editor.apply();
+                        Intent in = new Intent(Dosen_profile.this, MainActivity.class);
+                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(in);
+                        finish();
+                    }
+                }).setNegativeButton("Tidak", null).show();
             }
         });
 
@@ -119,7 +157,6 @@ public class Dosen_profile extends AppCompatActivity {
             Toast.makeText(Dosen_profile.this, "Image Saved!", Toast.LENGTH_SHORT).show();
         }
     }
-
     public String saveImage(Bitmap myBitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);

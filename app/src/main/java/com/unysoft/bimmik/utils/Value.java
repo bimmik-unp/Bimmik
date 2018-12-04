@@ -2,26 +2,28 @@ package com.unysoft.bimmik.utils;
 
 import com.google.gson.annotations.SerializedName;
 import com.unysoft.bimmik.model.Keg_item;
+import com.unysoft.bimmik.model.NilaiItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Value {
 
-    @SerializedName("value")
-    private String value;
-    @SerializedName("message")
-    private String message;
-    @SerializedName("user")
-    private User user;
-    @SerializedName("result")
-    String id_mhs;
+    @SerializedName("value") private String value;
+    @SerializedName("message") private String message;
+    @SerializedName("user") private User user;
+    @SerializedName("result") String id_mhs;
+    @SerializedName("email") String email;
+    @SerializedName("Gresult") private List<Keg_item> keg_items;
+    @SerializedName("semuanilai") private List<NilaiItem> nilaiItems;
 
-    @SerializedName("email")
-    String email;
+    public List<NilaiItem> getNilaiItems() {
+        return nilaiItems;
+    }
 
-    @SerializedName("Gresult")
-    private List<Keg_item> keg_items;
+    public void setNilaiItems(List<NilaiItem> nilaiItems) {
+        this.nilaiItems = nilaiItems;
+    }
 
     public void setKeg_items(List<Keg_item> keg_items) {
         this.keg_items = keg_items;

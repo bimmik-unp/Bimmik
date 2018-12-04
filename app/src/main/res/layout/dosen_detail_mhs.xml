@@ -1,282 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".dosen.Dosen_detail_mhs">
+    android:layout_width="match_parent" android:layout_height="match_parent" android:scrollbars="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!--<ScrollView-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:scrollbars="vertical"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent">-->
-
-
-    <android.support.v7.widget.CardView
-        app:cardElevation="0dp"
-        android:id="@+id/cardView2"
-        android:layout_width="0dp"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="6dp"
-        app:contentPadding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:context=".dosen.Dosen_detail_mhs">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profile mahasiswa"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textStyle="bold" />
-
-            <TableLayout
+            app:cardCornerRadius="6dp"
+            app:cardElevation="0dp"
+            app:contentPadding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:stretchColumns="*">
+                android:orientation="vertical">
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+                    <TableRow>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:src="@drawable/ic_person" />
+                        <TextView
+                            android:id="@+id/dosen_profileMhs_tvNama"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:fontFamily="@font/googlesans_reguler"
+                            android:text="Nama mahasiswa"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="8dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:src="@drawable/ic_contacts" />
+                        <TextView
+                            android:id="@+id/dosen_profileMhs_tvNim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:fontFamily="@font/googlesans_reguler"
+                            android:text="NIM"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="8dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:src="@drawable/ic_email" />
+                        <TextView
+                            android:id="@+id/dosen_profileMhs_tvEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:fontFamily="@font/googlesans_reguler"
+                            android:text="Email"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="8dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:src="@drawable/ic_phone" />
+                        <TextView
+                            android:id="@+id/dosen_profileMhs_tvNohp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:fontFamily="@font/googlesans_reguler"
+                            android:text="No Hp"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="8dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:src="@drawable/ic_book" />
+                        <TextView
+                            android:id="@+id/dosen_profileMhs_tvProdi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:fontFamily="@font/googlesans_reguler"
+                            android:text="Program studi"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-                <TableRow>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:src="@drawable/ic_person" />
-
-                    <TextView
-                        android:fontFamily="@font/googlesans_reguler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Nama mahasiswa"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                </TableRow>
-
-                <TableRow android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:src="@drawable/ic_contacts" />
-
-                    <TextView
-                        android:fontFamily="@font/googlesans_reguler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="NIM"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                </TableRow>
-
-                <TableRow android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:src="@drawable/ic_email" />
-
-                    <TextView
-                        android:fontFamily="@font/googlesans_reguler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Email"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                </TableRow>
-
-                <TableRow android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:src="@drawable/ic_phone" />
-
-                    <TextView
-                        android:fontFamily="@font/googlesans_reguler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="No Hp"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                </TableRow>
-
-                <TableRow android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:src="@drawable/ic_book" />
-
-                    <TextView
-                        android:fontFamily="@font/googlesans_reguler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Program studi"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                </TableRow>
-            </TableLayout>
-        </LinearLayout>
-
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        app:cardElevation="0dp"
-        app:cardCornerRadius="6dp"
-        android:id="@+id/cardView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:contentPadding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:textSize="@dimen/txt16"
+            android:textColor="@android:color/black"
+            android:background="#d7d6d6"
+            android:padding="8dp"
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="start"
+            android:text="Profile mahasiswa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:fontFamily="@font/googlesans_reguler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kegiatan"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textStyle="bold" />
+        <TextView
+            android:textSize="@dimen/txt16"
+            android:textColor="@android:color/black"
+            android:background="#d7d6d6"
+            android:padding="8dp"
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Daftar kegiatan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:stretchColumns="*">
-
-                <TableRow>
-
-                    <!--<ImageView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="left"-->
-                    <!--android:src="@drawable/ic_person" />-->
-
-                    <TextView
-                        android:fontFamily="@font/googlesans_reguler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Kegiatan 1"
-                        android:textColor="#808080"
-                        android:textSize="14sp" />
-                </TableRow>
-
-                <TableRow android:layout_marginTop="8dp">
-
-                    <!--<ImageView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="left"-->
-                    <!--android:src="@drawable/ic_contacts" />-->
-
-                    <TextView
-                        android:fontFamily="@font/googlesans_reguler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Kegiatan 2"
-                        android:textColor="#808080"
-                        android:textSize="14sp" />
-                </TableRow>
-
-                <TableRow android:layout_marginTop="8dp">
-
-                    <!--<ImageView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="left"-->
-                    <!--android:src="@drawable/ic_email" />-->
-
-                    <TextView
-                        android:fontFamily="@font/googlesans_reguler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Kegiatan 3"
-                        android:textColor="#808080"
-                        android:textSize="14sp" />
-                </TableRow>
-            </TableLayout>
-
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <Button
-        android:fontFamily="@font/googlesans_reguler"
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Cetak"
-        android:textColor="@color/putih"
-        android:textAllCaps="false"
-        android:background="@drawable/rounded"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/dosen_fab_chat"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/putih"
-        android:clickable="true"
-        app:fab_size="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_message"
-        android:focusable="true" />
-
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/dosen_toolbar_detail_mhs"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:minHeight="?attr/actionBarSize"-->
-        <!--android:backgroundTint="@android:color/holo_blue_dark"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-    <!--</ScrollView>-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/dosen_detailMhs_rvKegiatan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 
-</android.support.constraint.ConstraintLayout>
+        <!--<TextView-->
+            <!--android:textSize="@dimen/txt16"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:background="#d7d6d6"-->
+            <!--android:padding="8dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Daftar nilai"-->
+            <!--android:id="@+id/ttv"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/dosen_detailMhs_rvKegiatan" />-->
+
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/dosen_detailMhs_rvNilai"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ttv" />-->
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

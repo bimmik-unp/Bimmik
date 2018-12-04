@@ -16,8 +16,12 @@ public class ResponseMahasiswa {
     String prodi;
     @SerializedName("pass")
     String pass;
+    @SerializedName("nama_dosen")
+    String nama_dosen;
     @SerializedName("id_dosen")
     String id_dosen;
+    @SerializedName("value")
+    String value;
 
     public String getId_dosen() {
         return id_dosen;
@@ -25,6 +29,46 @@ public class ResponseMahasiswa {
 
     public void setId_dosen(String id_dosen) {
         this.id_dosen = id_dosen;
+    }
+
+    public String getId_mhs() {
+        return id_mhs;
+    }
+
+    public void setId_mhs(String id_mhs) {
+        this.id_mhs = id_mhs;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNo_hp() {
+        return no_hp;
+    }
+
+    public void setNo_hp(String no_hp) {
+        this.no_hp = no_hp;
+    }
+
+    public String getProdi() {
+        return prodi;
+    }
+
+    public void setProdi(String prodi) {
+        this.prodi = prodi;
     }
 
     public String getPass() {
@@ -35,31 +79,19 @@ public class ResponseMahasiswa {
         this.pass = pass;
     }
 
-    @SerializedName("value")
-    String value;
+    public String getNama_dosen() {
+        return nama_dosen;
+    }
+
+    public void setNama_dosen(String nama_dosen) {
+        this.nama_dosen = nama_dosen;
+    }
 
     public String getValue() {
-
         return value;
     }
 
-    public String getId_mhs() {
-        return id_mhs;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getNo_hp() {
-        return no_hp;
-    }
-
-    public String getProdi() {
-        return prodi;
+    public void setValue(String value) {
+        this.value = value;
     }
 }

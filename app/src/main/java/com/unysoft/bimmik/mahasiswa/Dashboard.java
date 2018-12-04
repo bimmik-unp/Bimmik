@@ -78,7 +78,7 @@ public class Dashboard extends AppCompatActivity  {
         nama = findViewById(R.id.zzz_nama);
             nama.setText(preferences.getString("NAMA_MHS", ""));
         nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
-            nm_dosen.setText(preferences.getString("ID_DOSEN", ""));
+            nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
     }
 
     private void showDialog() {
@@ -86,17 +86,21 @@ public class Dashboard extends AppCompatActivity  {
         pictureDialog.setTitle("Select Action");
         String[] pictureDialogItems = {
                 "Lihat profile",
-                "Kirim pesan" };
+                "Kirim pesan",
+                "Ganti dosen pembimbing"};
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-//                                choosePhotoFromGallary();
+                                FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
                                 break;
                             case 1:
-//                                takePhotoFromCamera();
+                                FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                                break;
+                            case 2:
+                                FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
                                 break;
                         }
                     }

@@ -108,16 +108,11 @@
                     <!--android:textSize="16sp"-->
                     <!--android:text="Ket" />-->
             <!--</TableRow>-->
-            <ScrollView
-                android:scrollbars="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
                 <android.support.v7.widget.RecyclerView
                     android:scrollbars="vertical"
                     android:id="@+id/kegiatan_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-            </ScrollView>
 
             <!--</TableLayout>-->
         </LinearLayout>

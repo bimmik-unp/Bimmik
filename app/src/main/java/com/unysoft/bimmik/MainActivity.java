@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.dosen.Dosen_dashboard;
 import com.unysoft.bimmik.mahasiswa.Dashboard;
+import com.unysoft.bimmik.model.DosenModel;
 import com.unysoft.bimmik.model.ResponseDosen;
 import com.unysoft.bimmik.model.ResponseMahasiswa;
 import com.unysoft.bimmik.utils.GLOBAL;
@@ -73,9 +74,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Dashboard.class));
                 finish();
             }
-        } else if (preferences.getString("STATUS_LOGIN_DOSEN", null) != null) {
+        }
+
+        if (preferences.getString("STATUS_LOGIN_DOSEN", null) != null) {
             if (preferences.getString("STATUS_LOGIN_DOSEN", null).equals("TRUE")) {
-                GLOBAL.nama_mhs = preferences.getString("NAMA_DOSEN", null);
+                GLOBAL.nama_dosen = preferences.getString("NAMA_DOSEN", null);
                 startActivity(new Intent(MainActivity.this, Dosen_dashboard.class));
                 finish();
             }
@@ -116,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("EMAIL_MHS", response.body().getEmail());
                     editor.putString("NO_HP", response.body().getNo_hp());
                     editor.putString("PRODI", response.body().getProdi());
+                    editor.putString("PASS_MHS", response.body().getPass());
+                    editor.putString("NAMA_DOSEN", response.body().getNama_dosen());
                     editor.putString("ID_DOSEN", response.body().getId_dosen());
                     editor.commit();
                     startActivity(new Intent(MainActivity.this, Dashboard.class)
@@ -146,31 +151,30 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-        Call<ResponseDosen> call_ds = baseApiService.cek_login_dosen(em,pw);
-        call_ds.enqueue(new Callback<ResponseDosen>() {
+        Call<DosenModel> call_ds = baseApiService.cek_login_dosen(em,pw);
+        call_ds.enqueue(new Callback<DosenModel>() {
             @Override
-            public void onResponse(Call<ResponseDosen> call_ds, Response<ResponseDosen> response) {
+            public void onResponse(Call<DosenModel> call, Response<DosenModel> response) {
                 progressDialog.dismiss();
                 if (response.body().getValue().equals("1")) {
                     GLOBAL.id_dosen = response.body().getId_dosen();
-                    GLOBAL.nama_dosen = response.body().getNama();
-                    GLOBAL.email_dosen = response.body().getEmail();
-                    GLOBAL.pass_dosen = response.body().getPass();
-                    GLOBAL.noHp_dosen = response.body().getNo_hp();
                     editor.putString("STATUS_LOGIN_DOSEN", "TRUE");
                     editor.putString("NAMA_DOSEN", response.body().getNama());
+                    editor.putString("EMAIL_DOSEN", response.body().getEmail());
+                    editor.putString("ID_DOSEN", response.body().getId_dosen());
+                    editor.putString("PASS_DOSEN", response.body().getPass());
                     editor.apply();
                     startActivity(new Intent(MainActivity.this, Dosen_dashboard.class)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                     finish();
-                    FancyToast.makeText(MainActivity.this, "Selamat datang "+em, FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false).show();
+                    FancyToast.makeText(MainActivity.this, "Selamat datang "+response.body().getNama(), FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false).show();
                 } else {
                     progressDialog.dismiss();
                     FancyToast.makeText(MainActivity.this, "Username atau password salah", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 }
             }
             @Override
-            public void onFailure(Call<ResponseDosen> call, Throwable t) {
+            public void onFailure(Call<DosenModel> call, Throwable t) {
                 progressDialog.dismiss();
                 FancyToast.makeText(MainActivity.this, t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
             }

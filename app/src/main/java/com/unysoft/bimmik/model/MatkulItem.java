@@ -4,20 +4,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class MatkulItem {
 
-//    @SerializedName("id")
+    @SerializedName("id")
     private String id;
-
-//    @SerializedName("id_matkul")
+    @SerializedName("id_matkul")
     private String id_matkul;
-
-//    @SerializedName("nama")
+    @SerializedName("nama")
     private String nama;
-
-//    @SerializedName("semester")
+    @SerializedName("semester")
     private String semester;
-
-//    @SerializedName("sks")
+    @SerializedName("sks")
     private String sks;
+    @SerializedName("id_smt")
+    private String id_smt;
 
     public String getId() {
         return id;
@@ -57,5 +55,13 @@ public class MatkulItem {
 
     public void setSks(String sks) {
         this.sks = sks;
+    }
+
+    public String getId_smt() {
+        return id_smt;
+    }
+
+    public void setId_smt(String id_smt) {
+        this.id_smt = id_smt;
     }
 }

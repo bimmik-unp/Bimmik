@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.model.DosenModel;
-import com.unysoft.bimmik.model.ResponseDosen;
-import com.unysoft.bimmik.model.SmtModel;
 
 import java.util.List;
 

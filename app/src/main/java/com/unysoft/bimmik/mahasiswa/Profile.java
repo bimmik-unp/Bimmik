@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
+import com.unysoft.bimmik.model.ResponsePassword;
 import com.unysoft.bimmik.model.ResponseUpdate;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.SharedPrefManager;
@@ -53,11 +54,6 @@ public class Profile extends AppCompatActivity {
 
     private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
 
-    String[] dosenPA = { "--Pilih dosen pembimbing akademik--", "Sodik Kirono, S.Komp, M.Kom", "Mukidin, M.Kom", "Amroni, M.Kom" };
-
-    Spinner spinner;
-    SharedPrefManager sharedPrefManager;
-
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
@@ -67,7 +63,7 @@ public class Profile extends AppCompatActivity {
     private int CAMERA = 2;
 
     EditText nim, nama, email, noHp, prodi;
-    String na,em,hp,prod,dosn,pw;
+    String na,em,hp,prod,pw;
 
     CircleImageView profile;
 
@@ -84,10 +80,6 @@ public class Profile extends AppCompatActivity {
         email = findViewById(R.id.profile_et_email);
         noHp = findViewById(R.id.profile_et_noHp);
         prodi = findViewById(R.id.profile_et_prodi);
-
-        spinner = findViewById(R.id.profile_spin_dosenPA);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dosenPA);
-        spinner.setAdapter(adapter);
 
         findViewById(R.id.profile_btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,10 +150,43 @@ public class Profile extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                String op = oldPwd.getText().toString();
-                                String np = newPwd.getText().toString();
+//                                progressDialog = new ProgressDialog(getApplicationContext());
+//                                progressDialog.setMessage("Sedang perbarui data");
+//                                progressDialog.setCancelable(false);
+//                                progressDialog.show();
+
+                                final String op = oldPwd.getText().toString();
+                                final String np = newPwd.getText().toString();
                                 String cnp = confNewPwd.getText().toString();
 
+                                if (!cnp.equals(np)) {
+                                    FancyToast.makeText(getApplicationContext(), "Konfirmasi password tidak sama", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                                } else {
+                                    Retrofit retrofit = new Retrofit.Builder()
+                                            .baseUrl(URL)
+                                            .addConverterFactory(GsonConverterFactory.create())
+                                            .build();
+                                    BaseApiService baseApiService = retrofit.create(BaseApiService.class);
+                                    Call<ResponsePassword> call = baseApiService.updatePassword(GLOBAL.id_mhs, op, np);
+                                    call.enqueue(new Callback<ResponsePassword>() {
+                                        @Override
+                                        public void onResponse(Call<ResponsePassword> call, Response<ResponsePassword> response) {
+                                            if (response.body().getValue().equals("1")) {
+//                                                progressDialog.dismiss();
+                                                FancyToast.makeText(getApplicationContext(), response.body().getMessage(), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                                            } else {
+//                                                progressDialog.dismiss();
+                                                FancyToast.makeText(getApplicationContext(), response.body().getMessage(), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponsePassword> call, Throwable t) {
+//                                            progressDialog.dismiss();
+                                            FancyToast.makeText(getApplicationContext(), t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                                        }
+                                    });
+                                }
                             }
                         })
                         .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
@@ -195,28 +220,45 @@ public class Profile extends AppCompatActivity {
     }
 
     private void updateUser() {
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Update data...");
         progressDialog.setCancelable(false);
         progressDialog.show();
+
+        na = nama.getText().toString().trim();
+        em = email.getText().toString().trim();
+        hp = noHp.getText().toString().trim();
+        prod = prodi.getText().toString();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-        Call<ResponseUpdate> call = baseApiService.mhsUpdate(na, em, hp, prod, dosn, GLOBAL.id_mhs);
+        Call<ResponseUpdate> call = baseApiService.mhsUpdate(na, em, hp, prod, GLOBAL.id_mhs);
         call.enqueue(new Callback<ResponseUpdate>() {
             @Override
             public void onResponse(Call<ResponseUpdate> call, Response<ResponseUpdate> response) {
                 if (response.body().getValue().equals("1")){
+//                    GLOBAL.id_mhs = response.body().getId_mhs();
+//                    editor.putString("NAMA_MHS", response.body().getNama());
+//                    editor.putString("EMAIL_MHS", response.body().getEmail());
+//                    editor.putString("NO_HP", response.body().getNoHp());
+//                    editor.putString("PRODI", response.body().getProdi());
                     progressDialog.dismiss();
                     FancyToast.makeText(Profile.this, "Berhasil perbarui data", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
-                    ambilData();
+//                    ambilData();
+//                    nama.requestFocus();
+                } else {
+                    progressDialog.dismiss();
+                    FancyToast.makeText(Profile.this, "Gagal perbarui data", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseUpdate> call, Throwable t) {
+                progressDialog.dismiss();
                 FancyToast.makeText(Profile.this, t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
             }
         });

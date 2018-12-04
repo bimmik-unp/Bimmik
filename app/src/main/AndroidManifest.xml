@@ -11,9 +11,9 @@
     <application
         android:name="com.unysoft.bimmik.webservice.AppController"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
@@ -27,13 +27,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity
+            android:parentActivityName=".MainActivity"
+            android:name=".RegisterActivity" />
         <activity
             android:name=".mahasiswa.Dashboard"
             android:label="@string/title_activity_dashboard"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".mahasiswa.InputNilaiSemester" />
+        <activity
+            android:theme="@style/adaToolbar"
+            android:parentActivityName=".mahasiswa.Dashboard"
+            android:label="Input Nilai"
+            android:name=".mahasiswa.InputNilaiSemester" />
         <activity android:name=".mahasiswa.Profile" />
         <activity android:name=".mahasiswa.Kegiatan" />
         <activity android:name=".mahasiswa.Chat" />

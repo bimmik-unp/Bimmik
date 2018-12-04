@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,9 @@ import com.android.volley.toolbox.Volley;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.adapter.DosenAdapter;
 import com.unysoft.bimmik.model.DosenModel;
+import com.unysoft.bimmik.model.GetSemester;
+import com.unysoft.bimmik.model.ResponseDosen;
+import com.unysoft.bimmik.model.SemesterItem;
 import com.unysoft.bimmik.utils.Value;
 import com.unysoft.bimmik.webservice.AppController;
 import com.unysoft.bimmik.webservice.BaseApiService;
@@ -34,6 +38,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -54,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     String ni,na,pw,em;
     String tag_json_obj = "json_obj_req";
-    String datadosen;
+    String idDosen, nmDosen;
 
     RadioGroup radioGroup;
     RadioButton rbDosen, rbMhs;
@@ -84,8 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
         spin_dosen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String s = getId_dosen(position);
-                Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -97,89 +101,53 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void ambilDataDosen() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Link.URL_SEMUADOSEN, new com.android.volley.Response.Listener<String>() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        BaseApiService baseApiService = retrofit.create(BaseApiService.class);
+        Call<ResponseDosen> call = baseApiService.getSemuaDosen();
+        call.enqueue(new Callback<ResponseDosen>() {
             @Override
-            public void onResponse(String response) {
-                JSONObject j = null;
-                try {
-                    j = new JSONObject(response);
-                    result = j.getJSONArray("results");
-                    getDosen(result);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            public void onResponse(Call<ResponseDosen> call, retrofit2.Response<ResponseDosen> response) {
+                if (response.body().getValue().equals("1")){
+                    final List<DosenModel> dosenModels = response.body().getSemuadosen();
+                    final List<String> listSpinner = new ArrayList<String>();
+                    for (int i=0; i < dosenModels.size(); i++) {
+                        listSpinner.add(dosenModels.get(i).getNama());
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listSpinner);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spin_dosen.setAdapter(adapter);
+                        spin_dosen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                String selectedName = parent.getItemAtPosition(position).toString();
+                                idDosen = dosenModels.get(position).getId_dosen();
+                                nmDosen = dosenModels.get(position).getNama();
+                                Log.d("id_dosen", idDosen+"-"+nmDosen);
+                                if (selectedName == null){
+
+                                } else {
+
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+                    }
                 }
             }
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
 
+            @Override
+            public void onFailure(Call<ResponseDosen> call, Throwable t) {
+                FancyToast.makeText(getApplicationContext(), t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
             }
         });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-//        StringRequest strReq = new StringRequest(Request.Method.POST, Link.URL_SEMUADOSEN, new com.android.volley.Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                try {
-//                    DosenModel modelSpinner = null;
-//                    JSONObject jObj = new JSONObject(response);
-//                    String getObject = jObj.getString("results");
-//                    JSONArray jsonArray = new JSONArray(getObject);
-//                    ArrayList<DosenModel> list = new ArrayList<>();
-//                    if(jsonArray.length() != 0){
-//                        for (int i = 0; i < jsonArray.length(); i++) {
-//                            JSONObject obj = jsonArray.getJSONObject(i);
-//                            modelSpinner = new DosenModel();
-//                            modelSpinner.setId_dosen(obj.getString("id_dosen"));
-//                            modelSpinner.setNama(obj.getString("nama"));
-//                            list.add(modelSpinner);
-//                        }
-//                    }
-//                    DosenAdapter adapter;
-//                    adapter = new DosenAdapter(RegisterActivity.this, list);
-//                    spin_dosen.setAdapter(adapter);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//
-//                }
-//            }
-//        }, new com.android.volley.Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                FancyToast.makeText(RegisterActivity.this, error.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
-//            }
-//        })
-//        {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                return params;
-//            }
-//        };
-//        AppController.getInstance().addToRequestQueue(strReq,tag_json_obj);
     }
 
-    private void getDosen(JSONArray jsonArray) {
-        for (int i=0; i<jsonArray.length();i++){
-            try {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                dosen.add(jsonObject.getString("nama"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        spin_dosen.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dosen));
-    }
-    private String getId_dosen(int position){
-        try {
-            JSONObject jsonObject = result.getJSONObject(position);
-            datadosen = jsonObject.getString("id_dosen");
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
-        return datadosen;
-    }
 
     private void cekParam(){
         ETnim = findViewById(R.id.regis_et_nim);
@@ -199,9 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         ETnim.setError(null); ETnama.setError(null);
         ETpwd.setError(null); ETemail.setError(null);
-
     }
-
 
     private void prosesRegister() {
         cekParam();
@@ -223,6 +189,7 @@ public class RegisterActivity extends AppCompatActivity {
                     regisMhs();
                     break;
                 case R.id.regis_rb_dosen:
+                    spin_dosen.setEnabled(false);
                     regisDosen();
                     break;
             }
@@ -276,7 +243,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .build();
         BaseApiService api = retrofit.create(BaseApiService.class);
 
-        Call<Value> call = api.registerRequest(ni,na,em,pw,datadosen);
+        Call<Value> call = api.registerRequest(ni,na,em,pw,idDosen, nmDosen);
         call.enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
@@ -298,5 +265,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
     }
 }

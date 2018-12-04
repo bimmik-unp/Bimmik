@@ -13,7 +13,6 @@
         <item name="colorPrimary">@color/ijo</item>
         <item name="colorPrimaryDark">@color/item</item>
         <item name="colorAccent">@color/ijo</item>
-        <item name="android:textColorPrimary">@color/putih</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

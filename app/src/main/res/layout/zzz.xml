@@ -11,7 +11,7 @@
         android:background="@drawable/gradient_bg"
         android:layout_width="match_parent"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:layout_height="150dp">
+        android:layout_height="200dp">
         <android.support.design.widget.CollapsingToolbarLayout
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
@@ -24,8 +24,8 @@
                 app:civ_border_color="@android:color/black"
                 android:layout_gravity="center"
                 android:src="@mipmap/ic_launcher_round"
-                android:layout_width="80dp"
-                android:layout_height="80dp" />
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -91,14 +91,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TableLayout
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:stretchColumns="*"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TableRow>
                         <Button
                             android:id="@+id/zzz_input_nilai"
-                            android:padding="16dp"
+                            android:padding="8dp"
                             style="@style/AppTheme.Button"
                             android:textColor="@android:color/white"
                             android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                             />
                         <Button
                             android:id="@+id/zzz_input_kegiatan"
-                            android:padding="16dp"
+                            android:padding="8dp"
                             style="@style/AppTheme.Button"
                             android:textColor="@android:color/white"
                             android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                             />
                         <Button
                             android:id="@+id/zzz_cetak_laporan"
-                            android:padding="16dp"
+                            android:padding="8dp"
                             style="@style/AppTheme.Button"
                             android:textColor="@android:color/white"
                             android:layout_height="wrap_content"
