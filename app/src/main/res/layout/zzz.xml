@@ -26,15 +26,12 @@
                 android:src="@mipmap/ic_launcher_round"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
-            <Button
-                android:layout_margin="8dp"
-                android:layout_gravity="end|bottom"
+            <ImageButton
                 android:id="@+id/zzz_profile_logout"
+                android:layout_gravity="end|top"
                 android:padding="16dp"
                 android:background="?attr/selectableItemBackground"
-                android:textColor="@android:color/white"
-                android:textAllCaps="false"
-                android:text="Logout"
+                android:src="@drawable/ic_exit_to_app"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.CollapsingToolbarLayout>

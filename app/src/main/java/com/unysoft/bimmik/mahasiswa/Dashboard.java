@@ -9,20 +9,24 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.adapter.ProfileDosen;
+import com.unysoft.bimmik.model.DosenModel;
 import com.unysoft.bimmik.model.ResponseDosen;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.SharedPrefManager;
 import com.unysoft.bimmik.webservice.BaseApiService;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -40,6 +44,7 @@ public class Dashboard extends AppCompatActivity  {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
+    String idDosen;
     TextView nama, nm_dosen;
     FloatingActionButton chat;
     CircleImageView image;
@@ -60,7 +65,6 @@ public class Dashboard extends AppCompatActivity  {
                 startActivity(new Intent(Dashboard.this, Profile.class));
             }
         });
-
         findViewById(R.id.zzz_input_nilai).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,14 +83,12 @@ public class Dashboard extends AppCompatActivity  {
                 FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
             }
         });
-
         findViewById(R.id.zzz_pilihan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
-        //LOGOUT
         findViewById(R.id.zzz_profile_logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +116,8 @@ public class Dashboard extends AppCompatActivity  {
             nama.setText(preferences.getString("NAMA_MHS", ""));
         nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
             nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
+
+        idDosen = preferences.getString("ID_DOSEN","");
     }
 
     private void showDialog() {
@@ -129,8 +133,7 @@ public class Dashboard extends AppCompatActivity  {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                ProfileDosen profileDosen = ProfileDosen.newInstance();
-                                profileDosen.show(getSupportFragmentManager(), "profile_dosen");
+                                profileDosen();
                                 break;
                             case 1:
                                 FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
@@ -142,6 +145,31 @@ public class Dashboard extends AppCompatActivity  {
                     }
                 });
         pictureDialog.show();
+    }
+
+    private void profileDosen() {
+        Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+        BaseApiService baseApiService = retrofit.create(BaseApiService.class);
+        Call<DosenModel> call = baseApiService.getProfileDosen(idDosen);
+        call.enqueue(new Callback<DosenModel>() {
+            @Override
+            public void onResponse(Call<DosenModel> call, Response<DosenModel> response) {
+                if (response.body().getValue().equals("1")){
+                    Toast.makeText(Dashboard.this, response.body().getId_dosen(), Toast.LENGTH_SHORT).show();
+//                    ProfileDosen profileDosen = ProfileDosen.newInstance();
+//                    profileDosen.show(getSupportFragmentManager(), "profile_dosen");
+                } else {
+
+                }
+            }
+            @Override
+            public void onFailure(Call<DosenModel> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

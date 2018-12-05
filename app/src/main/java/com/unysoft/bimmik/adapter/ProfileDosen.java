@@ -7,11 +7,15 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.mahasiswa.Profile;
 import com.unysoft.bimmik.model.ResponseDosen;
 import com.unysoft.bimmik.webservice.BaseApiService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,9 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProfileDosen extends BottomSheetDialogFragment {
 
-    private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
+    TextView nama, email, hp;
 
     public static ProfileDosen newInstance() {
         return new ProfileDosen();
@@ -32,30 +34,19 @@ public class ProfileDosen extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.dosen_dashboard, container, false);
+        View view = inflater.inflate(R.layout.profile_dosen, container, false);
 
+        nama = view.findViewById(R.id.profileDosen_nama);
+        email = view.findViewById(R.id.profileDosen_email);
+        hp = view.findViewById(R.id.profileDosen_noHp);
 
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-//        Call<ResponseDosen> call = baseApiService.getProfileDosen(preferences.getString("ID_DOSEN", ""));
-//        call.enqueue(new Callback<ResponseDosen>() {
-//            @Override
-//            public void onResponse(Call<ResponseDosen> call, Response<ResponseDosen> response) {
-//                if (response.body().getValue().equals("1")){
-//
-//                } else {
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseDosen> call, Throwable t) {
-//
-//            }
-//        });
+        view.findViewById(R.id.profileDosen_btn_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
         return view;
     }

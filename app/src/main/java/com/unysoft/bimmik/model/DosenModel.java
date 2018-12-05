@@ -4,18 +4,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class DosenModel {
 
-    @SerializedName("id")
-    private String id;
-    @SerializedName("id_dosen")
-    private String id_dosen;
-    @SerializedName("nama")
-    private String nama;
-    @SerializedName("email")
-    private String email;
-    @SerializedName("pass")
-    private String pass;
-    @SerializedName("value")
-    private String value;
+    @SerializedName("id") private String id;
+    @SerializedName("id_dosen") private String id_dosen;
+    @SerializedName("nama") private String nama;
+    @SerializedName("email") private String email;
+    @SerializedName("pass") private String pass;
+    @SerializedName("value") private String value;
+    @SerializedName("message") private String message;
+    @SerializedName("Gresult") private String getProfile;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getGetProfile() {
+        return getProfile;
+    }
+
+    public void setGetProfile(String getProfile) {
+        this.getProfile = getProfile;
+    }
 
     public String getId() {
         return id;

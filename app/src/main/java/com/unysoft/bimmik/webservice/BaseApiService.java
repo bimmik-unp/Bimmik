@@ -109,6 +109,6 @@ public interface BaseApiService {
                          @Query("id_mhs") String id_mhs);
 
     @GET("api_profile_dosen.php")
-    Call<ResponseDosen>getProfileDosen(@Query("id_dosen") String id_dosen);
+    Call<DosenModel>getProfileDosen(@Query("id_dosen") String id_dosen);
 
 }
