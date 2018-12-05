@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         //COMMIT KOMENTAR
         //jnjhjkhjkh
+        //763
 
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
