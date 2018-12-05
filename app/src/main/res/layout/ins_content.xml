@@ -74,7 +74,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nilai"
-                    android:inputType="numberDecimal"
                     android:textColor="@color/item" />
             </android.support.design.widget.TextInputLayout>
             <Button

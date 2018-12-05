@@ -25,20 +25,20 @@
             android:id="@+id/ins_spin_smt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <Spinner
+            android:layout_marginTop="8dp"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:fontFamily="@font/googlesans_reguler"
+            android:id="@+id/ins_spin_id_matkul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <LinearLayout
             android:gravity="bottom"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Spinner
-                android:layout_weight="80"
-                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                android:fontFamily="@font/googlesans_reguler"
-                android:id="@+id/ins_spin_id_matkul"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
             <android.support.design.widget.TextInputLayout
-                android:layout_weight="20"
+                android:layout_weight="50"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
@@ -52,20 +52,22 @@
                     android:inputType="number"
                     android:textColor="@color/item" />
             </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="50"
+                android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputEditText
+                    android:fontFamily="@font/googlesans_reguler"
+                    android:id="@+id/ins_et_nilai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nilai"
+                    android:digits="ABCDabcd"
+                    android:maxLength="1"
+                    android:inputType="textCapWords"
+                    android:textColor="@color/item" />
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputEditText
-                android:fontFamily="@font/googlesans_reguler"
-                android:id="@+id/ins_et_nilai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nilai"
-                android:inputType="numberDecimal"
-                android:textColor="@color/item" />
-        </android.support.design.widget.TextInputLayout>
         <Button
             android:fontFamily="@font/googlesans_reguler"
             android:id="@+id/ins_btn_simpan"

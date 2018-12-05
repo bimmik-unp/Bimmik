@@ -26,6 +26,17 @@
                 android:src="@mipmap/ic_launcher_round"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
+            <Button
+                android:layout_margin="8dp"
+                android:layout_gravity="end|bottom"
+                android:id="@+id/zzz_profile_logout"
+                android:padding="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:text="Logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -62,10 +73,10 @@
                     android:id="@+id/zzz_profile"
                     android:padding="16dp"
                     style="@style/AppTheme.Button"
-                    android:layout_alignParentEnd="true"
                     android:textColor="@android:color/white"
                     android:textAllCaps="false"
                     android:text="Lihat profil"
+                    android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>

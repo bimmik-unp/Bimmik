@@ -2,6 +2,7 @@ package com.unysoft.bimmik;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -57,6 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button regis;
     Spinner spin_dosen;
 
+    TextInputLayout textInputLayout;
+
     String ni,na,pw,em;
     String tag_json_obj = "json_obj_req";
     String idDosen, nmDosen;
@@ -75,6 +78,29 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         dosen = new ArrayList<String>();
+        spin_dosen = findViewById(R.id.regis_spinner);
+        spin_dosen.setVisibility(View.GONE);
+
+        textInputLayout = findViewById(R.id.regis_nim_textinputlayout);
+        textInputLayout.setHint("Kode dosen/Nomor induk");
+        radioGroup = findViewById(R.id.radioGroup2);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.regis_rb_dosen:
+                        spin_dosen.setVisibility(View.GONE);
+                        textInputLayout.setHint("Kode dosen");
+                        break;
+                    case R.id.regis_rb_mhs:
+                        spin_dosen.setVisibility(View.VISIBLE);
+                        textInputLayout.setHint("Nomor induk");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
         regis = findViewById(R.id.regis_btn);
         regis.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        spin_dosen = findViewById(R.id.regis_spinner);
+
         ambilDataDosen();
         spin_dosen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -157,7 +183,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         rbDosen = findViewById(R.id.regis_rb_dosen);
         rbMhs = findViewById(R.id.regis_rb_mhs);
-        radioGroup = findViewById(R.id.radioGroup2);
         rbId = radioGroup.getCheckedRadioButtonId();
 
         ni = ETnim.getText().toString().trim();

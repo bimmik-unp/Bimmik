@@ -12,16 +12,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.shashank.sony.fancytoastlib.FancyToast;
+import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
+import com.unysoft.bimmik.adapter.ProfileDosen;
+import com.unysoft.bimmik.model.ResponseDosen;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.SharedPrefManager;
+import com.unysoft.bimmik.webservice.BaseApiService;
 
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Dashboard extends AppCompatActivity  {
+
+    private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
 
     SharedPrefManager sharedPrefManager;
 
@@ -74,6 +86,29 @@ public class Dashboard extends AppCompatActivity  {
                 showDialog();
             }
         });
+        //LOGOUT
+        findViewById(R.id.zzz_profile_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(Dashboard.this)
+                        .setMessage("Logout dari aplikasi ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                GLOBAL.id_mhs = "";
+                                editor.putString("STATUS_LOGIN", "FALSE");
+                                editor.clear();
+                                editor.apply();
+                                Intent i = new Intent(Dashboard.this, MainActivity.class);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(i);
+                            }
+                        })
+                        .setNegativeButton("Tidak", null)
+                        .show();
+            }
+        });
 
         nama = findViewById(R.id.zzz_nama);
             nama.setText(preferences.getString("NAMA_MHS", ""));
@@ -94,7 +129,8 @@ public class Dashboard extends AppCompatActivity  {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                                ProfileDosen profileDosen = ProfileDosen.newInstance();
+                                profileDosen.show(getSupportFragmentManager(), "profile_dosen");
                                 break;
                             case 1:
                                 FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();

@@ -108,4 +108,7 @@ public interface BaseApiService {
     Call<Value> detailGetNilai(@Query("id_smt") String id_smt,
                          @Query("id_mhs") String id_mhs);
 
+    @GET("api_profile_dosen.php")
+    Call<ResponseDosen>getProfileDosen(@Query("id_dosen") String id_dosen);
+
 }

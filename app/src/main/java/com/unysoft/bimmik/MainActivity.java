@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,12 +41,11 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     TextView regis;
     EditText ETemail,ETpwd;
+    TextInputLayout textInputLayout;
 
     String em, pw;
     int id_rb;
     RadioGroup radioGroup;
-
-    //sekali maning
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -55,14 +55,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //COMMIT KOMENTAR
-        //jnjhjkhjkh
-        //763
-        //CommitAng
-
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
         cekLogin();
+
+        textInputLayout = findViewById(R.id.textInputLayout10);
+        textInputLayout.setHint("Kode dosen/Email");
+        radioGroup = findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.login_rb_dosen:
+                        textInputLayout.setHint("Kode dosen");
+                        break;
+                    case R.id.login_rb_mhs:
+                        textInputLayout.setHint("Email");
+                        break;
+                        default:
+                            break;
+                }
+            }
+        });
 
         regis = findViewById(R.id.login_txt_regis);
         findViewById(R.id.login_btn_msk).setOnClickListener(new View.OnClickListener() {
@@ -98,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
         em = ETemail.getText().toString().trim();
         pw = ETpwd.getText().toString().trim();
-        radioGroup = findViewById(R.id.radioGroup);
+
         id_rb = radioGroup.getCheckedRadioButtonId();
 
     }
@@ -199,9 +213,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             switch (id_rb) {
                 case R.id.login_rb_mhs:
+                    textInputLayout.setHint("Email");
                     loginMhs();
                     break;
                 case R.id.login_rb_dosen:
+                    textInputLayout.setHint("Kode dosen");
                     loginDosen();
                     break;
                 default:

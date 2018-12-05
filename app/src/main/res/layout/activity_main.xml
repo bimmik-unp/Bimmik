@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <android.support.design.widget.TextInputLayout
+        app:hintEnabled="true"
         android:id="@+id/textInputLayout10"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -24,12 +25,13 @@
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="16dp"
             android:fontFamily="@font/googlesans_reguler"
-            android:hint="@string/login_email"
             android:inputType="textEmailAddress"
             android:textColor="@color/item" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        app:hintEnabled="true"
+        android:hint="@string/login_pwd"
         android:id="@+id/textInputLayout9"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -48,7 +50,6 @@
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="16dp"
             android:fontFamily="@font/googlesans_reguler"
-            android:hint="@string/login_pwd"
             android:inputType="textPassword"
             android:textColor="@color/item" />
     </android.support.design.widget.TextInputLayout>
