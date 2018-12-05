@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //COMMIT KOMENTAR
+        //COMMIT KOMENTAR
+        //COMMIT KOMENTAR
 
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
