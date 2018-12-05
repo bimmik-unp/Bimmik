@@ -140,6 +140,36 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dosen_detailMhs_rvNilai" />
+        <TableLayout
+            app:layout_constraintTop_toBottomOf="@+id/tvNilai"
+            android:stretchColumns="*"
+            android:id="@+id/tabelnilai"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableRow>
+                <TextView
+                    android:text="Nama Matkul"
+                    android:id="@+id/ins_tb_matkul"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+                <TextView
+                    android:text="SKS"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/ins_tb_sks"/>
+                <TextView
+                    android:text="Nilai"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/ins_tb_nilai"/>
+
+            </TableRow>
+        </TableLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/dosen_detailMhs_rvNilai"
@@ -147,7 +177,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNilai" />
+            app:layout_constraintTop_toBottomOf="@+id/tabelnilai" />
 
         <Spinner
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"

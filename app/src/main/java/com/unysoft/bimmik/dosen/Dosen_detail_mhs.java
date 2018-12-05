@@ -256,7 +256,7 @@ class NilaiAdapter extends RecyclerView.Adapter <NilaiAdapter.NilaiHolder> {
     public void onBindViewHolder(@NonNull NilaiAdapter.NilaiHolder holder, int position) {
         final NilaiItem nilaiItem = nilaiItems.get(position);
         holder.mt.setText(nilaiItem.getNama());
-        holder.smt.setText(nilaiItem.getId_smt());
+//        holder.smt.setText(nilaiItem.getId_smt());
         holder.sks.setText(nilaiItem.getSks());
         holder.nil.setText(nilaiItem.getNilai());
     }
@@ -273,7 +273,6 @@ class NilaiAdapter extends RecyclerView.Adapter <NilaiAdapter.NilaiHolder> {
         public NilaiHolder(View view) {
             super(view);
             mt = view.findViewById(R.id.ins_tb_matkul);
-            smt = view.findViewById(R.id.ins_tb_smt);
             sks = view.findViewById(R.id.ins_tb_sks);
             nil = view.findViewById(R.id.ins_tb_nilai);
 

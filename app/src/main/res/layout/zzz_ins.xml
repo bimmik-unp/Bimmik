@@ -14,71 +14,24 @@
         android:layout_height="wrap_content">
         <TableRow>
             <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Mata kuliah"/>
-            <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text=":"/>
-            <TextView
+                android:text="Nama Matkul"
                 android:id="@+id/ins_tb_matkul"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content" />
-        </TableRow>
-        <TableRow android:layout_marginTop="5dp">
             <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Semester"/>
-            <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text=":"/>
-            <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/ins_tb_smt"/>
-        </TableRow>
-        <TableRow android:layout_marginTop="5dp">
-            <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="SKS"/>
-            <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text=":"/>
-            <TextView
+                android:text="SKS"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/ins_tb_sks"/>
-        </TableRow>
-        <TableRow android:layout_marginTop="5dp">
             <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Nilai"/>
-            <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text=":"/>
-            <TextView
+                android:text="Nilai"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/ins_tb_nilai"/>
+
         </TableRow>
     </TableLayout>
 </android.support.v7.widget.CardView>

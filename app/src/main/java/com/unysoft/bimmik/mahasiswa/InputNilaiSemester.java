@@ -306,7 +306,7 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
         public NilaiHolder(View view) {
             super(view);
             mt = view.findViewById(R.id.ins_tb_matkul);
-            smt = view.findViewById(R.id.ins_tb_smt);
+            //smt = view.findViewById(R.id.ins_tb_smt);
             sks = view.findViewById(R.id.ins_tb_sks);
             nil = view.findViewById(R.id.ins_tb_nilai);
 
