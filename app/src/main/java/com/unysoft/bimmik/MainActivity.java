@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     int id_rb;
     RadioGroup radioGroup;
 
+    //sekali maning
+
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
