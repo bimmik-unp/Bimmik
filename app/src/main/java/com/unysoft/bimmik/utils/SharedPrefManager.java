@@ -23,6 +23,7 @@ public class SharedPrefManager {
     public static final String KEY_PASS = "pass";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_NAMA = "nama";
+    public static final String KEY_SKS = "total_sks";
 
     public SharedPrefManager(Context context) {
         this.context = context;
@@ -38,6 +39,10 @@ public class SharedPrefManager {
 
     public String getEmail(){
         return pref.getString(KEY_EMAIL,"");
+    }
+
+    public String getTotalSks(){
+        return pref.getString(KEY_SKS,"");
     }
 
     public void saveSpBoolean(String keySp, boolean value){

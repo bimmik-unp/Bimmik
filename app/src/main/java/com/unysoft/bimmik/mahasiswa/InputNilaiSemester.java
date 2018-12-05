@@ -281,7 +281,7 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
     @NonNull
     @Override
     public NilaiSemesterAdapter.NilaiHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.zzz_ins, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.zzz_inputnilai, parent, false);
         return new NilaiSemesterAdapter.NilaiHolder(view);
     }
 
@@ -289,7 +289,7 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
     public void onBindViewHolder(@NonNull NilaiSemesterAdapter.NilaiHolder holder, int position) {
         final NilaiItem nilaiItem = nilaiItems.get(position);
         holder.mt.setText(nilaiItem.getNama());
-        holder.smt.setText(nilaiItem.getId_smt());
+        //holder.smt.setText(nilaiItem.getId_smt());
         holder.sks.setText(nilaiItem.getSks());
         holder.nil.setText(nilaiItem.getNilai());
     }
@@ -307,8 +307,8 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
             super(view);
             mt = view.findViewById(R.id.ins_tb_matkul);
             //smt = view.findViewById(R.id.ins_tb_smt);
-            sks = view.findViewById(R.id.ins_tb_sks);
-            nil = view.findViewById(R.id.ins_tb_nilai);
+            sks = view.findViewById(R.id.tvSks);
+            nil = view.findViewById(R.id.tvGrade);
 
         }
     }

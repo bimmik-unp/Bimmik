@@ -47,7 +47,7 @@ public class Dosen_detail_mhs extends AppCompatActivity {
     private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
     public String idSemester;
 
-    TextView tvNama, tvNim, tvEmail, tvNohp, tvProdi;
+    TextView tvNama, tvNim, tvEmail, tvNohp, tvProdi,tvTotal;
     String idMhs, namaMhs, emailMhs, nohpMhs, prodiMhs;
     Spinner semester;
 
@@ -90,6 +90,7 @@ public class Dosen_detail_mhs extends AppCompatActivity {
         tvEmail = findViewById(R.id.dosen_profileMhs_tvEmail);
         tvNohp = findViewById(R.id.dosen_profileMhs_tvNohp);
         tvProdi = findViewById(R.id.dosen_profileMhs_tvProdi);
+        tvTotal=findViewById(R.id.tvTotalSKS);
 
 //        rvKegiatan = findViewById(R.id.dosen_detailMhs_rvKegiatan);
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -116,6 +117,7 @@ public class Dosen_detail_mhs extends AppCompatActivity {
         tvEmail.setText(emailMhs);
         tvNohp.setText(nohpMhs);
         tvProdi.setText(prodiMhs);
+
 
         semester =(Spinner) findViewById(R.id.spSemester);
 
@@ -184,6 +186,9 @@ public class Dosen_detail_mhs extends AppCompatActivity {
         baseApiService.detailGetNilai(idSemester,idMhs).enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
+                final String total_sks =response.body().getTotal_sks();
+                tvTotal.setText(total_sks);
+                //Toast.makeText(Dosen_detail_mhs.this, GLOBAL.total_sks, Toast.LENGTH_SHORT).show();
                 if (response.body().getValue().equals("1")) {
                     loading.dismiss();
                     final List<NilaiItem> nilaiItemList= response.body().getNilaiItems();
@@ -256,8 +261,9 @@ class NilaiAdapter extends RecyclerView.Adapter <NilaiAdapter.NilaiHolder> {
     public void onBindViewHolder(@NonNull NilaiAdapter.NilaiHolder holder, int position) {
         final NilaiItem nilaiItem = nilaiItems.get(position);
         holder.mt.setText(nilaiItem.getNama());
+        holder.id.setText(nilaiItem.getId_matkul());
 //        holder.smt.setText(nilaiItem.getId_smt());
-        holder.sks.setText(nilaiItem.getSks());
+        holder.sks.setText("SKS "+nilaiItem.getSks());
         holder.nil.setText(nilaiItem.getNilai());
     }
 
@@ -268,13 +274,14 @@ class NilaiAdapter extends RecyclerView.Adapter <NilaiAdapter.NilaiHolder> {
 
     public class NilaiHolder extends RecyclerView.ViewHolder {
 
-        TextView mt,smt,sks,nil;
+        TextView id,mt,smt,sks,nil;
 
         public NilaiHolder(View view) {
             super(view);
+            id =view.findViewById(R.id.tvIdMatkul);
             mt = view.findViewById(R.id.ins_tb_matkul);
-            sks = view.findViewById(R.id.ins_tb_sks);
-            nil = view.findViewById(R.id.ins_tb_nilai);
+            sks = view.findViewById(R.id.tvSks);
+            nil = view.findViewById(R.id.tvGrade);
 
         }
     }

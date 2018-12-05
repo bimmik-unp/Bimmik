@@ -12,7 +12,7 @@ public class GLOBAL {
 
     public static String id_smt = "";
 
-    public static String nama_keg = "";
+    public static String total_sks = "";
 
     public static String id_dosen = "";
     public static String nama_dosen = "";

@@ -59,6 +59,12 @@ public class Dashboard extends AppCompatActivity  {
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
+        nama = findViewById(R.id.zzz_nama);
+        nama.setText(preferences.getString("NAMA_MHS", ""));
+        nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
+        nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
+        idDosen = preferences.getString("ID_DOSEN","");
+
         findViewById(R.id.zzz_profile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,12 +118,9 @@ public class Dashboard extends AppCompatActivity  {
             }
         });
 
-        nama = findViewById(R.id.zzz_nama);
-            nama.setText(preferences.getString("NAMA_MHS", ""));
-        nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
-            nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
 
-        idDosen = preferences.getString("ID_DOSEN","");
+
+
     }
 
     private void showDialog() {
@@ -132,7 +135,9 @@ public class Dashboard extends AppCompatActivity  {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
+
                             case 0:
+
                                 profileDosen();
                                 break;
                             case 1:

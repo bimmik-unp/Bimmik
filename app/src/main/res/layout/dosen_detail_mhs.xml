@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:scrollbars="vertical"
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.v4.widget.NestedScrollView
+    android:id="@+id/scrol"
+    android:layout_width="match_parent" android:layout_height="500dp" android:scrollbars="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:context=".dosen.Dosen_detail_mhs">
 
         <android.support.v7.widget.CardView
@@ -145,29 +149,24 @@
             android:stretchColumns="*"
             android:id="@+id/tabelnilai"
             android:padding="8dp"
-            android:layout_margin="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TableRow>
                 <TextView
-                    android:text="Nama Matkul"
+                    android:text="Mata Kuliah"
+                    android:textColor="@color/item"
                     android:id="@+id/ins_tb_matkul"
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content" />
-                <TextView
-                    android:text="SKS"
-                    style="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/ins_tb_sks"/>
-                <TextView
-                    android:text="Nilai"
-                    style="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/ins_tb_nilai"/>
-
+            </TableRow>
+            <TableRow>
+                <View
+                    android:layout_marginTop="6dp"
+                    android:layout_below="@+id/lytop"
+                    android:background="#bebebe"
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"/>
             </TableRow>
         </TableLayout>
 
@@ -213,4 +212,53 @@
 
 
     </android.support.constraint.ConstraintLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>
+    <android.support.v7.widget.CardView
+        app:cardElevation="10dp"
+        app:cardCornerRadius="15dp"
+        android:id="@+id/cvIPK"
+        android:layout_marginBottom="-10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <LinearLayout
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginRight="80dp"
+                    android:text="IPK Semester"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="3.55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginRight="80dp"
+                    android:text="Total SKS      "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tvTotalSKS"
+                    android:text="3.55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
