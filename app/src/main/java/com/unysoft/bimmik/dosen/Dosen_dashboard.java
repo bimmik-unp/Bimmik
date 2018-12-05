@@ -62,7 +62,7 @@ public class Dosen_dashboard extends AppCompatActivity {
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
-        TextView nama = findViewById(R.id.dosen_dashboard_nama);
+        TextView nama = findViewById(R.id.dashboard_nm_dosen);
         nama.setText(preferences.getString("NAMA_DOSEN", ""));
 
         recyclerView = findViewById(R.id.dosen_dashboard_rv);
@@ -81,6 +81,26 @@ public class Dosen_dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Dosen_dashboard.this, Dosen_profile.class));
+            }
+        });
+        findViewById(R.id.dosen_profile_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Dosen_dashboard.this);
+                builder.setMessage("Anda yakin ingin logout?");
+                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        editor.putString("STATUS_LOGIN_DOSEN", "FALSE");
+                        editor.clear();
+                        editor.apply();
+                        Intent in = new Intent(Dosen_dashboard.this, MainActivity.class);
+                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(in);
+                        finish();
+                    }
+                }).setNegativeButton("Tidak", null).show();
             }
         });
     }

@@ -54,8 +54,13 @@ public interface BaseApiService {
                               @Field("ket") String ket
                               );
 
+    @GET("api_tampil_kegiatan2.php")
+    Call<Value> getKegiatan2(@Query("id_mhs") String id_mhs);
+
     @GET("api_tampil_kegiatan.php")
     Call<Value> getKegiatan(@Query("id_mhs") String id_mhs);
+
+
 
     @GET("api_tampil_nilai.php")
     Call<Value> getNilai(@Query("id_mhs") String id_mhs);

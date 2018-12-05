@@ -30,6 +30,7 @@ import com.unysoft.bimmik.model.NilaiItem;
 import com.unysoft.bimmik.model.SemesterItem;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.Value;
+import com.unysoft.bimmik.webservice.ApiClient;
 import com.unysoft.bimmik.webservice.BaseApiService;
 
 import java.util.ArrayList;
@@ -44,10 +45,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Dosen_detail_mhs extends AppCompatActivity {
 
     private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+    public String idSemester;
 
     TextView tvNama, tvNim, tvEmail, tvNohp, tvProdi;
     String idMhs, namaMhs, emailMhs, nohpMhs, prodiMhs;
-    Spinner spin_smt;
+    Spinner semester;
 
     RecyclerView rvNilai, rvKegiatan;
 
@@ -59,11 +61,29 @@ public class Dosen_detail_mhs extends AppCompatActivity {
     List<NilaiItem> nilaiItems = new ArrayList<>();
 
     ProgressDialog loading;
+    BaseApiService baseApiService;
+
+    private RecyclerView recyclerView,recyclerView2;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.LayoutManager mLayoutManager2;
+
+    public static Dosen_detail_mhs ds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dosen_detail_mhs);
+
+        recyclerView = (RecyclerView)findViewById(R.id.dosen_detailMhs_rvKegiatan);
+        recyclerView2 = (RecyclerView)findViewById(R.id.dosen_detailMhs_rvNilai);
+        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager2 = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView2.setLayoutManager(mLayoutManager2);
+        ds=this;
+
+        baseApiService = ApiClient.getClient().create(BaseApiService.class);
 
         tvNama = findViewById(R.id.dosen_profileMhs_tvNama);
         tvNim = findViewById(R.id.dosen_profileMhs_tvNim);
@@ -71,12 +91,11 @@ public class Dosen_detail_mhs extends AppCompatActivity {
         tvNohp = findViewById(R.id.dosen_profileMhs_tvNohp);
         tvProdi = findViewById(R.id.dosen_profileMhs_tvProdi);
 
-        rvKegiatan = findViewById(R.id.dosen_detailMhs_rvKegiatan);
-        kegiatanAdapter = new KegiatanAdapter(keg_itemList, getApplicationContext());
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        rvKegiatan.setLayoutManager(layoutManager);
-        rvKegiatan.setItemAnimator(new DefaultItemAnimator());
-        AmbilKegiatan();
+//        rvKegiatan = findViewById(R.id.dosen_detailMhs_rvKegiatan);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+//        rvKegiatan.setLayoutManager(layoutManager);
+//        rvKegiatan.setItemAnimator(new DefaultItemAnimator());
+
 
 //        rvNilai = findViewById(R.id.dosen_detailMhs_rvNilai);
 //        nilaiSemesterAdapter= new NilaiAdapter(nilaiItems, getApplicationContext());
@@ -98,60 +117,106 @@ public class Dosen_detail_mhs extends AppCompatActivity {
         tvNohp.setText(nohpMhs);
         tvProdi.setText(prodiMhs);
 
+        semester =(Spinner) findViewById(R.id.spSemester);
+
+        AmbilKegiatan();
+        initSpinSmt();
+
         loading = new ProgressDialog(this);
         loading.setMessage("Mengambil data...");
         loading.setCancelable(false);
         loading.show();
     }
 
-//    private void ambilNilai() {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-//
-//        Call<Value> call = baseApiService.detailGetNilai(GLOBAL.id_smt, idMhs);
-//        call.enqueue(new Callback<Value>() {
-//            @Override
-//            public void onResponse(Call<Value> call, Response<Value> response) {
-//                Toast.makeText(Dosen_detail_mhs.this, GLOBAL.id_smt+" - "+idMhs, Toast.LENGTH_SHORT).show();
-//                if (response.body().getValue().equals("1")) {
-//                    loading.dismiss();
-//                    final List<NilaiItem> nilaiItemList= response.body().getNilaiItems();
-//                    rvNilai.setAdapter(new NilaiAdapter(nilaiItemList, getApplicationContext()));
-//                    nilaiSemesterAdapter.notifyDataSetChanged();
-//                } else {
-//                    loading.dismiss();
-//                    FancyToast.makeText(getApplicationContext(), "Gagal mengambil data", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Value> call, Throwable t) {
-//                loading.dismiss();
-//                FancyToast.makeText(getApplicationContext(), "Kesalahan jaringan: "+t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show();
-//            }
-//        });
-//    }
-
-    private void AmbilKegiatan() {
+    public void initSpinSmt() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         BaseApiService baseApiService = retrofit.create(BaseApiService.class);
+        Call<GetSemester> call = baseApiService.getSemester();
+        call.enqueue(new Callback<GetSemester>() {
+            @Override
+            public void onResponse(Call<GetSemester> call, retrofit2.Response<GetSemester> response) {
+                if (response.body().getValue().equals("1")){
+                    loading.dismiss();
+                    final List<SemesterItem> semesterItems = response.body().getSemuaSemester();
+                    final List<String> listSpinner = new ArrayList<String>();
+                    for (int i=0; i < semesterItems.size(); i++) {
+                        listSpinner.add(semesterItems.get(i).getSmt());
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listSpinner);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        semester.setAdapter(adapter);
+                        semester.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                ((TextView) parent.getChildAt(0)).setTextColor(Color.DKGRAY);
+                                String selectedName = parent.getItemAtPosition(position).toString();
+                                idSemester = semesterItems.get(position).getId_smt();
+                                GLOBAL.id_smt = semesterItems.get(position).getId_smt();
+                                Log.d("id_smt", idSemester);
+                                if (selectedName.equals("- Pilih Semester -")){
 
-        Call<Value> call = baseApiService.getKegiatan(idMhs);
-        call.enqueue(new Callback<Value>() {
+                                } else {
+                                    ambilNilai();
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetSemester> call, Throwable t) {
+                loading.dismiss();
+                FancyToast.makeText(getApplicationContext(), t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+            }
+        });
+    }
+
+    private void ambilNilai() {
+
+        baseApiService.detailGetNilai(idSemester,idMhs).enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
                 if (response.body().getValue().equals("1")) {
                     loading.dismiss();
-                    final List<Keg_item> keg_itemList = response.body().getKegiatan();
-                    rvKegiatan.setAdapter(new KegiatanAdapter(keg_itemList, getApplicationContext()));
+                    final List<NilaiItem> nilaiItemList= response.body().getNilaiItems();
+                    Log.d("Retrofit GET","Nilai"+String.valueOf(nilaiItemList.size()));
+                    mAdapter = new NilaiAdapter(nilaiItemList,getApplicationContext());
+                    recyclerView2.setAdapter(mAdapter);
+                } else {
+                    loading.dismiss();
+                    FancyToast.makeText(getApplicationContext(), "Gagal mengambil data", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.dismiss();
+                FancyToast.makeText(getApplicationContext(), "Kesalahan jaringan: "+t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show();
+            }
+        });
+    }
+
+    private void AmbilKegiatan() {
+
+        baseApiService.getKegiatan2(idMhs).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                if (response.body().getValue().equals("1")) {
+                    loading.dismiss();
+                    List<Keg_item> keg_itemList = response.body().getKegiatan();
+                    Log.d("Retrofit GET","Kegiatan"+String.valueOf(keg_itemList.size()));
+                    mAdapter = new KegiatanAdapter(keg_itemList,getApplicationContext());
+                    recyclerView.setAdapter(mAdapter);
+
+                    //rvKegiatan.setAdapter(new KegiatanAdapter(keg_itemList, getApplicationContext()));
 //                    kegiatanAdapter.notifyDataSetChanged();
                 } else {
                     loading.dismiss();
