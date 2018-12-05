@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //COMMIT KOMENTAR
+
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
         cekLogin();
