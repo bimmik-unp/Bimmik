@@ -105,8 +105,8 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST("api_update_pass.php")
     Call<ResponsePassword>updatePassword(@Field("id_mhs") String id_mhs,
-                                         @Field("pass") String pass,
-                                         @Field("newpass") String newpass);
+                                         @Field("pass") String pass
+                                         );
 
     @GET("api_tampil_mhs_dosen.php")
     Call<GetMahasiswa>getMahasiswaBimbingan(@Query("id_dosen") String id_dosen);

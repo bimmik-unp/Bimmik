@@ -59,16 +59,16 @@ public class Dashboard extends AppCompatActivity  {
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
-<<<<<<< Updated upstream
+
         nama = findViewById(R.id.zzz_nama);
         nama.setText(preferences.getString("NAMA_MHS", ""));
         nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
         nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
         idDosen = preferences.getString("ID_DOSEN","");
-=======
+
         idDosen = preferences.getString("ID_DOSEN","");
         idMhs = preferences.getString("ID_MHS", "");
->>>>>>> Stashed changes
+
 
         findViewById(R.id.zzz_profile).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,10 +143,7 @@ public class Dashboard extends AppCompatActivity  {
 
 
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
     }
 
     private void showDialog() {
@@ -163,17 +160,17 @@ public class Dashboard extends AppCompatActivity  {
                         switch (which) {
 
                             case 0:
-<<<<<<< Updated upstream
 
-                                profileDosen();
-=======
+
+
+
                                 Bundle bundle = new Bundle();
                                 bundle.putString("idosen", idDosen);
                                 bundle.putString("ndosen", preferences.getString("NAMA_DOSEN",""));
                                 ProfileDosen profileDosen = new ProfileDosen().newInstance();
                                 profileDosen.show(getSupportFragmentManager(), "profile_dosen");
                                 profileDosen.setArguments(bundle);
->>>>>>> Stashed changes
+
                                 break;
                             case 1:
                                 FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
