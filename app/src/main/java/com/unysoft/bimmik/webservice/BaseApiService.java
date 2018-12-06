@@ -76,6 +76,13 @@ public interface BaseApiService {
                                    @Field("prodi") String prodi,
                                    @Field("id_mhs") String id_mhs
                                    );
+    @FormUrlEncoded
+    @POST("api_update_dsn.php")
+    Call<ResponseUpdate> dsnUpdate(@Field("nama") String nama,
+                                   @Field("email") String email,
+                                   @Field("no_hp") String noHp,
+                                   @Field("id_dosen") String id_mhs
+    );
 
     @GET("semester.php")
     Call<GetSemester> getSemester();

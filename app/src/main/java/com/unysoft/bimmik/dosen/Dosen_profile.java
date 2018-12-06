@@ -130,7 +130,7 @@ public class Dosen_profile extends AppCompatActivity {
         findViewById(R.id.dosen_profile_btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditDosen();
+                updateDosen();
                 editor.putString("STATUS_LOGIN_DOSEN", "FALSE");
                 editor.clear();
                 editor.apply();
@@ -171,7 +171,7 @@ public class Dosen_profile extends AppCompatActivity {
         email=ETemail.getText().toString();
         nohp=ETnohp.getText().toString();
 
-        baseApiService.dsnUpdate(nama,email,nohp,foto,id).enqueue(new Callback<ResponseUpdate>() {
+        baseApiService.dsnUpdate(nama,email,nohp,id).enqueue(new Callback<ResponseUpdate>() {
             @Override
             public void onResponse(Call<ResponseUpdate> call, Response<ResponseUpdate> response) {
 
@@ -268,46 +268,46 @@ public class Dosen_profile extends AppCompatActivity {
         }
     }
 
-    private void UploadGambar(){
-        File imagefile = new File(mediaPath);
-
-        RequestBody reqBody = RequestBody.create(MediaType.parse("*/*"), imagefile);
-        MultipartBody.Part partImage = MultipartBody.Part.createFormData("file", imagefile.getName(), reqBody);
-        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), imagefile.getName());
-        Log.d("uploadFile", "uploadFile--> " + partImage + " <--Mulaiii = " + filename);
-        baseApiService.uploadPicDsn(partImage,filename).enqueue(new Callback<Value>() {
-            @Override
-            public void onResponse(Call<Value> call, Response<Value> response) {
-
-                String value = response.body().getValue();
-                String message = response.body().getMessage();
-                String location = response.body().getLocation();
-
-                if (value.equals("1")) {
-                    foto = URL + location;
-                    updateDosen();
-                    Log.d("onResponse", message + " <====> " + foto);
-                } else {
-                    Log.d("onResponse", "Gagal");
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Value> call, Throwable t) {
-
-            }
-        });
-
-    }
-    public void EditDosen() {
-        try {
-            UploadGambar();
-        } catch (Exception e) {
-            foto = picprof;
-            updateDosen();
-        }
-    }
+//    private void UploadGambar(){
+//        File imagefile = new File(mediaPath);
+//
+//        RequestBody reqBody = RequestBody.create(MediaType.parse("*/*"), imagefile);
+//        MultipartBody.Part partImage = MultipartBody.Part.createFormData("file", imagefile.getName(), reqBody);
+//        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), imagefile.getName());
+//        Log.d("uploadFile", "uploadFile--> " + partImage + " <--Mulaiii = " + filename);
+//        baseApiService.uploadPicDsn(partImage,filename).enqueue(new Callback<Value>() {
+//            @Override
+//            public void onResponse(Call<Value> call, Response<Value> response) {
+//
+//                String value = response.body().getValue();
+//                String message = response.body().getMessage();
+//                String location = response.body().getLocation();
+//
+//                if (value.equals("1")) {
+//                    foto = URL + location;
+//                    updateDosen();
+//                    Log.d("onResponse", message + " <====> " + foto);
+//                } else {
+//                    Log.d("onResponse", "Gagal");
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Value> call, Throwable t) {
+//
+//            }
+//        });
+//
+//    }
+//    public void EditDosen() {
+//        try {
+//            UploadGambar();
+//        } catch (Exception e) {
+//            foto = picprof;
+//            updateDosen();
+//        }
+//    }
 //
 //        super.onActivityResult(requestCode, resultCode, data);
 //        if (resultCode == this.RESULT_CANCELED) {
