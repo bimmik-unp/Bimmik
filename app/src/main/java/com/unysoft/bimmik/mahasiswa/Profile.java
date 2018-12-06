@@ -83,6 +83,8 @@ public class Profile extends AppCompatActivity {
         noHp = findViewById(R.id.profile_et_noHp);
         prodi = findViewById(R.id.profile_et_prodi);
 
+        profile=findViewById(R.id.dosen_profile_img);
+
         nama.setText(preferences.getString("NAMA_MHS", ""));
         nim.setText(preferences.getString("ID_MHS", ""));
         email.setText(preferences.getString("EMAIL_MHS",""));
