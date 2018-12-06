@@ -114,6 +114,11 @@ public interface BaseApiService {
     @DELETE("api_hapus_kegiatan.php")
     Call<Value>deleteKegiatan(@Query("id_mhs") String id_mhs);
 
-    //COMMIT
+    @FormUrlEncoded
+    @POST("api_update_dsn.php")
+    Call<DosenModel>updateDosen(@Field("nama") String nama,
+                                @Field("email") String email,
+                                @Field("no_hp") String no_hp,
+                                @Field("id_dosen") String id_dosen);
 
 }

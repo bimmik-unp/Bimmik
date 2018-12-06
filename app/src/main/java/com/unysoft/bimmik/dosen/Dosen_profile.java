@@ -24,6 +24,7 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.mahasiswa.Profile;
+import com.unysoft.bimmik.model.DosenModel;
 import com.unysoft.bimmik.model.ResponseUpdate;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.SharedPrefManager;
@@ -80,7 +81,7 @@ public class Dosen_profile extends AppCompatActivity {
         ETnim.setEnabled(false);
 
         profile=findViewById(R.id.dosen_profile_img);
-
+        ambilData();
 //        findViewById(R.id.dosen_profile_fab).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -126,19 +127,11 @@ public class Dosen_profile extends AppCompatActivity {
             }
         });
 
-        ambilData();
+
         findViewById(R.id.dosen_profile_btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                updateDosen();
-                editor.putString("STATUS_LOGIN_DOSEN", "FALSE");
-                editor.clear();
-                editor.apply();
-                Intent in = new Intent(Dosen_profile.this, MainActivity.class);
-                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(in);
-                finish();
+                updateDosen();
             }
         });
 
@@ -161,37 +154,44 @@ public class Dosen_profile extends AppCompatActivity {
 
     }
 
-//    private void updateDosen(){
-//        progressDialog = new ProgressDialog(this);
-//        progressDialog.setMessage("Update data...");
-//        progressDialog.setCancelable(false);
-//        progressDialog.show();
-//        id=ETnim.getText().toString();
-//        nama=ETnama.getText().toString();
-//        email=ETemail.getText().toString();
-//        nohp=ETnohp.getText().toString();
-//
-//        baseApiService.dsnUpdate(nama,email,nohp,id).enqueue(new Callback<ResponseUpdate>() {
-//            @Override
-//            public void onResponse(Call<ResponseUpdate> call, Response<ResponseUpdate> response) {
-//
-//                if (response.body().getValue().equals("1")){
-//                    progressDialog.dismiss();
-//
-//                    FancyToast.makeText(Dosen_profile.this, "Berhasil perbarui data Silahkan Login Kembali !", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
-//                }else {
-//                    progressDialog.dismiss();
-//                    FancyToast.makeText(Dosen_profile.this, "Gagal perbarui data", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseUpdate> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    private void updateDosen(){
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Update data...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        id=ETnim.getText().toString();
+        nama=ETnama.getText().toString();
+        email=ETemail.getText().toString();
+        nohp=ETnohp.getText().toString();
+
+        baseApiService.updateDosen(nama,email,nohp,id).enqueue(new Callback<DosenModel>() {
+            @Override
+            public void onResponse(Call<DosenModel> call, Response<DosenModel> response) {
+
+                if (response.body().getValue().equals("1")){
+                    progressDialog.dismiss();
+                    FancyToast.makeText(Dosen_profile.this, "Berhasil perbarui data Silahkan Login Kembali !", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                    editor.putString("STATUS_LOGIN_DOSEN", "FALSE");
+                    editor.clear();
+                    editor.apply();
+                    Intent in = new Intent(Dosen_profile.this, MainActivity.class);
+                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(in);
+                    finish();
+                }else {
+                    progressDialog.dismiss();
+                    FancyToast.makeText(Dosen_profile.this, "Gagal perbarui data", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<DosenModel> call, Throwable t) {
+
+            }
+        });
+    }
 
 //    private void showPictureDialog(){
 //        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);

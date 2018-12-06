@@ -1,7 +1,9 @@
 package com.unysoft.bimmik.mahasiswa;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,6 +48,9 @@ public class Kegiatan extends AppCompatActivity {
     EditText nama, keterangan;
     ProgressDialog progressDialog;
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     RecyclerView recyclerView;
     KegiatanAdapter kegiatanAdapter;
     List<Keg_item> keg_itemList = new ArrayList<>();
@@ -65,11 +70,17 @@ public class Kegiatan extends AppCompatActivity {
             }
         });
 
+        preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
+        editor = preferences.edit();
+
         recyclerView = findViewById(R.id.kegiatan_rv);
         kegiatanAdapter = new KegiatanAdapter(keg_itemList, getApplicationContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+
         AmbilKegiatan();
 
 
@@ -92,7 +103,7 @@ public class Kegiatan extends AppCompatActivity {
 
         BaseApiService baseApiService = retrofit.create(BaseApiService.class);
 
-        Call<Value> call = baseApiService.getKegiatan(GLOBAL.id_mhs);
+        Call<Value> call = baseApiService.getKegiatan(preferences.getString("ID_MHS",""));
         call.enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
@@ -124,6 +135,8 @@ public class Kegiatan extends AppCompatActivity {
         String na = nama.getText().toString().trim();
         final String ket = keterangan.getText().toString().trim();
 
+        String idm = preferences.getString("ID_MHS","");
+
         nama.setError(null); keterangan.setError(null);
 
         if (TextUtils.isEmpty(na)){
@@ -141,7 +154,7 @@ public class Kegiatan extends AppCompatActivity {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-            Call<Value> call = baseApiService.inputKegiatan(GLOBAL.id_mhs, na, ket);
+            Call<Value> call = baseApiService.inputKegiatan(idm, na, ket);
             call.enqueue(new Callback<Value>() {
                 @Override
                 public void onResponse(Call<Value> call, Response<Value> response) {

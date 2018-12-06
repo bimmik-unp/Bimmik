@@ -54,28 +54,14 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.Kegiat
         TextView nama, ket;
         ImageButton edit, hapus;
 
-        public KegiatanHolder(View view, final onItemClick onItemClick) {
+        public KegiatanHolder(View view) {
             super(view);
             nama = view.findViewById(R.id.kegiatan_tb_nm);
             ket = view.findViewById(R.id.kegiatan_tb_ket);
             edit = view.findViewById(R.id.kegiatan_edit);
             hapus = view.findViewById(R.id.kegiatan_hapus);
 
-            edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onItemClick != null){
-                        int pos = getAdapterPosition();
-                        if (pos != RecyclerView.NO_POSITION){
-                            onItemClick.mEditClick(v, pos);
-                        }
-                    }
-                }
-            });
         }
 
-        public KegiatanHolder(View view) {
-            super(view);
-        }
     }
 }

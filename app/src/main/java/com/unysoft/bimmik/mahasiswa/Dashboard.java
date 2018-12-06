@@ -131,8 +131,7 @@ public class Dashboard extends AppCompatActivity  {
         pictureDialog.setTitle("Select Action");
         String[] pictureDialogItems = {
                 "Lihat profile",
-                "Kirim pesan",
-                "Ganti dosen pembimbing"};
+                "Kirim pesan"};
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -147,9 +146,6 @@ public class Dashboard extends AppCompatActivity  {
                                 profileDosen.setArguments(bundle);
                                 break;
                             case 1:
-                                FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
-                                break;
-                            case 2:
                                 FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
                                 break;
                         }
