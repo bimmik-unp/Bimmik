@@ -130,7 +130,7 @@ public class Dosen_profile extends AppCompatActivity {
         findViewById(R.id.dosen_profile_btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateDosen();
+//                updateDosen();
                 editor.putString("STATUS_LOGIN_DOSEN", "FALSE");
                 editor.clear();
                 editor.apply();
@@ -161,37 +161,37 @@ public class Dosen_profile extends AppCompatActivity {
 
     }
 
-    private void updateDosen(){
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Update data...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        id=ETnim.getText().toString();
-        nama=ETnama.getText().toString();
-        email=ETemail.getText().toString();
-        nohp=ETnohp.getText().toString();
-
-        baseApiService.dsnUpdate(nama,email,nohp,id).enqueue(new Callback<ResponseUpdate>() {
-            @Override
-            public void onResponse(Call<ResponseUpdate> call, Response<ResponseUpdate> response) {
-
-                if (response.body().getValue().equals("1")){
-                    progressDialog.dismiss();
-
-                    FancyToast.makeText(Dosen_profile.this, "Berhasil perbarui data Silahkan Login Kembali !", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
-                }else {
-                    progressDialog.dismiss();
-                    FancyToast.makeText(Dosen_profile.this, "Gagal perbarui data", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseUpdate> call, Throwable t) {
-
-            }
-        });
-    }
+//    private void updateDosen(){
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("Update data...");
+//        progressDialog.setCancelable(false);
+//        progressDialog.show();
+//        id=ETnim.getText().toString();
+//        nama=ETnama.getText().toString();
+//        email=ETemail.getText().toString();
+//        nohp=ETnohp.getText().toString();
+//
+//        baseApiService.dsnUpdate(nama,email,nohp,id).enqueue(new Callback<ResponseUpdate>() {
+//            @Override
+//            public void onResponse(Call<ResponseUpdate> call, Response<ResponseUpdate> response) {
+//
+//                if (response.body().getValue().equals("1")){
+//                    progressDialog.dismiss();
+//
+//                    FancyToast.makeText(Dosen_profile.this, "Berhasil perbarui data Silahkan Login Kembali !", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+//                }else {
+//                    progressDialog.dismiss();
+//                    FancyToast.makeText(Dosen_profile.this, "Gagal perbarui data", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseUpdate> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
 //    private void showPictureDialog(){
 //        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
