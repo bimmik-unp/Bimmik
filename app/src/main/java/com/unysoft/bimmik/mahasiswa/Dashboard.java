@@ -44,7 +44,7 @@ public class Dashboard extends AppCompatActivity  {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    String idDosen;
+    String idDosen, idMhs;
     TextView nama, nm_dosen;
     FloatingActionButton chat;
     CircleImageView image;
@@ -59,11 +59,16 @@ public class Dashboard extends AppCompatActivity  {
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
+<<<<<<< Updated upstream
         nama = findViewById(R.id.zzz_nama);
         nama.setText(preferences.getString("NAMA_MHS", ""));
         nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
         nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
         idDosen = preferences.getString("ID_DOSEN","");
+=======
+        idDosen = preferences.getString("ID_DOSEN","");
+        idMhs = preferences.getString("ID_MHS", "");
+>>>>>>> Stashed changes
 
         findViewById(R.id.zzz_profile).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +91,25 @@ public class Dashboard extends AppCompatActivity  {
         findViewById(R.id.zzz_cetak_laporan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(Dashboard.this);
+                builder.setTitle("Cetak laporan");
+                String[] p = {"Laporan kegiatan","Laporan nilai"};
+                builder.setItems(p, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case 0:
+                                //cetak kegiatan
+                                break;
+                            case 1:
+                                //cetak nilai
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+                builder.show();
             }
         });
         findViewById(R.id.zzz_pilihan).setOnClickListener(new View.OnClickListener() {
@@ -120,7 +143,10 @@ public class Dashboard extends AppCompatActivity  {
 
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     }
 
     private void showDialog() {
@@ -137,8 +163,17 @@ public class Dashboard extends AppCompatActivity  {
                         switch (which) {
 
                             case 0:
+<<<<<<< Updated upstream
 
                                 profileDosen();
+=======
+                                Bundle bundle = new Bundle();
+                                bundle.putString("idosen", idDosen);
+                                bundle.putString("ndosen", preferences.getString("NAMA_DOSEN",""));
+                                ProfileDosen profileDosen = new ProfileDosen().newInstance();
+                                profileDosen.show(getSupportFragmentManager(), "profile_dosen");
+                                profileDosen.setArguments(bundle);
+>>>>>>> Stashed changes
                                 break;
                             case 1:
                                 FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
@@ -150,31 +185,6 @@ public class Dashboard extends AppCompatActivity  {
                     }
                 });
         pictureDialog.show();
-    }
-
-    private void profileDosen() {
-        Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-        BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-        Call<DosenModel> call = baseApiService.getProfileDosen(idDosen);
-        call.enqueue(new Callback<DosenModel>() {
-            @Override
-            public void onResponse(Call<DosenModel> call, Response<DosenModel> response) {
-                if (response.body().getValue().equals("1")){
-                    Toast.makeText(Dashboard.this, response.body().getId_dosen(), Toast.LENGTH_SHORT).show();
-//                    ProfileDosen profileDosen = ProfileDosen.newInstance();
-//                    profileDosen.show(getSupportFragmentManager(), "profile_dosen");
-                } else {
-
-                }
-            }
-            @Override
-            public void onFailure(Call<DosenModel> call, Throwable t) {
-
-            }
-        });
     }
 
     @Override

@@ -61,7 +61,7 @@
                     android:id="@+id/ins_et_nilai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nilai"
+                    android:hint="Nilai mutu"
                     android:digits="ABCDabcd"
                     android:maxLength="1"
                     android:inputType="textCapWords"

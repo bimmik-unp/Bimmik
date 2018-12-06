@@ -13,10 +13,12 @@ import com.unysoft.bimmik.model.GetSemester;
 import com.unysoft.bimmik.utils.Value;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -74,8 +76,7 @@ public interface BaseApiService {
                                    @Field("email") String email,
                                    @Field("no_hp") String noHp,
                                    @Field("prodi") String prodi,
-                                   @Field("id_mhs") String id_mhs
-                                   );
+                                   @Field("id_mhs") String id_mhs );
 
     @GET("semester.php")
     Call<GetSemester> getSemester();
@@ -98,8 +99,7 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST("api_update_pass.php")
     Call<ResponsePassword>updatePassword(@Field("id_mhs") String id_mhs,
-                                         @Field("pass") String pass,
-                                         @Field("newpass") String newpass);
+                                         @Field("pass") String pass);
 
     @GET("api_tampil_mhs_dosen.php")
     Call<GetMahasiswa>getMahasiswaBimbingan(@Query("id_dosen") String id_dosen);
@@ -110,5 +110,8 @@ public interface BaseApiService {
 
     @GET("api_profile_dosen.php")
     Call<DosenModel>getProfileDosen(@Query("id_dosen") String id_dosen);
+
+    @DELETE("api_hapus_kegiatan.php")
+    Call<Value>deleteKegiatan(@Query("id_mhs") String id_mhs);
 
 }
