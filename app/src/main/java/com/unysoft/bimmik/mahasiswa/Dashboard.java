@@ -23,6 +23,7 @@ import com.unysoft.bimmik.model.DosenModel;
 import com.unysoft.bimmik.model.ResponseDosen;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.SharedPrefManager;
+import com.unysoft.bimmik.webservice.ApiClient;
 import com.unysoft.bimmik.webservice.BaseApiService;
 
 import java.util.HashMap;
@@ -59,16 +60,12 @@ public class Dashboard extends AppCompatActivity  {
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
-<<<<<<< Updated upstream
         nama = findViewById(R.id.zzz_nama);
         nama.setText(preferences.getString("NAMA_MHS", ""));
         nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
         nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
         idDosen = preferences.getString("ID_DOSEN","");
-=======
-        idDosen = preferences.getString("ID_DOSEN","");
         idMhs = preferences.getString("ID_MHS", "");
->>>>>>> Stashed changes
 
         findViewById(R.id.zzz_profile).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,25 +88,7 @@ public class Dashboard extends AppCompatActivity  {
         findViewById(R.id.zzz_cetak_laporan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Dashboard.this);
-                builder.setTitle("Cetak laporan");
-                String[] p = {"Laporan kegiatan","Laporan nilai"};
-                builder.setItems(p, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
-                            case 0:
-                                //cetak kegiatan
-                                break;
-                            case 1:
-                                //cetak nilai
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                });
-                builder.show();
+                startActivity(new Intent(Dashboard.this, Print.class));
             }
         });
         findViewById(R.id.zzz_pilihan).setOnClickListener(new View.OnClickListener() {
@@ -141,12 +120,10 @@ public class Dashboard extends AppCompatActivity  {
             }
         });
 
+    }
 
+    private void cetak() {
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     }
 
     private void showDialog() {
@@ -161,19 +138,13 @@ public class Dashboard extends AppCompatActivity  {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
-
                             case 0:
-<<<<<<< Updated upstream
-
-                                profileDosen();
-=======
                                 Bundle bundle = new Bundle();
                                 bundle.putString("idosen", idDosen);
                                 bundle.putString("ndosen", preferences.getString("NAMA_DOSEN",""));
                                 ProfileDosen profileDosen = new ProfileDosen().newInstance();
                                 profileDosen.show(getSupportFragmentManager(), "profile_dosen");
                                 profileDosen.setArguments(bundle);
->>>>>>> Stashed changes
                                 break;
                             case 1:
                                 FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();

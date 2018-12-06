@@ -51,6 +51,7 @@
             android:theme="@style/adaToolbar" />
         <activity android:name=".dosen.Dosen_profile" />
         <activity android:name=".dosen.Dosen_chat" />
+        <activity android:name=".mahasiswa.Print" />
     </application>
 
 </manifest>

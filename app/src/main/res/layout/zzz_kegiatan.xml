@@ -31,29 +31,29 @@
             android:layout_height="wrap_content"
             android:textSize="14sp" />
     </LinearLayout>
-    <!--<LinearLayout-->
-        <!--android:gravity="center"-->
-        <!--android:padding="5dp"-->
-        <!--android:orientation="horizontal"-->
-        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="30"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<ImageButton-->
-            <!--android:id="@+id/kegiatan_edit"-->
-            <!--android:tint="@android:color/black"-->
-            <!--android:padding="8dp"-->
-            <!--android:background="?attr/selectableItemBackground"-->
-            <!--android:src="@drawable/ic_edit"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--<ImageButton-->
-            <!--android:id="@+id/kegiatan_hapus"-->
-            <!--android:tint="@android:color/black"-->
-            <!--android:padding="8dp"-->
-            <!--android:background="?attr/selectableItemBackground"-->
-            <!--android:src="@drawable/ic_close"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-    <!--</LinearLayout>-->
+    <LinearLayout
+        android:gravity="center"
+        android:padding="5dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/kegiatan_edit"
+            android:tint="@android:color/holo_green_dark"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageButton
+            android:id="@+id/kegiatan_hapus"
+            android:tint="@android:color/holo_red_dark"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>

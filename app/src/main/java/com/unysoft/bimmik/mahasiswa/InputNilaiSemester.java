@@ -300,11 +300,8 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
     public void onBindViewHolder(@NonNull NilaiSemesterAdapter.NilaiHolder holder, int position) {
         final NilaiItem nilaiItem = nilaiItems.get(position);
         holder.mt.setText(nilaiItem.getNama());
-<<<<<<< Updated upstream
         //holder.smt.setText(nilaiItem.getId_smt());
-=======
 //        holder.smt.setText(nilaiItem.getId_smt());
->>>>>>> Stashed changes
         holder.sks.setText(nilaiItem.getSks());
         holder.nil.setText(nilaiItem.getNilai());
     }

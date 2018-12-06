@@ -24,6 +24,11 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.Kegiat
         this.context = context;
     }
 
+    public interface onItemClick {
+        void mDeleteClick(View v, int postition);
+        void mEditClick(View v, int position);
+    }
+
     @NonNull
     @Override
     public KegiatanHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,22 +37,11 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.Kegiat
     }
 
     @Override
-    public void onBindViewHolder(@NonNull KegiatanAdapter.KegiatanHolder holder, int position) {
+    public void onBindViewHolder(@NonNull KegiatanAdapter.KegiatanHolder holder, final int position) {
         final Keg_item keg_item = keg_itemList.get(position);
         holder.nama.setText(keg_item.getNama());
         holder.ket.setText(keg_item.getKet());
-//        holder.edit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//        holder.hapus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+
     }
 
     @Override
@@ -60,13 +54,28 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.Kegiat
         TextView nama, ket;
         ImageButton edit, hapus;
 
-        public KegiatanHolder(View view) {
+        public KegiatanHolder(View view, final onItemClick onItemClick) {
             super(view);
             nama = view.findViewById(R.id.kegiatan_tb_nm);
             ket = view.findViewById(R.id.kegiatan_tb_ket);
-//            edit = view.findViewById(R.id.kegiatan_edit);
-//            hapus = view.findViewById(R.id.kegiatan_hapus);
+            edit = view.findViewById(R.id.kegiatan_edit);
+            hapus = view.findViewById(R.id.kegiatan_hapus);
 
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClick != null){
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION){
+                            onItemClick.mEditClick(v, pos);
+                        }
+                    }
+                }
+            });
+        }
+
+        public KegiatanHolder(View view) {
+            super(view);
         }
     }
 }
