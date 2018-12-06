@@ -1,289 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<android.support.v4.widget.NestedScrollView
-    android:id="@+id/scrol"
-    android:layout_width="match_parent" android:layout_height="500dp" android:scrollbars="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+
+        <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/scrol"
+            android:layout_width="wrap_content"
+            android:layout_height="450dp"
+            android:scrollbars="vertical">
+
+            <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".dosen.Dosen_detail_mhs">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="0dp"
+                    app:contentPadding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:stretchColumns="*">
+
+                            <TableRow>
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:src="@drawable/ic_person" />
+
+                                <TextView
+                                    android:id="@+id/dosen_profileMhs_tvNama"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:fontFamily="@font/googlesans_reguler"
+                                    android:text="Nama mahasiswa"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+                            </TableRow>
+
+                            <TableRow android:layout_marginTop="8dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:src="@drawable/ic_contacts" />
+
+                                <TextView
+                                    android:id="@+id/dosen_profileMhs_tvNim"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:fontFamily="@font/googlesans_reguler"
+                                    android:text="NIM"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+                            </TableRow>
+
+                            <TableRow android:layout_marginTop="8dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:src="@drawable/ic_email" />
+
+                                <TextView
+                                    android:id="@+id/dosen_profileMhs_tvEmail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:fontFamily="@font/googlesans_reguler"
+                                    android:text="Email"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+                            </TableRow>
+
+                            <TableRow android:layout_marginTop="8dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:src="@drawable/ic_phone" />
+
+                                <TextView
+                                    android:id="@+id/dosen_profileMhs_tvNohp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:fontFamily="@font/googlesans_reguler"
+                                    android:text="No Hp"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+                            </TableRow>
+
+                            <TableRow android:layout_marginTop="8dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:src="@drawable/ic_book" />
+
+                                <TextView
+                                    android:id="@+id/dosen_profileMhs_tvProdi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:fontFamily="@font/googlesans_reguler"
+                                    android:text="Program studi"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="#d7d6d6"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:text="Profile mahasiswa"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="#d7d6d6"
+                    android:padding="8dp"
+                    android:text="Daftar kegiatan"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dosen_detailMhs_rvNilai" />
+
+                <TableLayout
+                    android:id="@+id/tabelnilai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:stretchColumns="*"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNilai">
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/ins_tb_matkul"
+                            style="@style/TextAppearance.AppCompat.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mata Kuliah"
+                            android:textColor="@color/item" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.2dp"
+                            android:layout_below="@+id/lytop"
+                            android:layout_marginTop="6dp"
+                            android:background="#bebebe" />
+                    </TableRow>
+                </TableLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/dosen_detailMhs_rvNilai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tabelnilai" />
+
+                <Spinner
+                    android:id="@+id/spSemester"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/googlesans_reguler"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+
+                <TextView
+                    android:id="@+id/tvNilai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="#d7d6d6"
+                    android:padding="8dp"
+                    android:text="Daftar nilai"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spSemester" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/dosen_detailMhs_rvKegiatan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".dosen.Dosen_detail_mhs">
-
+        android:layout_height="wrap_content">
         <android.support.v7.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="0dp"
-            app:contentPadding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            android:id="@+id/cvIPK"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#bce5ff"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TableLayout
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="*">
-                    <TableRow>
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:src="@drawable/ic_person" />
-                        <TextView
-                            android:id="@+id/dosen_profileMhs_tvNama"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:fontFamily="@font/googlesans_reguler"
-                            android:text="Nama mahasiswa"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp" />
-                    </TableRow>
-                    <TableRow android:layout_marginTop="8dp">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:src="@drawable/ic_contacts" />
-                        <TextView
-                            android:id="@+id/dosen_profileMhs_tvNim"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:fontFamily="@font/googlesans_reguler"
-                            android:text="NIM"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp" />
-                    </TableRow>
-                    <TableRow android:layout_marginTop="8dp">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:src="@drawable/ic_email" />
-                        <TextView
-                            android:id="@+id/dosen_profileMhs_tvEmail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:fontFamily="@font/googlesans_reguler"
-                            android:text="Email"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp" />
-                    </TableRow>
-                    <TableRow android:layout_marginTop="8dp">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:src="@drawable/ic_phone" />
-                        <TextView
-                            android:id="@+id/dosen_profileMhs_tvNohp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:fontFamily="@font/googlesans_reguler"
-                            android:text="No Hp"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp" />
-                    </TableRow>
-                    <TableRow android:layout_marginTop="8dp">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:src="@drawable/ic_book" />
-                        <TextView
-                            android:id="@+id/dosen_profileMhs_tvProdi"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:fontFamily="@font/googlesans_reguler"
-                            android:text="Program studi"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp" />
-                    </TableRow>
-                </TableLayout>
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="182dp"
+                        android:text="Total SKS"
+                        android:textColor="@color/item" />
+
+                    <TextView
+                        android:id="@+id/tvTotalSKS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3.55"
+                        android:textColor="@color/item" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="85dp"
+                        android:text="Indeks Prestasi Semester"
+                        android:textColor="@color/item" />
+
+                    <TextView
+                        android:id="@+id/tvIps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3.55"
+                        android:textColor="@color/item" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="85dp"
+                        android:text="Indeks Prestasi Kumulatif"
+                        android:textColor="@color/item" />
+
+                    <TextView
+                        android:id="@+id/tvIPK"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3.55"
+                        android:textColor="@color/item" />
+                </LinearLayout>
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
-
-        <TextView
-            android:textSize="@dimen/txt16"
-            android:textColor="@android:color/black"
-            android:background="#d7d6d6"
-            android:padding="8dp"
-            android:id="@+id/textView2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="Profile mahasiswa"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:textSize="@dimen/txt16"
-            android:textColor="@android:color/black"
-            android:background="#d7d6d6"
-            android:padding="8dp"
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Daftar kegiatan"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dosen_detailMhs_rvNilai" />
-        <TableLayout
-            app:layout_constraintTop_toBottomOf="@+id/tvNilai"
-            android:stretchColumns="*"
-            android:id="@+id/tabelnilai"
-            android:padding="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TableRow>
-                <TextView
-                    android:text="Mata Kuliah"
-                    android:textColor="@color/item"
-                    android:id="@+id/ins_tb_matkul"
-                    style="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content" />
-            </TableRow>
-            <TableRow>
-                <View
-                    android:layout_marginTop="6dp"
-                    android:layout_below="@+id/lytop"
-                    android:background="#bebebe"
-                    android:layout_width="match_parent"
-                    android:layout_height="1.2dp"/>
-            </TableRow>
-        </TableLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/dosen_detailMhs_rvNilai"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabelnilai" />
-
-        <Spinner
-            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-            android:fontFamily="@font/googlesans_reguler"
-            android:id="@+id/spSemester"
-            android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            android:layout_height="wrap_content" />
-
-
-        <TextView
-            android:textSize="@dimen/txt16"
-            android:textColor="@android:color/black"
-            android:background="#d7d6d6"
-            android:padding="8dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Daftar nilai"
-            android:id="@+id/tvNilai"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spSemester"
-             />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/dosen_detailMhs_rvKegiatan"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-
-    </android.support.constraint.ConstraintLayout>
-</android.support.v4.widget.NestedScrollView>
-    <android.support.v7.widget.CardView
-        app:cardElevation="10dp"
-        app:cardCornerRadius="15dp"
-        android:id="@+id/cvIPK"
-        android:layout_marginBottom="-10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
-        <LinearLayout
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="@color/item"
-                    android:layout_marginRight="182dp"
-                    android:text="Total SKS"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/item"
-                    android:id="@+id/tvTotalSKS"
-                    android:text="3.55"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="@color/item"
-                    android:layout_marginRight="85dp"
-                    android:text="Indeks Prestasi Semester"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/item"
-                    android:id="@+id/tvIps"
-                    android:text="3.55"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="@color/item"
-                    android:layout_marginRight="85dp"
-                    android:text="Indeks Prestasi Kumulatif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="@color/item"
-                    android:id="@+id/tvIPK"
-                    android:text="3.55"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-    </android.support.v7.widget.CardView>
-</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

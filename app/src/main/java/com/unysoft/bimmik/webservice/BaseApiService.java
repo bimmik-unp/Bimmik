@@ -114,7 +114,4 @@ public interface BaseApiService {
     @DELETE("api_hapus_kegiatan.php")
     Call<Value>deleteKegiatan(@Query("id_mhs") String id_mhs);
 
-
-
-
 }
