@@ -9,6 +9,7 @@ public class DosenModel {
     @SerializedName("nama") private String nama;
     @SerializedName("email") private String email;
     @SerializedName("pass") private String pass;
+    @SerializedName("no_hp") private String no_hp;
     @SerializedName("value") private String value;
     @SerializedName("message") private String message;
     @SerializedName("Gresult") private String getProfile;
@@ -27,6 +28,14 @@ public class DosenModel {
 
     public void setGetProfile(String getProfile) {
         this.getProfile = getProfile;
+    }
+
+    public String getNo_hp() {
+        return no_hp;
+    }
+
+    public void setNo_hp(String no_hp) {
+        this.no_hp = no_hp;
     }
 
     public String getId() {

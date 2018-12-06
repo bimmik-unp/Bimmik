@@ -19,6 +19,7 @@ public class Value {
     @SerializedName("total_sks") String total_sks;
     @SerializedName("ips")String ips;
     @SerializedName("ipk")String ipk;
+    @SerializedName("location") String location;
 
     public List<NilaiItem> getNilaiItems() {
         return nilaiItems;
@@ -34,6 +35,14 @@ public class Value {
 
     public String getIpk() {
         return ipk;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String loacation) {
+        this.location = loacation;
     }
 
     public void setIpk(String ipk) {

@@ -184,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("EMAIL_DOSEN", response.body().getEmail());
                     editor.putString("ID_DOSEN", response.body().getId_dosen());
                     editor.putString("PASS_DOSEN", response.body().getPass());
+                    editor.putString("NO_HP", response.body().getNo_hp());
                     editor.apply();
                     startActivity(new Intent(MainActivity.this, Dosen_dashboard.class)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
