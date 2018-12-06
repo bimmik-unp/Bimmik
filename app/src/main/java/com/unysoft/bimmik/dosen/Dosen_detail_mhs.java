@@ -47,7 +47,7 @@ public class Dosen_detail_mhs extends AppCompatActivity {
     private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
     public String idSemester;
 
-    TextView tvNama, tvNim, tvEmail, tvNohp, tvProdi,tvTotal;
+    TextView tvNama, tvNim, tvEmail, tvNohp, tvProdi,tvTotal,tvIps,tvIpk;
     String idMhs, namaMhs, emailMhs, nohpMhs, prodiMhs;
     Spinner semester;
 
@@ -91,6 +91,8 @@ public class Dosen_detail_mhs extends AppCompatActivity {
         tvNohp = findViewById(R.id.dosen_profileMhs_tvNohp);
         tvProdi = findViewById(R.id.dosen_profileMhs_tvProdi);
         tvTotal=findViewById(R.id.tvTotalSKS);
+        tvIps=findViewById(R.id.tvIps);
+        tvIpk=findViewById(R.id.tvIPK);
 
 //        rvKegiatan = findViewById(R.id.dosen_detailMhs_rvKegiatan);
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -131,13 +133,7 @@ public class Dosen_detail_mhs extends AppCompatActivity {
     }
 
     public void initSpinSmt() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-        Call<GetSemester> call = baseApiService.getSemester();
-        call.enqueue(new Callback<GetSemester>() {
+        baseApiService.getSemester().enqueue(new Callback<GetSemester>() {
             @Override
             public void onResponse(Call<GetSemester> call, retrofit2.Response<GetSemester> response) {
                 if (response.body().getValue().equals("1")){
@@ -187,8 +183,12 @@ public class Dosen_detail_mhs extends AppCompatActivity {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
                 final String total_sks =response.body().getTotal_sks();
+                final String ips=response.body().getIps();
+                final String ipk=response.body().getIpk();
                 tvTotal.setText(total_sks);
-                //Toast.makeText(Dosen_detail_mhs.this, GLOBAL.total_sks, Toast.LENGTH_SHORT).show();
+                tvIps.setText(ips);
+                tvIpk.setText(ipk);
+
                 if (response.body().getValue().equals("1")) {
                     loading.dismiss();
                     final List<NilaiItem> nilaiItemList= response.body().getNilaiItems();

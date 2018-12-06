@@ -222,7 +222,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp">
         <LinearLayout
-            android:padding="20dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="20dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -232,26 +233,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:layout_marginRight="80dp"
-                    android:text="IPK Semester"
+                    android:textColor="@color/item"
+                    android:layout_marginRight="182dp"
+                    android:text="Total SKS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:textColor="@color/item"
+                    android:id="@+id/tvTotalSKS"
                     android:text="3.55"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:layout_marginRight="80dp"
-                    android:text="Total SKS      "
+                    android:textColor="@color/item"
+                    android:layout_marginRight="85dp"
+                    android:text="Indeks Prestasi Semester"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:id="@+id/tvTotalSKS"
+                    android:textColor="@color/item"
+                    android:id="@+id/tvIps"
+                    android:text="3.55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/item"
+                    android:layout_marginRight="85dp"
+                    android:text="Indeks Prestasi Kumulatif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@color/item"
+                    android:id="@+id/tvIPK"
                     android:text="3.55"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

@@ -17,6 +17,8 @@ public class Value {
     @SerializedName("Gresult") private List<Keg_item> keg_items;
     @SerializedName("semuanilai") private List<NilaiItem> nilaiItems;
     @SerializedName("total_sks") String total_sks;
+    @SerializedName("ips")String ips;
+    @SerializedName("ipk")String ipk;
 
     public List<NilaiItem> getNilaiItems() {
         return nilaiItems;
@@ -28,6 +30,22 @@ public class Value {
 
     public void setKeg_items(List<Keg_item> keg_items) {
         this.keg_items = keg_items;
+    }
+
+    public String getIpk() {
+        return ipk;
+    }
+
+    public void setIpk(String ipk) {
+        this.ipk = ipk;
+    }
+
+    public String getIps() {
+        return ips;
+    }
+
+    public void setIps(String ips) {
+        this.ips = ips;
     }
 
     public String getTotal_sks() {
