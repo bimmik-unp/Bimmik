@@ -63,7 +63,7 @@ public class Profile extends AppCompatActivity {
     private int CAMERA = 2;
 
     EditText nim, nama, email, noHp, prodi;
-    String na,em,hp,prod,pw;
+    String na,em,hp,prod,pw, idM;
 
     CircleImageView profile;
 
@@ -75,11 +75,19 @@ public class Profile extends AppCompatActivity {
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
+        idM = preferences.getString("ID_MHS", "");
+
         nim = findViewById(R.id.profile_et_nim);
         nama = findViewById(R.id.profile_et_nama);
         email = findViewById(R.id.profile_et_email);
         noHp = findViewById(R.id.profile_et_noHp);
         prodi = findViewById(R.id.profile_et_prodi);
+
+        nama.setText(preferences.getString("NAMA_MHS", ""));
+        nim.setText(preferences.getString("ID_MHS", ""));
+        email.setText(preferences.getString("EMAIL_MHS",""));
+        noHp.setText(preferences.getString("NO_HP",""));
+        prodi.setText(preferences.getString("PRODI",""));
 
         findViewById(R.id.profile_btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,9 +111,6 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
-
-        ambilData();
-
 
         //LOGOUT
         findViewById(R.id.profile_btn_logout).setOnClickListener(new View.OnClickListener() {
@@ -140,8 +145,6 @@ public class Profile extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
                 builder.setView(view);
 
-                final EditText oldPwd = view.findViewById(R.id.profile_et_oldPd);
-                    oldPwd.setText(pw);
                 final EditText newPwd = view.findViewById(R.id.profile_et_newPwd);
                 final EditText confNewPwd = view.findViewById(R.id.profile_et_confNewPwd);
 
@@ -155,7 +158,6 @@ public class Profile extends AppCompatActivity {
 //                                progressDialog.setCancelable(false);
 //                                progressDialog.show();
 
-                                final String op = oldPwd.getText().toString();
                                 final String np = newPwd.getText().toString();
                                 String cnp = confNewPwd.getText().toString();
 
@@ -167,13 +169,18 @@ public class Profile extends AppCompatActivity {
                                             .addConverterFactory(GsonConverterFactory.create())
                                             .build();
                                     BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-                                    Call<ResponsePassword> call = baseApiService.updatePassword(GLOBAL.id_mhs, op, np);
+                                    Call<ResponsePassword> call = baseApiService.updatePassword(idM, np);
                                     call.enqueue(new Callback<ResponsePassword>() {
                                         @Override
                                         public void onResponse(Call<ResponsePassword> call, Response<ResponsePassword> response) {
                                             if (response.body().getValue().equals("1")) {
-//                                                progressDialog.dismiss();
-                                                FancyToast.makeText(getApplicationContext(), response.body().getMessage(), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                                                FancyToast.makeText(Profile.this, "Data telah diubah.\nSilahkan login ulang", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                                                editor.putString("STATUS_LOGIN", "FALSE");
+                                                editor.clear();
+                                                editor.apply();
+                                                startActivity(new Intent(Profile.this, MainActivity.class)
+                                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                                finish();
                                             } else {
 //                                                progressDialog.dismiss();
                                                 FancyToast.makeText(getApplicationContext(), response.body().getMessage(), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
@@ -202,23 +209,6 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    private void ambilData() {
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Mengambil data...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
-        nama.setText(preferences.getString("NAMA_MHS", ""));
-        nim.setText(preferences.getString("ID_MHS", ""));
-        email.setText(preferences.getString("EMAIL_MHS",""));
-        noHp.setText(preferences.getString("NO_HP",""));
-        prodi.setText(preferences.getString("PRODI",""));
-
-        progressDialog.dismiss();
-
-    }
-
     private void updateUser() {
 
         progressDialog = new ProgressDialog(this);
@@ -236,20 +226,19 @@ public class Profile extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-        Call<ResponseUpdate> call = baseApiService.mhsUpdate(na, em, hp, prod, GLOBAL.id_mhs);
+        Call<ResponseUpdate> call = baseApiService.mhsUpdate(na, em, hp, prod, preferences.getString("ID_MHS",""));
         call.enqueue(new Callback<ResponseUpdate>() {
             @Override
             public void onResponse(Call<ResponseUpdate> call, Response<ResponseUpdate> response) {
                 if (response.body().getValue().equals("1")){
-//                    GLOBAL.id_mhs = response.body().getId_mhs();
-//                    editor.putString("NAMA_MHS", response.body().getNama());
-//                    editor.putString("EMAIL_MHS", response.body().getEmail());
-//                    editor.putString("NO_HP", response.body().getNoHp());
-//                    editor.putString("PRODI", response.body().getProdi());
                     progressDialog.dismiss();
-                    FancyToast.makeText(Profile.this, "Berhasil perbarui data", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
-//                    ambilData();
-//                    nama.requestFocus();
+                    FancyToast.makeText(Profile.this, "Data telah diubah.\nSilahkan login ulang", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                    editor.putString("STATUS_LOGIN", "FALSE");
+                    editor.clear();
+                    editor.apply();
+                    startActivity(new Intent(Profile.this, MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    finish();
                 } else {
                     progressDialog.dismiss();
                     FancyToast.makeText(Profile.this, "Gagal perbarui data", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();

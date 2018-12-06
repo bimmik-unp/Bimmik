@@ -12,7 +12,7 @@ public class DosenModel {
     @SerializedName("no_hp") private String no_hp;
     @SerializedName("value") private String value;
     @SerializedName("message") private String message;
-    @SerializedName("Gresult") private String getProfile;
+//    @SerializedName("Gresult") private String getProfile;
 
     public String getMessage() {
         return message;
@@ -22,13 +22,13 @@ public class DosenModel {
         this.message = message;
     }
 
-    public String getGetProfile() {
-        return getProfile;
-    }
-
-    public void setGetProfile(String getProfile) {
-        this.getProfile = getProfile;
-    }
+//    public String getGetProfile() {
+//        return getProfile;
+//    }
+//
+//    public void setGetProfile(String getProfile) {
+//        this.getProfile = getProfile;
+//    }
 
     public String getNo_hp() {
         return no_hp;

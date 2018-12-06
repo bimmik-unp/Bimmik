@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <android.support.design.widget.TextInputLayout
-        app:passwordToggleEnabled="true"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.design.widget.TextInputEditText
-            android:fontFamily="@font/googlesans_reguler"
-            android:id="@+id/profile_et_oldPd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password lama"
-            android:inputType="textPassword"
-            android:textColor="@color/item" />
-    </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         app:passwordToggleEnabled="true"
         android:layout_marginTop="8dp"

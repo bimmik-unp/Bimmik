@@ -12,15 +12,11 @@ import com.unysoft.bimmik.model.ResponseUpdate;
 import com.unysoft.bimmik.model.GetSemester;
 import com.unysoft.bimmik.utils.Value;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -80,17 +76,6 @@ public interface BaseApiService {
                                    @Field("prodi") String prodi,
                                    @Field("id_mhs") String id_mhs
                                    );
-    @FormUrlEncoded
-    @POST("api_update_dsn.php")
-    Call<ResponseUpdate> dsnUpdate(@Field("nama") String nama,
-                                   @Field("email") String email,
-                                   @Field("no_hp") String no_hp,
-                                   @Field("foto") String foto,
-                                   @Field("id_dosen") String id_dosen
-    );
-    @Multipart
-    @POST("update_pic_guru.php")
-    Call<Value> uploadPicDsn(@Part MultipartBody.Part file, @Part("file") RequestBody name);
 
     @GET("semester.php")
     Call<GetSemester> getSemester();

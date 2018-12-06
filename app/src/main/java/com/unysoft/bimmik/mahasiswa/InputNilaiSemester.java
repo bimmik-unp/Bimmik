@@ -2,6 +2,7 @@ package com.unysoft.bimmik.mahasiswa;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,9 @@ public class InputNilaiSemester extends AppCompatActivity {
 
     private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     Spinner semester, idmatakuliah;
     EditText ETsks, ETnilai;
     String idM, na, nil, sk, idS;
@@ -73,6 +77,9 @@ public class InputNilaiSemester extends AppCompatActivity {
 //                finish();
 //            }
 //        });
+        preferences = this.getSharedPreferences("MySaving",Context.MODE_PRIVATE);
+        editor = preferences.edit();
+        idM = preferences.getString("ID_MHS", "");
 
         recyclerView = findViewById(R.id.ins_rv);
         nilaiSemesterAdapter= new NilaiSemesterAdapter(nilaiItems, getApplicationContext());
@@ -127,7 +134,7 @@ public class InputNilaiSemester extends AppCompatActivity {
                                 idSemester = semesterItems.get(position).getId_smt();
                                 GLOBAL.id_smt = semesterItems.get(position).getId_smt();
                                 Log.d("id_smt", idSemester);
-                                if (selectedName.equals("- Pilih Semester -")){
+                                if (selectedName.equals("Pilih Semester")){
                                     idmatakuliah.setEnabled(false);
                                 } else {
                                     idmatakuliah.setEnabled(true);
@@ -208,31 +215,35 @@ public class InputNilaiSemester extends AppCompatActivity {
 
         nil = ETnilai.getText().toString().trim();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        BaseApiService baseApiService = retrofit.create(BaseApiService.class);
-        Call<ResponseInputNilai> call = baseApiService.inputNilai(GLOBAL.id_mhs, idMatkul, na, nil, nilSks, idSemester);
-        call.enqueue(new Callback<ResponseInputNilai>() {
-            @Override
-            public void onResponse(Call<ResponseInputNilai> call, Response<ResponseInputNilai> response) {
-                if (response.body().getValue().equals("1")){
-                    loading.dismiss();
-                    FancyToast.makeText(InputNilaiSemester.this, "Berhasil menyimpan", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
-                    ambilNilai();
-                    ETnilai.setText("");
-                } else {
-                    loading.dismiss();
-                    FancyToast.makeText(InputNilaiSemester.this, "Gagal menyimpan", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+        if (nil.isEmpty()){
+            ETnilai.setError("Field tidak boleh kosong");
+        } else {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            BaseApiService baseApiService = retrofit.create(BaseApiService.class);
+            Call<ResponseInputNilai> call = baseApiService.inputNilai(idM, idMatkul, na, nil, nilSks, idSemester);
+            call.enqueue(new Callback<ResponseInputNilai>() {
+                @Override
+                public void onResponse(Call<ResponseInputNilai> call, Response<ResponseInputNilai> response) {
+                    if (response.body().getValue().equals("1")){
+                        loading.dismiss();
+                        FancyToast.makeText(InputNilaiSemester.this, "Berhasil menyimpan", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                        ambilNilai();
+                        ETnilai.setText("");
+                    } else {
+                        loading.dismiss();
+                        FancyToast.makeText(InputNilaiSemester.this, "Gagal menyimpan", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                    }
                 }
-            }
-            @Override
-            public void onFailure(Call<ResponseInputNilai> call, Throwable t) {
-                loading.dismiss();
-                FancyToast.makeText(InputNilaiSemester.this, "Kesalahan jaringan: "+t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponseInputNilai> call, Throwable t) {
+                    loading.dismiss();
+                    FancyToast.makeText(InputNilaiSemester.this, "Kesalahan jaringan: "+t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                }
+            });
+        }
     }
 
     private void ambilNilai() {
@@ -243,7 +254,7 @@ public class InputNilaiSemester extends AppCompatActivity {
 
         BaseApiService baseApiService = retrofit.create(BaseApiService.class);
 
-        Call<Value> call = baseApiService.getNilai(GLOBAL.id_mhs);
+        Call<Value> call = baseApiService.getNilai(idM);
         call.enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
@@ -289,7 +300,11 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
     public void onBindViewHolder(@NonNull NilaiSemesterAdapter.NilaiHolder holder, int position) {
         final NilaiItem nilaiItem = nilaiItems.get(position);
         holder.mt.setText(nilaiItem.getNama());
+<<<<<<< Updated upstream
         //holder.smt.setText(nilaiItem.getId_smt());
+=======
+//        holder.smt.setText(nilaiItem.getId_smt());
+>>>>>>> Stashed changes
         holder.sks.setText(nilaiItem.getSks());
         holder.nil.setText(nilaiItem.getNilai());
     }
