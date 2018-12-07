@@ -139,7 +139,7 @@ public class Profile extends AppCompatActivity {
                                 editor.clear();
                                 editor.apply();
                                 Intent i = new Intent(Profile.this, MainActivity.class);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(i);
                             }

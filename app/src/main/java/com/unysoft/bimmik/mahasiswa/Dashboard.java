@@ -37,7 +37,7 @@ public class Dashboard extends AppCompatActivity  {
     String idDosen, idMhs, foto,namax;
     TextView nama, nm_dosen;
     FloatingActionButton chat;
-    CircleImageView image;
+    CircleImageView image, imgDosen;
     ProgressDialog progressDialog;
 
     @Override
@@ -113,7 +113,7 @@ public class Dashboard extends AppCompatActivity  {
                                 editor.clear();
                                 editor.apply();
                                 Intent i = new Intent(Dashboard.this, MainActivity.class);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(i);
                             }
@@ -122,10 +122,6 @@ public class Dashboard extends AppCompatActivity  {
                         .show();
             }
         });
-
-    }
-
-    private void cetak() {
 
     }
 

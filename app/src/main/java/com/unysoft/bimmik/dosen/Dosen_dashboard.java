@@ -108,7 +108,7 @@ public class Dosen_dashboard extends AppCompatActivity {
                         editor.clear();
                         editor.apply();
                         Intent in = new Intent(Dosen_dashboard.this, MainActivity.class);
-                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(in);
                         finish();

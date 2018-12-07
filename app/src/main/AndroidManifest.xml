@@ -33,22 +33,24 @@
             android:name=".mahasiswa.Dashboard"
             android:label="@string/title_activity_dashboard"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
+            android:theme="@style/AppTheme" />        <activity
             android:name=".mahasiswa.InputNilaiSemester"
             android:label="Input Nilai"
             android:parentActivityName=".mahasiswa.Dashboard"
             android:theme="@style/adaToolbar" />
-        <activity android:name=".mahasiswa.Profile" />
+        <activity
+            android:name=".mahasiswa.Profile" />
         <activity android:name=".mahasiswa.Kegiatan" />
         <activity android:name=".mahasiswa.Chat" />
-        <activity android:name=".dosen.Dosen_dashboard" />
+        <activity
+            android:name=".dosen.Dosen_dashboard" />
         <activity
             android:name=".dosen.Dosen_detail_mhs"
             android:label="Detail mahasiswa"
             android:parentActivityName=".dosen.Dosen_dashboard"
             android:theme="@style/adaToolbar" />
-        <activity android:name=".dosen.Dosen_profile" />
+        <activity
+            android:name=".dosen.Dosen_profile" />
         <activity android:name=".dosen.Dosen_chat" />
         <activity android:name=".mahasiswa.Print" />
         <activity
