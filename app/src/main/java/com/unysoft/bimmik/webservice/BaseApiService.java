@@ -3,6 +3,7 @@ package com.unysoft.bimmik.webservice;
 import com.unysoft.bimmik.model.DosenModel;
 import com.unysoft.bimmik.model.GetMahasiswa;
 import com.unysoft.bimmik.model.GetMatkul;
+import com.unysoft.bimmik.model.GetMessage;
 import com.unysoft.bimmik.model.Keg_item;
 import com.unysoft.bimmik.model.ResponseDosen;
 import com.unysoft.bimmik.model.ResponseInputNilai;
@@ -137,8 +138,18 @@ public interface BaseApiService {
 
     @FormUrlEncoded
     @POST("api_upd_kegiatan.php")
-    Call<Keg_item>updateKegiatan(@Field("id_mhs") String id_mhs,
+    Call<Keg_item>updateKegiatan(@Field("id") String id,
                                  @Field("nama") String nama,
                                  @Field("ket") String ket);
+
+    @FormUrlEncoded
+    @POST("api_kirim_pesan.php")
+    Call<GetMessage>kirimPesan(@Field("from_user_id") String from_user_id,
+                               @Field("to_user_id") String to_user_id,
+                               @Field("title") String title,
+                               @Field("message") String message);
+
+    @GET("api_tampil_pesan.php")
+    Call<GetMessage>getPesan(@Query("from_user_id") String id);
 
 }
