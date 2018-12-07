@@ -4,24 +4,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResponseMahasiswa {
 
-    @SerializedName("id_mhs")
-    String id_mhs;
-    @SerializedName("nama")
-    String nama;
-    @SerializedName("email")
-    String email;
-    @SerializedName("no_hp")
-    String no_hp;
-    @SerializedName("prodi")
-    String prodi;
-    @SerializedName("pass")
-    String pass;
-    @SerializedName("nama_dosen")
-    String nama_dosen;
-    @SerializedName("id_dosen")
-    String id_dosen;
-    @SerializedName("value")
-    String value;
+    @SerializedName("id_mhs") String id_mhs;
+    @SerializedName("nama") String nama;
+    @SerializedName("email") String email;
+    @SerializedName("no_hp") String no_hp;
+    @SerializedName("prodi") String prodi;
+    @SerializedName("pass") String pass;
+    @SerializedName("nama_dosen") String nama_dosen;
+    @SerializedName("id_dosen") String id_dosen;
+    @SerializedName("foto") String foto;
+    @SerializedName("value") String value;
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public String getId_dosen() {
         return id_dosen;

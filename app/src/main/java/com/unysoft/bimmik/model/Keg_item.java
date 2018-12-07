@@ -4,12 +4,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class Keg_item {
 
-    @SerializedName("id_mhs")
-    private String id_mhs;
-    @SerializedName("nama")
-    private String nama;
-    @SerializedName("ket")
-    private String ket;
+    @SerializedName("id") private String id;
+    @SerializedName("id_mhs") private String id_mhs;
+    @SerializedName("nama") private String nama;
+    @SerializedName("ket") private String ket;
+    @SerializedName("value") private String value;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 
     public String getId_mhs() {
         return id_mhs;

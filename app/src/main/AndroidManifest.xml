@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.unysoft.bimmik.webservice.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
@@ -52,6 +51,11 @@
         <activity android:name=".dosen.Dosen_profile" />
         <activity android:name=".dosen.Dosen_chat" />
         <activity android:name=".mahasiswa.Print" />
+        <activity
+            android:theme="@style/AppTheme"
+            android:name=".mahasiswa.fragment.EditKegiatan"
+            android:parentActivityName=".mahasiswa.Kegiatan"
+            android:label="Edit Kegiatan" />
     </application>
 
 </manifest>

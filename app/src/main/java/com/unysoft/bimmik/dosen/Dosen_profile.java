@@ -81,7 +81,6 @@ public class Dosen_profile extends AppCompatActivity {
         ETnohp = findViewById(R.id.dosen_profile_et_noHp);
         ETnim.setEnabled(false);
 
-        profile=findViewById(R.id.dosen_profile_img);
         ambilData();
 //        findViewById(R.id.dosen_profile_fab).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -195,13 +194,25 @@ public class Dosen_profile extends AppCompatActivity {
         ETnohp.setText(preferences.getString("NO_HP",""));
         pic =preferences.getString("FOTO","");
 
-        Glide.with(Dosen_profile.this)
-                .load(pic)
-                .into(profile);
+        if (pic.isEmpty()){
+            Glide.with(Dosen_profile.this)
+                    .load(R.drawable.user)
+                    .into(profile);
+        } else {
+            Glide.with(Dosen_profile.this)
+                    .load(pic)
+                    .into(profile);
+        }
         progressDialog.dismiss();
 
     }
     private void UploadGambar(){
+
+        progressDialog = new ProgressDialog(Dosen_profile.this);
+        progressDialog.setMessage("Uploading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         File imagefile = new File(mediaPath);
 
         RequestBody reqBody = RequestBody.create(MediaType.parse("*/*"), imagefile);
@@ -217,6 +228,7 @@ public class Dosen_profile extends AppCompatActivity {
                 String location = response.body().getLocation();
 
                 if (value.equals("1")) {
+                    progressDialog.dismiss();
                     foto = URL + location;
                     updateDosen();
                     Log.d("onResponse", message + " <====> " + foto);

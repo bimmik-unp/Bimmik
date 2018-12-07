@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("PASS_MHS", response.body().getPass());
                     editor.putString("NAMA_DOSEN", response.body().getNama_dosen());
                     editor.putString("ID_DOSEN", response.body().getId_dosen());
+                    editor.putString("FOTO_MHS", response.body().getFoto());
                     editor.commit();
                     startActivity(new Intent(MainActivity.this, Dashboard.class)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));

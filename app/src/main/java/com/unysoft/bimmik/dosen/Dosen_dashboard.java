@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
+import com.unysoft.bimmik.mahasiswa.Dashboard;
 import com.unysoft.bimmik.model.Dosen_list_mhs;
 import com.unysoft.bimmik.model.GetMahasiswa;
 import com.unysoft.bimmik.model.ResponseMahasiswa;
@@ -71,9 +72,11 @@ public class Dosen_dashboard extends AppCompatActivity {
         foto=preferences.getString("FOTO","");
         profile = findViewById(R.id.imgDosen);
 
-        Glide.with(Dosen_dashboard.this)
-                .load(foto)
-                .into(profile);
+        if  (foto.isEmpty()){
+            Glide.with(Dosen_dashboard.this).load(R.drawable.user).into(profile);
+        } else {
+            Glide.with(Dosen_dashboard.this).load(foto).into(profile);
+        }
 
         recyclerView = findViewById(R.id.dosen_dashboard_rv);
         listMhsAdapter= new ListMhsAdapter(dosen_list_mhs, getApplicationContext());

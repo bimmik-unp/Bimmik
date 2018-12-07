@@ -9,32 +9,18 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
+import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
-import com.unysoft.bimmik.adapter.ProfileDosen;
-import com.unysoft.bimmik.model.DosenModel;
-import com.unysoft.bimmik.model.ResponseDosen;
+import com.unysoft.bimmik.mahasiswa.fragment.ProfileDosen;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.SharedPrefManager;
-import com.unysoft.bimmik.webservice.ApiClient;
-import com.unysoft.bimmik.webservice.BaseApiService;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Dashboard extends AppCompatActivity  {
 
@@ -45,7 +31,7 @@ public class Dashboard extends AppCompatActivity  {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    String idDosen, idMhs;
+    String idDosen, idMhs, foto;
     TextView nama, nm_dosen;
     FloatingActionButton chat;
     CircleImageView image;
@@ -56,16 +42,24 @@ public class Dashboard extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zzz);
 
-        sharedPrefManager = new SharedPrefManager(getApplicationContext());
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
-        nama = findViewById(R.id.zzz_nama);
-        nama.setText(preferences.getString("NAMA_MHS", ""));
-        nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
-        nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
         idDosen = preferences.getString("ID_DOSEN","");
         idMhs = preferences.getString("ID_MHS", "");
+        foto = preferences.getString("FOTO_MHS", "");
+
+        nama = findViewById(R.id.zzz_nama);
+            nama.setText(preferences.getString("NAMA_MHS", ""));
+        nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
+            nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
+        image = findViewById(R.id.dashboard_img);
+
+        if  (foto.isEmpty()){
+            Glide.with(Dashboard.this).load(R.drawable.user).into(image);
+        } else {
+            Glide.with(Dashboard.this).load(foto).into(image);
+        }
 
         findViewById(R.id.zzz_profile).setOnClickListener(new View.OnClickListener() {
             @Override

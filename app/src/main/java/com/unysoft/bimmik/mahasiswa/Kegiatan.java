@@ -2,9 +2,7 @@ package com.unysoft.bimmik.mahasiswa;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,25 +10,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
-import com.google.gson.Gson;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.adapter.KegiatanAdapter;
 import com.unysoft.bimmik.model.Keg_item;
-import com.unysoft.bimmik.utils.GLOBAL;
-import com.unysoft.bimmik.utils.User;
 import com.unysoft.bimmik.utils.Value;
+import com.unysoft.bimmik.webservice.ApiClient;
 import com.unysoft.bimmik.webservice.BaseApiService;
 
 import java.util.ArrayList;
@@ -55,6 +44,8 @@ public class Kegiatan extends AppCompatActivity {
     KegiatanAdapter kegiatanAdapter;
     List<Keg_item> keg_itemList = new ArrayList<>();
 
+    BaseApiService baseApiService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +60,8 @@ public class Kegiatan extends AppCompatActivity {
                 finish();
             }
         });
+
+        baseApiService = ApiClient.getClient().create(BaseApiService.class);
 
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();

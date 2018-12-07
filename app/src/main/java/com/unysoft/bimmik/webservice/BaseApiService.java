@@ -3,6 +3,7 @@ package com.unysoft.bimmik.webservice;
 import com.unysoft.bimmik.model.DosenModel;
 import com.unysoft.bimmik.model.GetMahasiswa;
 import com.unysoft.bimmik.model.GetMatkul;
+import com.unysoft.bimmik.model.Keg_item;
 import com.unysoft.bimmik.model.ResponseDosen;
 import com.unysoft.bimmik.model.ResponseInputNilai;
 import com.unysoft.bimmik.model.ResponseMahasiswa;
@@ -80,6 +81,7 @@ public interface BaseApiService {
                                    @Field("email") String email,
                                    @Field("no_hp") String noHp,
                                    @Field("prodi") String prodi,
+                                   @Field("foto") String foto,
                                    @Field("id_mhs") String id_mhs );
 
     @GET("semester.php")
@@ -115,8 +117,8 @@ public interface BaseApiService {
     @GET("api_profile_dosen.php")
     Call<DosenModel>getProfileDosen(@Query("id_dosen") String id_dosen);
 
-    @DELETE("api_hapus_kegiatan.php")
-    Call<Value>deleteKegiatan(@Query("id_mhs") String id_mhs);
+    @GET("api_hapus_kegiatan.php")
+    Call<Value>deleteKegiatan(@Query("id") String id);
 
     @FormUrlEncoded
     @POST("api_update_dsn.php")
@@ -128,5 +130,15 @@ public interface BaseApiService {
     @Multipart
     @POST("update_pic_dosen.php")
     Call<Value> uploadPicDsn(@Part MultipartBody.Part file, @Part("file") RequestBody name);
+
+    @Multipart
+    @POST("update_pic_mhs.php")
+    Call<Value> uploadPicMhs(@Part MultipartBody.Part file, @Part("file") RequestBody name);
+
+    @FormUrlEncoded
+    @POST("api_upd_kegiatan.php")
+    Call<Keg_item>updateKegiatan(@Field("id_mhs") String id_mhs,
+                                 @Field("nama") String nama,
+                                 @Field("ket") String ket);
 
 }
