@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
+import com.karan.churi.PermissionManager.PermissionManager;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.dosen.Dosen_dashboard;
 import com.unysoft.bimmik.mahasiswa.Dashboard;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String URL = "http://teagardenapp.com/bimmikapp/api/";
 
+    PermissionManager permissionManager;
+
     boolean backExit = false;
 
     ProgressDialog progressDialog;
@@ -54,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        permissionManager = new PermissionManager(){};
+        permissionManager.checkAndRequestPermissions(this);
 
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
@@ -86,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        permissionManager.checkResult(requestCode, permissions, grantResults);
     }
 
     private void cekLogin() {
