@@ -63,7 +63,7 @@ public class Dosen_profile extends AppCompatActivity {
     BaseApiService baseApiService;
     String id,nama,email,nohp;
 
-    String nip_guru, foto, mediaPath, picprof;
+    String foto, mediaPath, picprof;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,12 +131,55 @@ public class Dosen_profile extends AppCompatActivity {
         findViewById(R.id.dosen_profile_btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateDosen();
+                EditDosen();
             }
         });
 
         baseApiService=ApiClient.getClient().create(BaseApiService.class);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            // When an Image is picked
+            if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
+
+                // Get the Image from data
+                Uri selectedImage = data.getData();
+
+                Log.d("onActivityResult", "OK1");
+
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+
+                Log.d("onActivityResult", "OK2");
+
+                if (cursor != null) {
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    mediaPath = cursor.getString(columnIndex);
+                    // Set the Image in ImageView for Previewing the Media
+                    //  imgView.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
+
+                    if (mediaPath != null) {
+
+                        // imgView.setImageBitmap(BitmapFactory.decodeFile(image.getAbsolutePath()));
+                        profile.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
+
+                    }
+                }
+                cursor.close();
+
+            } else {
+                Toast.makeText(this, "Anda Belum Memilih Foto Baru", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Terjadi Kesalahan!", Toast.LENGTH_LONG).show();
+        }
     }
     private void ambilData() {
 
@@ -153,6 +196,46 @@ public class Dosen_profile extends AppCompatActivity {
         progressDialog.dismiss();
 
     }
+    private void UploadGambar(){
+        File imagefile = new File(mediaPath);
+
+        RequestBody reqBody = RequestBody.create(MediaType.parse("*/*"), imagefile);
+        MultipartBody.Part partImage = MultipartBody.Part.createFormData("file", imagefile.getName(), reqBody);
+        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), imagefile.getName());
+        Log.d("uploadFile", "uploadFile--> " + partImage + " <--Mulaiii = " + filename);
+        baseApiService.uploadPicDsn(partImage,filename).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+
+                String value = response.body().getValue();
+                String message = response.body().getMessage();
+                String location = response.body().getLocation();
+
+                if (value.equals("1")) {
+                    foto = URL + location;
+                    updateDosen();
+                    Log.d("onResponse", message + " <====> " + foto);
+                } else {
+                    Log.d("onResponse", "Gagal");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+
+            }
+        });
+
+    }
+    public void EditDosen() {
+        try {
+            UploadGambar();
+        } catch (Exception e) {
+            foto = picprof;
+            updateDosen();
+        }
+    }
 
     private void updateDosen(){
         progressDialog = new ProgressDialog(this);
@@ -164,7 +247,7 @@ public class Dosen_profile extends AppCompatActivity {
         email=ETemail.getText().toString();
         nohp=ETnohp.getText().toString();
 
-        baseApiService.updateDosen(nama,email,nohp,id).enqueue(new Callback<DosenModel>() {
+        baseApiService.updateDosen(nama,email,nohp,foto,id).enqueue(new Callback<DosenModel>() {
             @Override
             public void onResponse(Call<DosenModel> call, Response<DosenModel> response) {
 
@@ -225,90 +308,11 @@ public class Dosen_profile extends AppCompatActivity {
 //        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 //        startActivityForResult(intent, CAMERA);
 //    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        try {
-            // When an Image is picked
-            if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
 
-                // Get the Image from data
-                Uri selectedImage = data.getData();
 
-                Log.d("onActivityResult", "OK1");
 
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
 
-                Log.d("onActivityResult", "OK2");
-
-                if (cursor != null) {
-                    cursor.moveToFirst();
-
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    mediaPath = cursor.getString(columnIndex);
-                    // Set the Image in ImageView for Previewing the Media
-                    //  imgView.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
-
-                    if (mediaPath != null) {
-
-                        // imgView.setImageBitmap(BitmapFactory.decodeFile(image.getAbsolutePath()));
-                        profile.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
-
-                    }
-                }
-                cursor.close();
-
-            } else {
-                Toast.makeText(this, "Anda Belum Memilih Foto Baru", Toast.LENGTH_LONG).show();
-            }
-        } catch (Exception e) {
-            Toast.makeText(this, "Terjadi Kesalahan!", Toast.LENGTH_LONG).show();
-        }
-    }
-
-//    private void UploadGambar(){
-//        File imagefile = new File(mediaPath);
-//
-//        RequestBody reqBody = RequestBody.create(MediaType.parse("*/*"), imagefile);
-//        MultipartBody.Part partImage = MultipartBody.Part.createFormData("file", imagefile.getName(), reqBody);
-//        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), imagefile.getName());
-//        Log.d("uploadFile", "uploadFile--> " + partImage + " <--Mulaiii = " + filename);
-//        baseApiService.uploadPicDsn(partImage,filename).enqueue(new Callback<Value>() {
-//            @Override
-//            public void onResponse(Call<Value> call, Response<Value> response) {
-//
-//                String value = response.body().getValue();
-//                String message = response.body().getMessage();
-//                String location = response.body().getLocation();
-//
-//                if (value.equals("1")) {
-//                    foto = URL + location;
-//                    updateDosen();
-//                    Log.d("onResponse", message + " <====> " + foto);
-//                } else {
-//                    Log.d("onResponse", "Gagal");
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Value> call, Throwable t) {
-//
-//            }
-//        });
-//
-//    }
-//    public void EditDosen() {
-//        try {
-//            UploadGambar();
-//        } catch (Exception e) {
-//            foto = picprof;
-//            updateDosen();
-//        }
-//    }
-//
 //        super.onActivityResult(requestCode, resultCode, data);
 //        if (resultCode == this.RESULT_CANCELED) {
 //            return;
@@ -334,7 +338,7 @@ public class Dosen_profile extends AppCompatActivity {
 //            saveImage(thumbnail);
 //            Toast.makeText(Dosen_profile.this, "Image Saved!", Toast.LENGTH_SHORT).show();
 //        }
-
+//
 //    public String saveImage(Bitmap myBitmap) {
 //        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 //        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);

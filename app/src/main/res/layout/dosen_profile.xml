@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingBottom="16dp"
-    tools:context=".mahasiswa.Profile">
+    tools:context=".dosen.Dosen_profile">
 
     <RelativeLayout
         android:background="@android:color/holo_blue_dark"
@@ -123,6 +123,7 @@
                     android:layout_marginTop="16dp"
                     android:textColor="@color/putih"
                     android:text="Simpan"
+
                     android:background="@drawable/rounded"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

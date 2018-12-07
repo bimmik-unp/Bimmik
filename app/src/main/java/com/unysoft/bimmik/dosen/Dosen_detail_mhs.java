@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.adapter.KegiatanAdapter;
+import com.unysoft.bimmik.adapter.KegiatanAdapterDosen;
 import com.unysoft.bimmik.model.GetSemester;
 import com.unysoft.bimmik.model.Keg_item;
 import com.unysoft.bimmik.model.NilaiItem;
@@ -218,7 +219,7 @@ public class Dosen_detail_mhs extends AppCompatActivity {
                     loading.dismiss();
                     List<Keg_item> keg_itemList = response.body().getKegiatan();
                     Log.d("Retrofit GET","Kegiatan"+String.valueOf(keg_itemList.size()));
-                    mAdapter = new KegiatanAdapter(keg_itemList,getApplicationContext());
+                    mAdapter = new KegiatanAdapterDosen(keg_itemList,getApplicationContext());
                     recyclerView.setAdapter(mAdapter);
 
                     //rvKegiatan.setAdapter(new KegiatanAdapter(keg_itemList, getApplicationContext()));
