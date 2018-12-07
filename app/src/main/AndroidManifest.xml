@@ -14,11 +14,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
-            android:noHistory="true"
             android:name=".MainActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,18 +27,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:parentActivityName=".MainActivity"
-            android:name=".RegisterActivity" />
+            android:name=".RegisterActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".mahasiswa.Dashboard"
             android:label="@string/title_activity_dashboard"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:theme="@style/adaToolbar"
-            android:parentActivityName=".mahasiswa.Dashboard"
+            android:name=".mahasiswa.InputNilaiSemester"
             android:label="Input Nilai"
-            android:name=".mahasiswa.InputNilaiSemester" />
+            android:parentActivityName=".mahasiswa.Dashboard"
+            android:theme="@style/adaToolbar" />
         <activity android:name=".mahasiswa.Profile" />
         <activity android:name=".mahasiswa.Kegiatan" />
         <activity android:name=".mahasiswa.Chat" />
@@ -52,10 +52,19 @@
         <activity android:name=".dosen.Dosen_chat" />
         <activity android:name=".mahasiswa.Print" />
         <activity
-            android:theme="@style/AppTheme"
             android:name=".mahasiswa.fragment.EditKegiatan"
+            android:label="Edit Kegiatan"
             android:parentActivityName=".mahasiswa.Kegiatan"
-            android:label="Edit Kegiatan" />
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".mahasiswa.Message"
+            android:label="@string/title_activity_message"
+            android:parentActivityName=".mahasiswa.Dashboard"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.unysoft.bimmik.mahasiswa.Dashboard" />
+        </activity>
     </application>
 
 </manifest>

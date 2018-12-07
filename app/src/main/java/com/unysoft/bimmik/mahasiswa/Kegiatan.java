@@ -34,6 +34,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Kegiatan extends AppCompatActivity {
 
     private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+
+    public static Kegiatan kegiatan;
     EditText nama, keterangan;
     ProgressDialog progressDialog;
 
@@ -85,7 +87,7 @@ public class Kegiatan extends AppCompatActivity {
         });
     }
 
-    private void AmbilKegiatan() {
+    public void AmbilKegiatan() {
 
         progressDialog = ProgressDialog.show(this, null, "Mengambil data...", true, false);
 

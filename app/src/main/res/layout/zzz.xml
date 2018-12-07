@@ -38,6 +38,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+        android:id="@+id/view"
         android:orientation="vertical"
         android:background="#d7d6d6"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

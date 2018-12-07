@@ -273,9 +273,11 @@ public class Profile extends AppCompatActivity {
         prodi.setText(preferences.getString("PRODI",""));
         pic =preferences.getString("FOTO_MHS","");
 
-        Glide.with(Profile.this)
-            .load(pic)
-            .into(profile);
+        if (pic.isEmpty()){
+            Glide.with(Profile.this).load(R.drawable.user).into(profile);
+        } else {
+            Glide.with(Profile.this).load(pic).into(profile);
+        }
 
     }
 

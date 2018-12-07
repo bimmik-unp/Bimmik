@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.R;
@@ -25,6 +27,7 @@ public class EditKegiatan extends AppCompatActivity {
     BaseApiService baseApiService;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -42,14 +45,14 @@ public class EditKegiatan extends AppCompatActivity {
         final Intent intent = getIntent();
         nama.setText(intent.getStringExtra("nk"));
         ket.setText(intent.getStringExtra("kk"));
+        id = intent.getStringExtra("id");
 
         findViewById(R.id.mhs_editKeg_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String idmhs = preferences.getString("ID_MHS","");
                 String nm = nama.getText().toString().trim();
                 String k = ket.getText().toString().trim();
-                baseApiService.updateKegiatan(idmhs,nm,k).enqueue(new Callback<Keg_item>() {
+                baseApiService.updateKegiatan(id,nm,k).enqueue(new Callback<Keg_item>() {
                     @Override
                     public void onResponse(Call<Keg_item> call, Response<Keg_item> response) {
                         if (response.body().getValue().equals("1")){

@@ -135,7 +135,7 @@ public class Dashboard extends AppCompatActivity  {
         pictureDialog.setTitle("Select Action");
         String[] pictureDialogItems = {
                 "Lihat profile",
-                "Kirim pesan"};
+                "Lihat pesan"};
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -150,7 +150,7 @@ public class Dashboard extends AppCompatActivity  {
                                 profileDosen.setArguments(bundle);
                                 break;
                             case 1:
-                                FancyToast.makeText(Dashboard.this, "Dalam proses", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                                startActivity(new Intent(Dashboard.this, Message.class));
                                 break;
                         }
                     }

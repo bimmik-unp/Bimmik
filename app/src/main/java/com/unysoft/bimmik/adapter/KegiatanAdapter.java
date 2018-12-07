@@ -43,8 +43,8 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.Kegiat
     }
 
     public interface onItemClick {
-        void mDeleteClick(View v, int postition);
-        void mEditClick(View v, int position);
+        void mDeleteClick(int postition);
+        void mEditClick(int position);
     }
 
     @NonNull
@@ -63,6 +63,7 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.Kegiat
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EditKegiatan.class);
+                intent.putExtra("id", keg_item.getId());
                 intent.putExtra("nk",keg_item.getNama());
                 intent.putExtra("kk",keg_item.getKet());
                 context.startActivity(intent);
@@ -84,6 +85,7 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.Kegiat
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
                 if (response.body().getValue().equals("1")){
+//                    Kegiatan.kegiatan.AmbilKegiatan();
                     FancyToast.makeText(context,"Data berhasil dihapus",FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
                 }
             }

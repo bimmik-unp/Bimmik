@@ -22,5 +22,6 @@
     <!-- BUTTON -->
     <string name="simpan">Simpan</string>
     <string name="kembali">Kembali</string>
+    <string name="title_activity_message">Pesan</string>
 
 </resources>
