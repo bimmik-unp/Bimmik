@@ -12,6 +12,7 @@ public class DosenModel {
     @SerializedName("no_hp") private String no_hp;
     @SerializedName("value") private String value;
     @SerializedName("message") private String message;
+    @SerializedName("foto")private String foto;
 //    @SerializedName("Gresult") private String getProfile;
 
     public String getMessage() {
@@ -29,6 +30,15 @@ public class DosenModel {
 //    public void setGetProfile(String getProfile) {
 //        this.getProfile = getProfile;
 //    }
+
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public String getNo_hp() {
         return no_hp;

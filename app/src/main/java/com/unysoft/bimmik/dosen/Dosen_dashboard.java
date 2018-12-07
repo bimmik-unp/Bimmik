@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
@@ -34,6 +35,7 @@ import com.unysoft.bimmik.webservice.BaseApiService;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,9 +48,11 @@ public class Dosen_dashboard extends AppCompatActivity {
 
     boolean doubleBackToExitPressedOnce = false;
     ProgressDialog loading;
+    String foto;
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+    CircleImageView profile;
 
     RecyclerView recyclerView;
     ListMhsAdapter listMhsAdapter;
@@ -64,6 +68,12 @@ public class Dosen_dashboard extends AppCompatActivity {
 
         TextView nama = findViewById(R.id.dashboard_nm_dosen);
         nama.setText(preferences.getString("NAMA_DOSEN", ""));
+        foto=preferences.getString("FOTO","");
+        profile = findViewById(R.id.imgDosen);
+
+        Glide.with(Dosen_dashboard.this)
+                .load(foto)
+                .into(profile);
 
         recyclerView = findViewById(R.id.dosen_dashboard_rv);
         listMhsAdapter= new ListMhsAdapter(dosen_list_mhs, getApplicationContext());

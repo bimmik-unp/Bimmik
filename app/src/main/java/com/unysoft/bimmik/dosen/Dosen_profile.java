@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
@@ -48,7 +49,7 @@ import retrofit2.Response;
 
 public class Dosen_profile extends AppCompatActivity {
 
-    public static final String URL = "https://teagardenapp.com/";
+    public static final String URL = "https://teagardenapp.com/bimmikapp/api/";
 
     private int GALLERY = 1;
     private int CAMERA = 2;
@@ -61,7 +62,7 @@ public class Dosen_profile extends AppCompatActivity {
 
     EditText ETnim, ETnama, ETemail, ETnohp;
     BaseApiService baseApiService;
-    String id,nama,email,nohp;
+    String id,nama,email,nohp,pic;
 
     String foto, mediaPath, picprof;
 
@@ -192,7 +193,11 @@ public class Dosen_profile extends AppCompatActivity {
         ETnama.setText(preferences.getString("NAMA_DOSEN",""));
         ETemail.setText(preferences.getString("EMAIL_DOSEN",""));
         ETnohp.setText(preferences.getString("NO_HP",""));
+        pic =preferences.getString("FOTO","");
 
+        Glide.with(Dosen_profile.this)
+                .load(pic)
+                .into(profile);
         progressDialog.dismiss();
 
     }
