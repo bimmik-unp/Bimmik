@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -25,13 +26,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Dashboard extends AppCompatActivity  {
 
     private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+    private static final String URLP = "http://teagardenapp.com/bimmikapp/cetak.php?";
+
 
     SharedPrefManager sharedPrefManager;
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    String idDosen, idMhs, foto;
+    String idDosen, idMhs, foto,namax;
     TextView nama, nm_dosen;
     FloatingActionButton chat;
     CircleImageView image;
@@ -48,6 +51,8 @@ public class Dashboard extends AppCompatActivity  {
         idDosen = preferences.getString("ID_DOSEN","");
         idMhs = preferences.getString("ID_MHS", "");
         foto = preferences.getString("FOTO_MHS", "");
+        namax=preferences.getString("NAMA_MHS","");
+        final String URLX =URLP+"id_mhs="+idMhs+"&nama="+namax;
 
         nama = findViewById(R.id.zzz_nama);
             nama.setText(preferences.getString("NAMA_MHS", ""));
@@ -82,7 +87,12 @@ public class Dashboard extends AppCompatActivity  {
         findViewById(R.id.zzz_cetak_laporan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Dashboard.this, Print.class));
+                //startActivity(new Intent(Dashboard.this, Print.class));
+                Intent browserIntent = new Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(URLX));
+                startActivity(browserIntent);
+
             }
         });
         findViewById(R.id.zzz_pilihan).setOnClickListener(new View.OnClickListener() {
