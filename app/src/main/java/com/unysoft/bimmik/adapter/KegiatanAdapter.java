@@ -85,7 +85,7 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.Kegiat
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
                 if (response.body().getValue().equals("1")){
-//                    Kegiatan.kegiatan.AmbilKegiatan();
+                    Kegiatan.kegiatan.AmbilKegiatan();
                     FancyToast.makeText(context,"Data berhasil dihapus",FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
                 }
             }

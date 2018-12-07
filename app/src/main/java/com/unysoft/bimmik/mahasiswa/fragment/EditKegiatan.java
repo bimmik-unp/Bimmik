@@ -60,6 +60,7 @@ public class EditKegiatan extends AppCompatActivity {
                             startActivity(new Intent(EditKegiatan.this, Kegiatan.class)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                             finish();
+                            Kegiatan.kegiatan.AmbilKegiatan();
                         }
                     }
 

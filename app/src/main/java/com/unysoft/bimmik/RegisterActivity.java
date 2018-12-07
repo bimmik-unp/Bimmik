@@ -294,6 +294,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        super.onBackPressed();
+        startActivity(new Intent(RegisterActivity.this,MainActivity.class)
+        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        finish();
     }
 }

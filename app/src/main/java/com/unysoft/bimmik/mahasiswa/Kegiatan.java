@@ -75,7 +75,7 @@ public class Kegiatan extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-
+        kegiatan = this;
         AmbilKegiatan();
 
 

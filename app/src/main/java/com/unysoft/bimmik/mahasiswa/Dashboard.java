@@ -109,7 +109,6 @@ public class Dashboard extends AppCompatActivity  {
                         .setCancelable(false)
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                GLOBAL.id_mhs = "";
                                 editor.putString("STATUS_LOGIN", "FALSE");
                                 editor.clear();
                                 editor.apply();
