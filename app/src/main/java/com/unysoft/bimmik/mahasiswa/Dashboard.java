@@ -25,6 +25,8 @@ import com.unysoft.bimmik.utils.SharedPrefManager;
 import com.unysoft.bimmik.webservice.ApiClient;
 import com.unysoft.bimmik.webservice.BaseApiService;
 
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -142,7 +144,14 @@ public class Dashboard extends AppCompatActivity  {
             @Override
             public void onResponse(Call<DosenModel> call, Response<DosenModel> response) {
                 if (response.body().getValue().equals("1")){
-                    Glide.with(Dashboard.this).load(response.body().getFoto()).into(imgDosen);
+                    final List<DosenModel> dosenItems = response.body().getDosen();
+                    for (int i=0; i <dosenItems.size(); i++){
+                        String img = dosenItems.get(i).getFoto();
+                        Glide.with(Dashboard.this)
+                                .load(img)
+                                .into(imgDosen);
+                    }
+
                 }
             }
 

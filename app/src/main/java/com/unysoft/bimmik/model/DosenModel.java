@@ -2,6 +2,8 @@ package com.unysoft.bimmik.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class DosenModel {
 
     @SerializedName("id") private String id;
@@ -14,6 +16,8 @@ public class DosenModel {
     @SerializedName("message") private String message;
     @SerializedName("foto")private String foto;
 //    @SerializedName("Gresult") private String getProfile;
+    @SerializedName("Dosen")
+    List<DosenModel> dosen;
 
     public String getMessage() {
         return message;
@@ -31,6 +35,14 @@ public class DosenModel {
 //        this.getProfile = getProfile;
 //    }
 
+
+    public List<DosenModel> getDosen() {
+        return dosen;
+    }
+
+    public void setDosen(List<DosenModel> dosen) {
+        this.dosen = dosen;
+    }
 
     public String getFoto() {
         return foto;
