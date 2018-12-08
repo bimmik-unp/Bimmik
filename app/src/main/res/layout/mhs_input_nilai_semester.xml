@@ -61,10 +61,10 @@
                     android:id="@+id/ins_et_nilai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nilai mutu"
-                    android:digits="ABCDabcd"
+                    android:hint="Mutu (A-D)"
+                    android:digits="ABCD"
                     android:maxLength="1"
-                    android:inputType="textCapWords"
+                    android:inputType="textCapSentences"
                     android:textColor="@color/item" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>

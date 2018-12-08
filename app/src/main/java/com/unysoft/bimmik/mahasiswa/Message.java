@@ -91,9 +91,10 @@ public class Message extends AppCompatActivity {
                 LayoutInflater inflater = LayoutInflater.from(Message.this);
                 View pView = inflater.inflate(R.layout.dialog_pesan, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(Message.this);
-                builder.setTitle("Kirim pesan ke "+nmDosen);
                 builder.setView(pView);
                 final EditText editTextTitle = (EditText) pView.findViewById(R.id.editTextTitle);
+                    editTextTitle.setText(nmDosen);
+                    editTextTitle.setEnabled(false);
                 final EditText editTextMessage = (EditText) pView.findViewById(R.id.editTextMessage);
                 final String idMhs = preferences.getString("ID_MHS","");
 

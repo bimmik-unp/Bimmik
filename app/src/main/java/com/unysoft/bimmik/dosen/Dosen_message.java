@@ -91,9 +91,10 @@ public class Dosen_message extends AppCompatActivity {
                 LayoutInflater inflater = LayoutInflater.from(Dosen_message.this);
                 View pView = inflater.inflate(R.layout.dialog_pesan, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(Dosen_message.this);
-                builder.setTitle("Kirim pesan ke "+nmDosen);
                 builder.setView(pView);
                 final EditText editTextTitle = (EditText) pView.findViewById(R.id.editTextTitle);
+                    editTextTitle.setText(idMhs);
+                    editTextTitle.setEnabled(false);
                 final EditText editTextMessage = (EditText) pView.findViewById(R.id.editTextMessage);
                 final String idDsn = idDosen;
 
