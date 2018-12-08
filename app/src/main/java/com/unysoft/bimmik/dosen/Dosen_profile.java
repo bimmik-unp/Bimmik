@@ -275,7 +275,7 @@ public class Dosen_profile extends AppCompatActivity {
                     editor.clear();
                     editor.apply();
                     Intent in = new Intent(Dosen_profile.this, MainActivity.class);
-                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in);
                     finish();

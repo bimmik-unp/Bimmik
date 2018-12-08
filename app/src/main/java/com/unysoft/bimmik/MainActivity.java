@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         permissionManager = new PermissionManager(){};
         permissionManager.checkAndRequestPermissions(this);
 
+
+
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
         cekLogin();
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("FOTO_MHS", response.body().getFoto());
                     editor.commit();
                     startActivity(new Intent(MainActivity.this, Dashboard.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                     finish();
                     FancyToast.makeText(MainActivity.this, "Selamat datang " + response.body().getNama(), FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false).show();
                 } else {
@@ -200,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("FOTO",response.body().getFoto());
                     editor.apply();
                     startActivity(new Intent(MainActivity.this, Dosen_dashboard.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                     finish();
                     FancyToast.makeText(MainActivity.this, "Selamat datang "+response.body().getNama(), FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false).show();
                 } else {

@@ -12,16 +12,23 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.mahasiswa.fragment.ProfileDosen;
+import com.unysoft.bimmik.model.DosenModel;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.SharedPrefManager;
+import com.unysoft.bimmik.webservice.ApiClient;
+import com.unysoft.bimmik.webservice.BaseApiService;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Dashboard extends AppCompatActivity  {
 
@@ -29,7 +36,7 @@ public class Dashboard extends AppCompatActivity  {
     private static final String URLP = "http://teagardenapp.com/bimmikapp/cetak.php?";
 
 
-    SharedPrefManager sharedPrefManager;
+    BaseApiService baseApiService;
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -45,13 +52,15 @@ public class Dashboard extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zzz);
 
+        baseApiService = ApiClient.getClient().create(BaseApiService.class);
+
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
         idDosen = preferences.getString("ID_DOSEN","");
         idMhs = preferences.getString("ID_MHS", "");
         foto = preferences.getString("FOTO_MHS", "");
-        namax=preferences.getString("NAMA_MHS","");
+        namax = preferences.getString("NAMA_MHS","");
         final String URLX =URLP+"id_mhs="+idMhs+"&nama="+namax;
 
         nama = findViewById(R.id.zzz_nama);
@@ -59,6 +68,8 @@ public class Dashboard extends AppCompatActivity  {
         nm_dosen = findViewById(R.id.zzz_nama_dosenPA);
             nm_dosen.setText(preferences.getString("NAMA_DOSEN", ""));
         image = findViewById(R.id.dashboard_img);
+
+        ambilFotoDosen();
 
         if  (foto.isEmpty()){
             Glide.with(Dashboard.this).load(R.drawable.user).into(image);
@@ -123,6 +134,23 @@ public class Dashboard extends AppCompatActivity  {
             }
         });
 
+    }
+
+    private void ambilFotoDosen() {
+        imgDosen = findViewById(R.id.zzz_img_dosen);
+        baseApiService.getProfileDosen(idDosen).enqueue(new Callback<DosenModel>() {
+            @Override
+            public void onResponse(Call<DosenModel> call, Response<DosenModel> response) {
+                if (response.body().getValue().equals("1")){
+                    Glide.with(Dashboard.this).load(response.body().getFoto()).into(imgDosen);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DosenModel> call, Throwable t) {
+
+            }
+        });
     }
 
     private void showDialog() {

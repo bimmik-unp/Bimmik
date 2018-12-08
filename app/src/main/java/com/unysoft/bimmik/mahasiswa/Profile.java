@@ -192,7 +192,7 @@ public class Profile extends AppCompatActivity {
                                                 editor.clear();
                                                 editor.apply();
                                                 startActivity(new Intent(Profile.this, MainActivity.class)
-                                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                                                 finish();
                                             } else {
 //                                                progressDialog.dismiss();

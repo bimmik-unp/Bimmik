@@ -152,4 +152,8 @@ public interface BaseApiService {
     @GET("api_tampil_pesan.php")
     Call<GetMessage>getPesan(@Query("from_user_id") String id);
 
+    @GET("api_tampil_pesan_mhs.php")
+    Call<GetMessage>getPesanMhs(@Query("from_user_id") String from_id,
+                                @Query("to_user_id") String to_id);
+
 }

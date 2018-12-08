@@ -44,7 +44,7 @@ public class Message extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    String nmDosen, idDosen;
+    String nmDosen, idDosen, idm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class Message extends AppCompatActivity {
 
         idDosen = preferences.getString("ID_DOSEN","");
         nmDosen = preferences.getString("NAMA_DOSEN","");
+        idm = preferences.getString("ID_MHS","");
 
         baseApiService.getPesan(idDosen).enqueue(new Callback<GetMessage>() {
             @Override
@@ -125,10 +126,15 @@ public class Message extends AppCompatActivity {
     }
 
     private void ambilPesan() {
-        baseApiService.getPesan(idDosen).enqueue(new Callback<GetMessage>() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Mengambil data");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        baseApiService.getPesanMhs(idDosen,idm).enqueue(new Callback<GetMessage>() {
             @Override
             public void onResponse(Call<GetMessage> call, Response<GetMessage> response) {
                 if (response.body().getValue().equals("1")){
+                    progressDialog.dismiss();
                     final List<MessageItem> messageItemList = response.body().getSemuapesan();
                     recyclerView.setAdapter(new MessageAdapter(messageItemList, getApplicationContext()));
                     adapter.notifyDataSetChanged();
@@ -137,7 +143,8 @@ public class Message extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GetMessage> call, Throwable t) {
-
+                progressDialog.dismiss();
+                Toast.makeText(Message.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
