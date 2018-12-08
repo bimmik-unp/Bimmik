@@ -171,9 +171,10 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp" />
                     <TextView
+                        android:text="Dosen"
                         android:id="@+id/zzz_nama_dosenPA"
                         android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@+id/zzz"
+                        android:layout_toRightOf="@+id/zzz_img_dosen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -183,7 +184,6 @@
                         android:textStyle="bold" />
                     <ImageButton
                         android:id="@+id/zzz_pilihan"
-                        android:layout_alignBaseline="@id/zzz"
                         android:src="@drawable/ic_more_vert"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"

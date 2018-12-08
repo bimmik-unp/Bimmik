@@ -62,6 +62,11 @@
             android:name=".mahasiswa.Message"
             android:label="@string/title_activity_message"
             android:parentActivityName=".mahasiswa.Dashboard"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".dosen.Dosen_message"
+            android:label="@string/title_activity_message"
+            android:parentActivityName=".dosen.Dosen_dashboard"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

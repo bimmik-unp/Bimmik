@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -212,7 +213,19 @@ class ListMhsAdapter extends RecyclerView.Adapter <ListMhsAdapter.ListHolder> {
     public void onBindViewHolder(@NonNull ListMhsAdapter.ListHolder holder, int position) {
         final ResponseMahasiswa dosenListMhs= dosen_list_mhs.get(position);
         holder.nama.setText(dosenListMhs.getNama());
+        Glide.with(context)
+                .load(dosenListMhs.getFoto())
+                .into(holder.imgMhs);
 //        holder.img.setImageResource(dosenListMhs.getImg());
+
+        holder.msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,Dosen_message.class);
+                intent.putExtra("id_mhs",dosenListMhs.getId_mhs());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -223,13 +236,26 @@ class ListMhsAdapter extends RecyclerView.Adapter <ListMhsAdapter.ListHolder> {
     public class ListHolder extends RecyclerView.ViewHolder {
 
         TextView nama;
+        CircleImageView imgMhs;
+        ImageButton msg;
 //        ImageView img;
 
-        public ListHolder(View view) {
+        public ListHolder(final View view) {
             super(view);
             nama = view.findViewById(R.id.dosen_list_nm_mhs);
+            imgMhs = view.findViewById(R.id.dosen_list_img_mhs);
+            msg=view.findViewById(R.id.btMsg);
 //            img = view.findViewById(R.id.dosen_list_img_mhs);
+//            msg.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context,Dosen_message.class);
+//                    context.startActivity(intent);
+//                }
+//            });
 
         }
+
+
     }
 }
