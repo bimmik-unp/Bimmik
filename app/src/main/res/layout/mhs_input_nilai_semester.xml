@@ -107,7 +107,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/item"
                     android:id="@+id/tvSKS"
-                    android:text="Sks"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -126,7 +126,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/item"
                     android:id="@+id/tvIPS"
-                    android:text="ips"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -145,7 +145,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/item"
                     android:id="@+id/tvIPK"
-                    android:text="ipk"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>

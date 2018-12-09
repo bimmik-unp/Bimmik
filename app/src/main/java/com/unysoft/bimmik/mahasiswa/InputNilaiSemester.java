@@ -311,9 +311,10 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
     public void onBindViewHolder(@NonNull NilaiSemesterAdapter.NilaiHolder holder, int position) {
         final NilaiItem nilaiItem = nilaiItems.get(position);
         holder.mt.setText(nilaiItem.getNama());
+        holder.id.setText(nilaiItem.getId_matkul());
         //holder.smt.setText(nilaiItem.getId_smt());
 //        holder.smt.setText(nilaiItem.getId_smt());
-        holder.sks.setText(nilaiItem.getSks());
+        holder.sks.setText("SKS "+nilaiItem.getSks());
         holder.nil.setText(nilaiItem.getNilai());
     }
 
@@ -324,10 +325,11 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
 
     public class NilaiHolder extends RecyclerView.ViewHolder {
 
-        TextView mt,smt,sks,nil;
+        TextView id,mt,smt,sks,nil;
 
         public NilaiHolder(View view) {
             super(view);
+            id =view.findViewById(R.id.tvIdMatkul);
             mt = view.findViewById(R.id.ins_tb_matkul);
             //smt = view.findViewById(R.id.ins_tb_smt);
             sks = view.findViewById(R.id.tvSks);
