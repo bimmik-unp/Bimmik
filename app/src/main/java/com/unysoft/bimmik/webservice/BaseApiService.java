@@ -72,6 +72,9 @@ public interface BaseApiService {
 
     @GET("api_tampil_nilai.php")
     Call<Value> getNilai(@Query("id_mhs") String id_mhs);
+    @GET("api_tampil_nilai_smt.php")
+    Call<Value> detailGetNilai(@Query("id_smt") String id_smt,
+                               @Query("id_mhs") String id_mhs);
 
     @GET("api_tampil_mhs.php")
     Call<ResponseUpdate> getMhs(@Query("id_mhs") String id_mhs);
@@ -107,13 +110,15 @@ public interface BaseApiService {
     @POST("api_update_pass.php")
     Call<ResponsePassword>updatePassword(@Field("id_mhs") String id_mhs,
                                          @Field("pass") String pass);
+    @FormUrlEncoded
+    @POST("api_update_pass2.php")
+    Call<ResponsePassword>updatePassword2(@Field("id_dosen") String id_dosen,
+                                         @Field("pass") String pass);
 
     @GET("api_tampil_mhs_dosen.php")
     Call<GetMahasiswa>getMahasiswaBimbingan(@Query("id_dosen") String id_dosen);
 
-    @GET("api_tampil_nilai_smt.php")
-    Call<Value> detailGetNilai(@Query("id_smt") String id_smt,
-                         @Query("id_mhs") String id_mhs);
+
 
     @GET("api_profile_dosen.php")
     Call<DosenModel>getProfileDosen(@Query("id_dosen") String id_dosen);

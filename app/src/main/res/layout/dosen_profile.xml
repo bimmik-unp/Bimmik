@@ -9,7 +9,7 @@
     tools:context=".dosen.Dosen_profile">
 
     <RelativeLayout
-        android:background="@android:color/holo_blue_dark"
+        android:background="@drawable/gradient_bg"
         android:layout_width="match_parent"
         android:layout_height="200dp">
         <ImageButton
@@ -119,12 +119,22 @@
                 </android.support.design.widget.TextInputLayout>
                 <Button
                     android:fontFamily="@font/googlesans_reguler"
+                    android:id="@+id/profile_btn_gantiPwd"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/putih"
+                    android:text="Ganti password"
+                    android:background="@drawable/buttonshape"
+                    android:textAllCaps="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:fontFamily="@font/googlesans_reguler"
                     android:id="@+id/dosen_profile_btn_save"
                     android:layout_marginTop="16dp"
                     android:textColor="@color/putih"
                     android:text="Simpan"
 
-                    android:background="@drawable/rounded"
+                    android:background="@drawable/buttonshape"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

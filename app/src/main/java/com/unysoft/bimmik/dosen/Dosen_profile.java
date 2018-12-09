@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.unysoft.bimmik.MainActivity;
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.mahasiswa.Profile;
 import com.unysoft.bimmik.model.DosenModel;
+import com.unysoft.bimmik.model.ResponsePassword;
 import com.unysoft.bimmik.model.ResponseUpdate;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.SharedPrefManager;
@@ -46,6 +48,8 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Dosen_profile extends AppCompatActivity {
 
@@ -62,7 +66,7 @@ public class Dosen_profile extends AppCompatActivity {
 
     EditText ETnim, ETnama, ETemail, ETnohp;
     BaseApiService baseApiService;
-    String id,nama,email,nohp,pic;
+    String id,nama,email,nohp,pic,idDsn;
 
     String foto, mediaPath, picprof;
 
@@ -73,6 +77,8 @@ public class Dosen_profile extends AppCompatActivity {
 
         preferences = this.getSharedPreferences("MySaving", Context.MODE_PRIVATE);
         editor = preferences.edit();
+
+        idDsn=preferences.getString("ID_DOSEN","");
 
         profile = findViewById(R.id.dosen_profile_img);
         ETnim = findViewById(R.id.dosen_profile_et_id);
@@ -136,8 +142,80 @@ public class Dosen_profile extends AppCompatActivity {
         });
 
         baseApiService=ApiClient.getClient().create(BaseApiService.class);
+        //GANTI PASSWORD
+        findViewById(R.id.profile_btn_gantiPwd).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater layoutInflater = LayoutInflater.from(Dosen_profile.this);
+                View view = layoutInflater.inflate(R.layout.mhs_dialog_pwd, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Dosen_profile.this);
+                builder.setView(view);
+
+                final EditText newPwd = view.findViewById(R.id.profile_et_newPwd);
+                final EditText confNewPwd = view.findViewById(R.id.profile_et_confNewPwd);
+
+                builder.setCancelable(false)
+                        .setPositiveButton("Simpan", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+//                                progressDialog = new ProgressDialog(getApplicationContext());
+//                                progressDialog.setMessage("Sedang perbarui data");
+//                                progressDialog.setCancelable(false);
+//                                progressDialog.show();
+
+                                final String np = newPwd.getText().toString();
+                                String cnp = confNewPwd.getText().toString();
+
+                                if (!cnp.equals(np)) {
+                                    FancyToast.makeText(getApplicationContext(), "Konfirmasi password tidak sama", FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                                } else {
+                                    Retrofit retrofit = new Retrofit.Builder()
+                                            .baseUrl(URL)
+                                            .addConverterFactory(GsonConverterFactory.create())
+                                            .build();
+                                    BaseApiService baseApiService = retrofit.create(BaseApiService.class);
+                                    Call<ResponsePassword> call = baseApiService.updatePassword2(idDsn, np);
+                                    call.enqueue(new Callback<ResponsePassword>() {
+                                        @Override
+                                        public void onResponse(Call<ResponsePassword> call, Response<ResponsePassword> response) {
+                                            if (response.body().getValue().equals("1")) {
+                                                FancyToast.makeText(Dosen_profile.this, "Data telah diubah.\nSilahkan login ulang", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                                                editor.putString("STATUS_LOGIN", "FALSE");
+                                                editor.clear();
+                                                editor.apply();
+                                                startActivity(new Intent(Dosen_profile.this, MainActivity.class)
+                                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                                finish();
+                                            } else {
+//                                                progressDialog.dismiss();
+                                                FancyToast.makeText(getApplicationContext(), response.body().getMessage(), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponsePassword> call, Throwable t) {
+//                                            progressDialog.dismiss();
+                                            FancyToast.makeText(getApplicationContext(), t.getMessage(), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                        .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
 
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

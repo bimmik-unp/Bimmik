@@ -55,6 +55,7 @@ public class InputNilaiSemester extends AppCompatActivity {
 
     Spinner semester, idmatakuliah;
     EditText ETsks, ETnilai;
+    TextView tot,tvips,tvipk;
     String idM, na, nil, sk, idS;
     String idSemester, idMatkul, nilSks;
     ProgressDialog loading;
@@ -86,7 +87,7 @@ public class InputNilaiSemester extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        ambilNilai();
+
 
         loading = new ProgressDialog(InputNilaiSemester.this);
         loading.setMessage("Mengambil data...");
@@ -94,6 +95,9 @@ public class InputNilaiSemester extends AppCompatActivity {
 
         ETsks = findViewById(R.id.ins_et_sks);
         ETnilai = findViewById(R.id.ins_et_nilai);
+        tot=findViewById(R.id.tvSKS);
+        tvips=findViewById(R.id.tvIPS);
+        tvipk=findViewById(R.id.tvIPK);
 
         idmatakuliah = (Spinner) findViewById(R.id.ins_spin_id_matkul);
         semester = (Spinner) findViewById(R.id.ins_spin_smt);
@@ -138,6 +142,7 @@ public class InputNilaiSemester extends AppCompatActivity {
                                     idmatakuliah.setEnabled(false);
                                 } else {
                                     idmatakuliah.setEnabled(true);
+                                    ambilNilai();
                                     initSpinMatkul(idSemester);
                                 }
                             }
@@ -254,10 +259,16 @@ public class InputNilaiSemester extends AppCompatActivity {
 
         BaseApiService baseApiService = retrofit.create(BaseApiService.class);
 
-        Call<Value> call = baseApiService.getNilai(idM);
+        Call<Value> call = baseApiService.detailGetNilai(idSemester,idM);
         call.enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
+                final String total_sks =response.body().getTotal_sks();
+                final String ips=response.body().getIps();
+                final String ipk=response.body().getIpk();
+                tot.setText(total_sks);
+                tvips.setText(ips);
+                tvipk.setText(ipk);
                 if (response.body().getValue().equals("1")) {
                     loading.dismiss();
                     final List<NilaiItem> nilaiItemList= response.body().getNilaiItems();
