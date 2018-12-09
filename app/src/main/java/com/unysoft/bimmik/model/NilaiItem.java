@@ -18,6 +18,15 @@ public class NilaiItem {
     private String sks;
     @SerializedName("id_smt")
     private String id_smt;
+    @SerializedName("value")private String value;
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 
     public String getId() {
         return id;

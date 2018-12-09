@@ -57,7 +57,12 @@
             android:name=".mahasiswa.fragment.EditKegiatan"
             android:label="Edit Kegiatan"
             android:parentActivityName=".mahasiswa.Kegiatan"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/adaToolbar" />
+        <activity
+            android:parentActivityName=".mahasiswa.InputNilaiSemester"
+            android:theme="@style/adaToolbar"
+            android:label="Edit Nilai"
+            android:name=".mahasiswa.fragment.EditNilai" />
         <activity
             android:name=".mahasiswa.Message"
             android:label="@string/title_activity_message"

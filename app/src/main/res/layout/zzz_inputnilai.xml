@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <RelativeLayout
-        android:layout_weight="0.7"
+        android:layout_weight="0.6"
         android:layout_width="0dp"
         android:layout_height="wrap_content">
     <LinearLayout
@@ -55,7 +55,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_toRightOf="@+id/ly1"
-        android:layout_weight="0.3"
+        android:layout_weight="0.2"
         android:layout_width="0dp"
         android:layout_height="wrap_content">
     <LinearLayout
@@ -79,6 +79,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_weight="0.2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:padding="8dp"
+            android:tint="@android:color/holo_green_light"
+            android:id="@+id/ins_edit"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageButton
+            android:padding="8dp"
+            android:tint="@android:color/holo_red_dark"
+            android:layout_toRightOf="@id/ins_edit"
+            android:id="@+id/ins_delete"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
     </LinearLayout>
     <View

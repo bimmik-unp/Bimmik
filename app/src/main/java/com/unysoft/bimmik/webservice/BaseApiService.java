@@ -5,6 +5,7 @@ import com.unysoft.bimmik.model.GetMahasiswa;
 import com.unysoft.bimmik.model.GetMatkul;
 import com.unysoft.bimmik.model.GetMessage;
 import com.unysoft.bimmik.model.Keg_item;
+import com.unysoft.bimmik.model.NilaiItem;
 import com.unysoft.bimmik.model.ResponseDosen;
 import com.unysoft.bimmik.model.ResponseInputNilai;
 import com.unysoft.bimmik.model.ResponseMahasiswa;
@@ -126,6 +127,9 @@ public interface BaseApiService {
     @GET("api_hapus_kegiatan.php")
     Call<Value>deleteKegiatan(@Query("id") String id);
 
+    @GET("api_hapus_nilai.php")
+    Call<Value>deleteNilai(@Query("id") String id);
+
     @FormUrlEncoded
     @POST("api_update_dsn.php")
     Call<DosenModel>updateDosen(@Field("nama") String nama,
@@ -148,6 +152,15 @@ public interface BaseApiService {
                                  @Field("ket") String ket);
 
     @FormUrlEncoded
+    @POST("api_upd_nilai.php")
+    Call<NilaiItem>updateNilai(@Field("id") String id,
+                               @Field("id_matkul") String id_matkul,
+                               @Field("nama") String nama,
+                               @Field("nilai") String nilai,
+                               @Field("sks") String sks,
+                               @Field("id_smt") String id_smt);
+
+    @FormUrlEncoded
     @POST("api_kirim_pesan.php")
     Call<GetMessage>kirimPesan(@Field("from_user_id") String from_user_id,
                                @Field("to_user_id") String to_user_id,
@@ -160,5 +173,6 @@ public interface BaseApiService {
     @GET("api_tampil_pesan_mhs.php")
     Call<GetMessage>getPesanMhs(@Query("from_user_id") String from_id,
                                 @Query("to_user_id") String to_id);
+
 
 }

@@ -2,6 +2,7 @@ package com.unysoft.bimmik.mahasiswa;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ import com.google.gson.Gson;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.unysoft.bimmik.R;
 import com.unysoft.bimmik.adapter.KegiatanAdapter;
+import com.unysoft.bimmik.mahasiswa.fragment.EditNilai;
 import com.unysoft.bimmik.model.GetMatkul;
 import com.unysoft.bimmik.model.GetSemester;
 import com.unysoft.bimmik.model.Keg_item;
@@ -35,6 +38,7 @@ import com.unysoft.bimmik.model.ResponseSKS;
 import com.unysoft.bimmik.model.SemesterItem;
 import com.unysoft.bimmik.utils.GLOBAL;
 import com.unysoft.bimmik.utils.Value;
+import com.unysoft.bimmik.webservice.ApiClient;
 import com.unysoft.bimmik.webservice.BaseApiService;
 
 import java.util.ArrayList;
@@ -49,6 +53,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InputNilaiSemester extends AppCompatActivity {
 
     private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+
+    public static InputNilaiSemester in;
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -68,6 +74,8 @@ public class InputNilaiSemester extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mhs_input_nilai_semester);
+
+        in = this;
 //        Toolbar toolbar = findViewById(R.id.toolbar_ins);
 //        toolbar.setTitle("Input nilai");
 //        setSupportActionBar(toolbar);
@@ -87,7 +95,6 @@ public class InputNilaiSemester extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
 
         loading = new ProgressDialog(InputNilaiSemester.this);
         loading.setMessage("Mengambil data...");
@@ -136,7 +143,6 @@ public class InputNilaiSemester extends AppCompatActivity {
                                 ((TextView) parent.getChildAt(0)).setTextColor(Color.DKGRAY);
                                 String selectedName = parent.getItemAtPosition(position).toString();
                                 idSemester = semesterItems.get(position).getId_smt();
-                                GLOBAL.id_smt = semesterItems.get(position).getId_smt();
                                 Log.d("id_smt", idSemester);
                                 if (selectedName.equals("Pilih Semester")){
                                     idmatakuliah.setEnabled(false);
@@ -251,7 +257,7 @@ public class InputNilaiSemester extends AppCompatActivity {
         }
     }
 
-    private void ambilNilai() {
+    public void ambilNilai() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -316,6 +322,44 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
 //        holder.smt.setText(nilaiItem.getId_smt());
         holder.sks.setText("SKS "+nilaiItem.getSks());
         holder.nil.setText(nilaiItem.getNilai());
+        holder.hapus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = nilaiItem.getId();
+                hapus(id);
+            }
+        });
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditNilai.class);
+                intent.putExtra("idnilai",nilaiItem.getId());
+                intent.putExtra("nmMt",nilaiItem.getNama());
+                intent.putExtra("idMt",nilaiItem.getId_matkul());
+                intent.putExtra("sks",nilaiItem.getSks());
+                intent.putExtra("nilai",nilaiItem.getNilai());
+                intent.putExtra("idSmt", nilaiItem.getId_smt());
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    private void hapus(String id) {
+        BaseApiService baseApiService = ApiClient.getClient().create(BaseApiService.class);
+        baseApiService.deleteNilai(id).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                if (response.body().getValue().equals("1")){
+                    InputNilaiSemester.in.ambilNilai();
+                    FancyToast.makeText(context,"Data berhasil dihapus",FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -326,6 +370,7 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
     public class NilaiHolder extends RecyclerView.ViewHolder {
 
         TextView id,mt,smt,sks,nil;
+        ImageButton edit,hapus;
 
         public NilaiHolder(View view) {
             super(view);
@@ -334,6 +379,8 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
             //smt = view.findViewById(R.id.ins_tb_smt);
             sks = view.findViewById(R.id.tvSks);
             nil = view.findViewById(R.id.tvGrade);
+            edit = view.findViewById(R.id.ins_edit);
+            hapus = view.findViewById(R.id.ins_delete);
 
         }
     }
