@@ -10,12 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.unysoft.bimmik.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileDosen extends BottomSheetDialogFragment {
 
     TextView nama, nim;
-    String idosen, ndosen;
+    CircleImageView fotodos;
+    String idosen, ndosen,foto;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
@@ -35,12 +39,17 @@ public class ProfileDosen extends BottomSheetDialogFragment {
         if (bundle != null){
             idosen = bundle.getString("idosen");
             ndosen = bundle.getString("ndosen");
+            foto = bundle.getString("foto");
         }
 
         nama = view.findViewById(R.id.profileDosen_nama);
             nama.setText(ndosen);
         nim = view.findViewById(R.id.profileDosen_nim);
             nim.setText(idosen);
+            fotodos = view.findViewById(R.id.profileDosen_img);
+        Glide.with(this)
+                .load(foto)
+                .into(fotodos);
 
         return view;
     }

@@ -53,7 +53,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Dosen_profile extends AppCompatActivity {
 
-    public static final String URL = "https://teagardenapp.com/bimmikapp/api/";
+    public static final String URL = "http://bimmikapps-unp.com/api/";
 
     private int GALLERY = 1;
     private int CAMERA = 2;

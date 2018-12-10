@@ -46,7 +46,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Dosen_dashboard extends AppCompatActivity {
 
-    private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+    private static final String URL = "http://bimmikapps-unp.com/api/";
 
     boolean doubleBackToExitPressedOnce = false;
     ProgressDialog loading;

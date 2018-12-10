@@ -33,7 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Kegiatan extends AppCompatActivity {
 
-    private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+    private static final String URL = "http://bimmikapps-unp.com/api/";
 
     public static Kegiatan kegiatan;
     EditText nama, keterangan;

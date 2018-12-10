@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+    public static final String URL = "http://bimmikapps-unp.com/api/";
 
     PermissionManager permissionManager;
 

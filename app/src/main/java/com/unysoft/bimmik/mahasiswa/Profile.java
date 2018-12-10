@@ -61,7 +61,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Profile extends AppCompatActivity {
 
-    private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+    private static final String URL = "http://bimmikapps-unp.com/api/";
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;

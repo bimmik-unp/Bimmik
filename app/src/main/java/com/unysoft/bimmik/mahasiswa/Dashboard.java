@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class Dashboard extends AppCompatActivity  {
 
     private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
-    private static final String URLP = "http://teagardenapp.com/bimmikapp/cetak.php?";
+    private static final String URLP = "http://bimmikapps-unp.com/cetak.php?";
 
 
     BaseApiService baseApiService;
@@ -146,7 +146,8 @@ public class Dashboard extends AppCompatActivity  {
                 if (response.body().getValue().equals("1")){
                     final List<DosenModel> dosenItems = response.body().getDosen();
                     for (int i=0; i <dosenItems.size(); i++){
-                        String img = dosenItems.get(i).getFoto();
+                        final String img = dosenItems.get(i).getFoto();
+                        GLOBAL.id_dosen=dosenItems.get(i).getFoto();
                         Glide.with(Dashboard.this)
                                 .load(img)
                                 .into(imgDosen);
@@ -177,6 +178,7 @@ public class Dashboard extends AppCompatActivity  {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("idosen", idDosen);
                                 bundle.putString("ndosen", preferences.getString("NAMA_DOSEN",""));
+                                bundle.putString("foto",GLOBAL.id_dosen);
                                 ProfileDosen profileDosen = new ProfileDosen().newInstance();
                                 profileDosen.show(getSupportFragmentManager(), "profile_dosen");
                                 profileDosen.setArguments(bundle);

@@ -7,7 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    public static final String BASE_URL ="http://teagardenapp.com/bimmikapp/api/";
+    public static final String BASE_URL ="http://bimmikapps-unp.com/api/";
 
     private static Retrofit retrofit = null;
 
