@@ -52,21 +52,46 @@
                     android:inputType="number"
                     android:textColor="@color/item" />
             </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
+            <Spinner
                 android:layout_weight="50"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputEditText
-                    android:fontFamily="@font/googlesans_reguler"
-                    android:id="@+id/ins_et_nilai"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Mutu (A-D)"
-                    android:digits="ABCD"
-                    android:maxLength="1"
-                    android:inputType="textCapSentences"
-                    android:textColor="@color/item" />
-            </android.support.design.widget.TextInputLayout>
+                android:id="@+id/ins_spinMutu"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="50"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<android.support.design.widget.TextInputEditText-->
+                    <!--android:fontFamily="@font/googlesans_reguler"-->
+                    <!--android:id="@+id/ins_et_nilai"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="Mutu (A-E)"-->
+                    <!--android:digits="ABCDE-+"-->
+                    <!--android:maxLength="2"-->
+                    <!--android:inputType="textCapSentences"-->
+                    <!--android:textColor="@color/item" />-->
+            <!--</android.support.design.widget.TextInputLayout>-->
+            <TextView
+                android:layout_marginStart="2dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/googlesans_reguler"
+                android:layout_gravity="center"
+                android:text="Point: "
+                android:textSize="16sp"
+                android:layout_weight="50"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/ins_tvPoint"
+                android:fontFamily="@font/googlesans_reguler"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:layout_weight="50"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
         </LinearLayout>
         <Button
             android:fontFamily="@font/googlesans_reguler"

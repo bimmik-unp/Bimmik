@@ -16,7 +16,7 @@ public class Print extends AppCompatActivity {
 
     private WebView webView = null;
 //    private static final String URL = "http://teagardenapp.com/bimmikapp/cetak.php";
-    private static final String URLP = "http://teagardenapp.com/bimmikapp/cetak.php?";
+    private static final String URLP = "http://bimmikapps-unp.com/cetak.php?";
 
 
     SharedPrefManager sharedPrefManager;

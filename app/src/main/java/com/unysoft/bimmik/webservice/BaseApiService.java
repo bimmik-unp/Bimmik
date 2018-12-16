@@ -38,7 +38,7 @@ public interface BaseApiService {
 
     @FormUrlEncoded
     @POST("api_login_dosen.php")
-    Call<DosenModel> cek_login_dosen(@Field("email") String em,
+    Call<DosenModel> cek_login_dosen(@Field("id_dosen") String id_dosen,
                                      @Field("pass") String pw);
 
     @FormUrlEncoded

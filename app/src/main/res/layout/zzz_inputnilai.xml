@@ -82,21 +82,20 @@
     </RelativeLayout>
     <RelativeLayout
         android:gravity="center"
-        android:layout_weight="0.2"
+        android:layout_weight="0.1"
         android:layout_width="0dp"
         android:layout_height="wrap_content">
-        <ImageButton
-            android:padding="8dp"
-            android:tint="@android:color/holo_green_light"
-            android:id="@+id/ins_edit"
-            android:background="?attr/selectableItemBackground"
-            android:src="@drawable/ic_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <!--<ImageButton-->
+            <!--android:padding="8dp"-->
+            <!--android:tint="@android:color/holo_green_light"-->
+            <!--android:id="@+id/ins_edit"-->
+            <!--android:background="?attr/selectableItemBackground"-->
+            <!--android:src="@drawable/ic_edit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
         <ImageButton
             android:padding="8dp"
             android:tint="@android:color/holo_red_dark"
-            android:layout_toRightOf="@id/ins_edit"
             android:id="@+id/ins_delete"
             android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_delete"

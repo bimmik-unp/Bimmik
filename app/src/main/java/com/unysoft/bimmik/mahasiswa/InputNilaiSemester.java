@@ -12,6 +12,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -52,6 +55,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class InputNilaiSemester extends AppCompatActivity {
 
+    String[] mutu = {
+            "A","B+","B","B-","C+","C","C-","D","E"
+    };
+
     private static final String URL = "http://bimmikapps-unp.com/api/";
 
     public static InputNilaiSemester in;
@@ -59,9 +66,9 @@ public class InputNilaiSemester extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    Spinner semester, idmatakuliah;
+    Spinner semester, idmatakuliah, spin_mutu;
     EditText ETsks, ETnilai;
-    TextView tot,tvips,tvipk;
+    TextView tot,tvips,tvipk,tvPoint;
     String idM, na, nil, sk, idS;
     String idSemester, idMatkul, nilSks;
     ProgressDialog loading;
@@ -101,11 +108,59 @@ public class InputNilaiSemester extends AppCompatActivity {
         loading.show();
 
         ETsks = findViewById(R.id.ins_et_sks);
-        ETnilai = findViewById(R.id.ins_et_nilai);
+//        ETnilai = findViewById(R.id.ins_et_nilai);
         tot=findViewById(R.id.tvSKS);
         tvips=findViewById(R.id.tvIPS);
         tvipk=findViewById(R.id.tvIPK);
+        tvPoint=findViewById(R.id.ins_tvPoint);
+        spin_mutu = findViewById(R.id.ins_spinMutu);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, mutu);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin_mutu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        tvPoint.setText("4");
+                        break;
+                    case 1:
+                        tvPoint.setText("3,6");
+                        break;
+                    case 2:
+                        tvPoint.setText("3,3");
+                        break;
+                    case 3:
+                        tvPoint.setText("3");
+                        break;
+                    case 4:
+                        tvPoint.setText("2,6");
+                        break;
+                    case 5:
+                        tvPoint.setText("2,3");
+                        break;
+                    case 6:
+                        tvPoint.setText("2");
+                        break;
+                    case 7:
+                        tvPoint.setText("1,6");
+                        break;
+                    case 8:
+                        tvPoint.setText("1");
+                        break;
+                    case 9:
+                        tvPoint.setText("0");
+                        break;
+                    default:
+                        break;
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spin_mutu.setAdapter(adapter);
         idmatakuliah = (Spinner) findViewById(R.id.ins_spin_id_matkul);
         semester = (Spinner) findViewById(R.id.ins_spin_smt);
 
@@ -146,8 +201,10 @@ public class InputNilaiSemester extends AppCompatActivity {
                                 Log.d("id_smt", idSemester);
                                 if (selectedName.equals("Pilih Semester")){
                                     idmatakuliah.setEnabled(false);
+                                    spin_mutu.setEnabled(false);
                                 } else {
                                     idmatakuliah.setEnabled(true);
+                                    spin_mutu.setEnabled(true);
                                     ambilNilai();
                                     initSpinMatkul(idSemester);
                                 }
@@ -199,9 +256,11 @@ public class InputNilaiSemester extends AppCompatActivity {
                                 na = semesterItems.get(position).getNama();
                                 Log.d("id_matkul", idMatkul);
                                 if (selectedName == null){
+                                    spin_mutu.setEnabled(false);
                                     ETsks.setText("");
                                 } else {
                                     ETsks.setText(nilSks);
+                                    spin_mutu.setEnabled(true);
                                 }
                             }
 
@@ -224,7 +283,7 @@ public class InputNilaiSemester extends AppCompatActivity {
 
     private void prosesSimpan() {
 
-        nil = ETnilai.getText().toString().trim();
+        nil = spin_mutu.getSelectedItem().toString();
 
         if (nil.isEmpty()){
             ETnilai.setError("Field tidak boleh kosong");
@@ -242,7 +301,6 @@ public class InputNilaiSemester extends AppCompatActivity {
                         loading.dismiss();
                         FancyToast.makeText(InputNilaiSemester.this, "Berhasil menyimpan", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
                         ambilNilai();
-                        ETnilai.setText("");
                     } else {
                         loading.dismiss();
                         FancyToast.makeText(InputNilaiSemester.this, "Gagal menyimpan", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
@@ -329,19 +387,19 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
                 hapus(id);
             }
         });
-        holder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, EditNilai.class);
-                intent.putExtra("idnilai",nilaiItem.getId());
-                intent.putExtra("nmMt",nilaiItem.getNama());
-                intent.putExtra("idMt",nilaiItem.getId_matkul());
-                intent.putExtra("sks",nilaiItem.getSks());
-                intent.putExtra("nilai",nilaiItem.getNilai());
-                intent.putExtra("idSmt", nilaiItem.getId_smt());
-                context.startActivity(intent);
-            }
-        });
+//        holder.edit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, EditNilai.class);
+//                intent.putExtra("idnilai",nilaiItem.getId());
+//                intent.putExtra("nmMt",nilaiItem.getNama());
+//                intent.putExtra("idMt",nilaiItem.getId_matkul());
+//                intent.putExtra("sks",nilaiItem.getSks());
+//                intent.putExtra("nilai",nilaiItem.getNilai());
+//                intent.putExtra("idSmt", nilaiItem.getId_smt());
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
     private void hapus(String id) {
@@ -379,7 +437,7 @@ class NilaiSemesterAdapter extends RecyclerView.Adapter <NilaiSemesterAdapter.Ni
             //smt = view.findViewById(R.id.ins_tb_smt);
             sks = view.findViewById(R.id.tvSks);
             nil = view.findViewById(R.id.tvGrade);
-            edit = view.findViewById(R.id.ins_edit);
+//            edit = view.findViewById(R.id.ins_edit);
             hapus = view.findViewById(R.id.ins_delete);
 
         }

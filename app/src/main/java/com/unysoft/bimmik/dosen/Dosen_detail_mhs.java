@@ -41,7 +41,7 @@ import retrofit2.Response;
 
 public class Dosen_detail_mhs extends AppCompatActivity {
 
-    private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+    private static final String URL = "http://bimmikapps-unp.com/api/";
     public String idSemester;
 
     TextView tvNama, tvNim, tvEmail, tvNohp, tvProdi,tvTotal,tvIps,tvIpk;

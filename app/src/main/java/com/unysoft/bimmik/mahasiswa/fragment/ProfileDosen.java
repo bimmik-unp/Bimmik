@@ -46,10 +46,8 @@ public class ProfileDosen extends BottomSheetDialogFragment {
             nama.setText(ndosen);
         nim = view.findViewById(R.id.profileDosen_nim);
             nim.setText(idosen);
-            fotodos = view.findViewById(R.id.profileDosen_img);
-        Glide.with(this)
-                .load(foto)
-                .into(fotodos);
+        fotodos = view.findViewById(R.id.profileDosen_img);
+            Glide.with(this).load(foto).into(fotodos);
 
         return view;
     }

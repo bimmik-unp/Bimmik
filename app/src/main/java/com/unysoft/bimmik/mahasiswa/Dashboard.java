@@ -34,7 +34,7 @@ import retrofit2.Response;
 
 public class Dashboard extends AppCompatActivity  {
 
-    private static final String URL = "http://teagardenapp.com/bimmikapp/api/";
+    private static final String URL = "http://bimmikapps-unp.com/api/";
     private static final String URLP = "http://bimmikapps-unp.com/cetak.php?";
 
 
@@ -43,7 +43,7 @@ public class Dashboard extends AppCompatActivity  {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    String idDosen, idMhs, foto,namax;
+    String idDosen, idMhs, foto,namax, img;
     TextView nama, nm_dosen;
     FloatingActionButton chat;
     CircleImageView image, imgDosen;
@@ -72,12 +72,6 @@ public class Dashboard extends AppCompatActivity  {
         image = findViewById(R.id.dashboard_img);
 
         ambilFotoDosen();
-
-        if  (foto.isEmpty()){
-            Glide.with(Dashboard.this).load(R.drawable.user).into(image);
-        } else {
-            Glide.with(Dashboard.this).load(foto).into(image);
-        }
 
         findViewById(R.id.zzz_profile).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,11 +140,12 @@ public class Dashboard extends AppCompatActivity  {
                 if (response.body().getValue().equals("1")){
                     final List<DosenModel> dosenItems = response.body().getDosen();
                     for (int i=0; i <dosenItems.size(); i++){
-                        final String img = dosenItems.get(i).getFoto();
-                        GLOBAL.id_dosen=dosenItems.get(i).getFoto();
-                        Glide.with(Dashboard.this)
-                                .load(img)
-                                .into(imgDosen);
+                        img = dosenItems.get(i).getFoto();
+                        if (img.isEmpty()){
+                            Glide.with(Dashboard.this).load(R.drawable.user).into(imgDosen);
+                        } else {
+                            Glide.with(Dashboard.this).load(img).into(imgDosen);
+                        }
                     }
 
                 }
@@ -178,7 +173,7 @@ public class Dashboard extends AppCompatActivity  {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("idosen", idDosen);
                                 bundle.putString("ndosen", preferences.getString("NAMA_DOSEN",""));
-                                bundle.putString("foto",GLOBAL.id_dosen);
+                                bundle.putString("foto", img);
                                 ProfileDosen profileDosen = new ProfileDosen().newInstance();
                                 profileDosen.show(getSupportFragmentManager(), "profile_dosen");
                                 profileDosen.setArguments(bundle);

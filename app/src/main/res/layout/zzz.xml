@@ -40,13 +40,12 @@
         android:textSize="16sp"
         android:textStyle="bold" />
     <LinearLayout
-        android:layout_gravity="center"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
-            android:background="?attr/selectableItemBackground"
+        <TextView
+            android:textColor="@android:color/holo_blue_dark"
             android:id="@+id/zzz_profile"
             android:padding="16dp"
             android:textAllCaps="false"
@@ -58,13 +57,12 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#bebebe"/>
-        <Button
+        <TextView
+            android:textColor="@android:color/holo_red_dark"
             android:textAllCaps="false"
             android:text="Logout"
             android:id="@+id/zzz_profile_logout"
-            android:layout_gravity="end|top"
-            android:padding="16dp"
-            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

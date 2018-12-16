@@ -8,17 +8,11 @@
     android:layout_height="match_parent"
     tools:context=".dosen.Dosen_dashboard">
 
-    <ImageView
-        android:layout_marginTop="16dp"
-        android:src="@drawable/logo_bimmik"
+    <android.support.v7.widget.Toolbar
+        app:popupTheme="@style/AppTheme.AppBarOverlay"
+        app:logo="@drawable/logo_bimmik"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <View
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#bebebe"/>
+        android:layout_height="?attr/actionBarSize" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_marginTop="16dp"
@@ -40,15 +34,14 @@
         android:textSize="16sp"
         android:textStyle="bold" />
     <LinearLayout
-        android:layout_gravity="center"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
-            android:background="?attr/selectableItemBackground"
+        <TextView
+            android:padding="8dp"
+            android:textColor="@android:color/holo_blue_dark"
             android:id="@+id/dosen_dashboard_edit"
-            android:padding="16dp"
             android:textAllCaps="false"
             android:text="Lihat profil"
             android:layout_width="wrap_content"
@@ -58,13 +51,12 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#bebebe"/>
-        <Button
+        <TextView
+            android:padding="8dp"
+            android:textColor="@android:color/holo_red_dark"
             android:textAllCaps="false"
             android:text="Logout"
             android:id="@+id/dosen_profile_logout"
-            android:layout_gravity="end|top"
-            android:padding="16dp"
-            android:background="?attr/selectableItemBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

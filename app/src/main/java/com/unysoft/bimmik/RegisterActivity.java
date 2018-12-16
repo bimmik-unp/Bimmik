@@ -15,32 +15,17 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.unysoft.bimmik.adapter.DosenAdapter;
 import com.unysoft.bimmik.model.DosenModel;
-import com.unysoft.bimmik.model.GetSemester;
 import com.unysoft.bimmik.model.ResponseDosen;
-import com.unysoft.bimmik.model.SemesterItem;
 import com.unysoft.bimmik.utils.Value;
-import com.unysoft.bimmik.webservice.AppController;
 import com.unysoft.bimmik.webservice.BaseApiService;
-import com.unysoft.bimmik.webservice.Link;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
